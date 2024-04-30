@@ -52,3 +52,37 @@ void	Contact::setPhoneNumber(const std::string& pNumber)
 {
 	phoneNumber = pNumber;
 }
+
+/**
+ * Get: Getter Contacts
+ * -------------------
+ *
+ * Getter is a public member function that helps in retrieving the value of a private data
+ * member without modifying it. The function typically returns the value of a private variable
+ * and doesn't alter any member data.
+ */
+
+std::string	Contact::getFirstName() const
+{
+	return (firstName);
+}
+
+std::string	Contact::getLastName(void) const
+{
+	return (lastName);
+}
+
+std::string	Contact::getnickName(void) const
+{
+	return (nickName);
+}
+
+std::string	Contact::getDarkestSecret(void) const
+{
+	return (darkestSecret);
+}
+
+std::string	Contact::getPhoneNumber(void) const
+{
+	return (phoneNumber);
+}
