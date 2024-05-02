@@ -22,12 +22,18 @@ int	main(void)
 		displayMenu();
 		std::getline(std::cin, input);
 		if (input.length() == 1)
-			choice = input[0];
+		{
+			choice = std::tolower(input[0]);
+			if (choice != 'a' && choice != 'b' && choice != 'c')
+			{
+				std::cout << BRED << "Invalid output. Please enter a single character (A, B or C).\n" << RESET;
+				continue;
+			}
+		}
 		else{
-		 	std::cout << BRED << "Invalid output. Please enter a single character (A, B or C).\n" << RESET;
+			std::cout << BRED << "Invalid output. Please enter a single character (A, B or C).\n" << RESET;
 			continue;
 		}
-
 		if (choice == 'C' || choice == 'c'){
 			std::cout << BGREEN << "Exiting Phonebook Application\n" << RESET;
 			break;
