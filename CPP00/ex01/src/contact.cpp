@@ -86,3 +86,12 @@ std::string	Contact::getPhoneNumber(void) const
 {
 	return (phoneNumber);
 }
+
+/**
+ * function: Add contacts
+ * -------------------
+ *
+ * Getter is a public member function that helps in retrieving the value of a private data
+ */
+
+

@@ -17,7 +17,7 @@ HEADER  = ./include
 
 ################################# Sources ###################################
 
-MEGAPHONE   = phonebook.cpp main.cpp
+MEGAPHONE   = phonebook.cpp contact.cpp main.cpp
 SRC = $(addprefix ./src/, $(MEGAPHONE))
 
 ################################# Objects ###################################

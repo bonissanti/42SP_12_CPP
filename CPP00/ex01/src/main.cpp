@@ -14,7 +14,7 @@ void	displayMenu()
 int	main(void)
 {
 	char		choice;
-	/* PhoneBook	phonebook; */
+	PhoneBook	phonebook;
 	std::string	input;
 	
 	while (true)
@@ -24,12 +24,12 @@ int	main(void)
 		if (input.length() == 1)
 			choice = input[0];
 		else{
-		 	std::cout << "Invalid output. Please enter a single character (A, B or C).\n";
+		 	std::cout << BRED << "Invalid output. Please enter a single character (A, B or C).\n" << RESET;
 			continue;
 		}
 
 		if (choice == 'C' || choice == 'c'){
-			std::cout << "Exiting Phonebook Application";
+			std::cout << BGREEN << "Exiting Phonebook Application\n" << RESET;
 			break;
 		}
 
@@ -37,33 +37,30 @@ int	main(void)
 			case 'A':
 			case 'a':{
 				std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
-				std::cout << "Enter first name: \n";
-				std::cout << "> ";
+				std::cout << BYELLOW << "Enter 'First Name': \n" << RESET;
+				std::cout << "• ";
 				std::getline(std::cin, firstName);
-				std::cout << "Enter last name: \n";
-				std::cout << "> ";
+				std::cout << BYELLOW << "Enter 'Last Name': \n" << RESET;
+				std::cout << "• ";
 				std::getline(std::cin, lastName);
-				std::cout << "Enter nickName: \n";
-				std::cout << "> ";
+				std::cout << BYELLOW << "Enter 'NickName': \n" << RESET;
+				std::cout << "• ";
 				std::getline(std::cin, nickName);
-				std::cout << "Enter phone number: \n";
-				std::cout << "> ";
+				std::cout << BYELLOW << "Enter 'Phone Number': \n" << RESET;
+				std::cout << "• ";
 				std::getline(std::cin, phoneNumber);
-				std::cout << "Enter darkest secret: \n";
-				std::cout << "> ";
+				std::cout << BYELLOW << "Enter 'Darkest Secret': \n" << RESET;
+				std::cout << "• ";
 				std::getline(std::cin, darkestSecret);
-				std::cout << "Adicionando contato: \n";
-				/* phonebook.addContact(firstName, lastName, nickName, phoneNumber, darkestSecret); */
+				Contact newContact(firstName, lastName, nickName, phoneNumber, darkestSecret);
+				phonebook.addContact(newContact);
+				std::cout << BGREEN << "Successful! Contact added. \n" << RESET;
 				break;
 			}
-
 			case 'B':
 			case 'b':{
-				std::cout << "Enter search query (first name, last name, nickName or index)\n";
-				std::cout << "> ";
-				std::string query;
-				std::getline(std::cin, query);
-				std::cout << "Realizando a procura\n";
+				std::cout << BYELLOW << "Check the list below and choose the index of the contact\n" << RESET;
+				phonebook.searchContact();
 				break ;
 			}
 		}
