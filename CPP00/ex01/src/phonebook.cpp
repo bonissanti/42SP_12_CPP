@@ -21,22 +21,46 @@ std::string	truncateString(const std::string& input)
 
 void PhoneBook::displayContact(void) const
 {
-	int	index;
+	int			index;
+	bool		isDigityOnly;
+	std::string	input;
+
 	std::cout << "\nEnter the index of the contact to display" << std::endl;
-	std::cout << "• ";
-	std::cin >> index;
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	if (index < 1 || index > numContacts)
-		std::cout << "Invalid index: No contact displayed" << std::endl;
-	else
+	while (true)
 	{
-		const Contact& to_print = contact[index - 1];
-		std::cout << BYELLOW << "First name: " << RESET << to_print.getFirstName() << std::endl;
-		std::cout << BYELLOW << "Last name: " << RESET<< to_print.getLastName() << std::endl;
-		std::cout << BYELLOW << "Nick name: " << RESET << to_print.getnickName() << std::endl;
-		std::cout << BYELLOW << "Phone number: " << RESET << to_print.getPhoneNumber() << std::endl;
-		std::cout << BYELLOW << "Darkest secret: " << RESET << to_print.getDarkestSecret() << std::endl;
+		std::cout << "• ";
+		std::getline(std::cin, input);
+		isDigityOnly = true;
+		for (size_t i = 0; i < input.length(); i++)
+		{
+			if (!isdigit(input[i]))
+			{
+				isDigityOnly = false;
+				break;
+			}
+		}
+		if (!isDigityOnly || input.empty())
+		{
+			std::cout << "Invalid input. Please enter a valid integer index or type 'exit' to quit: ";
+			if (input == "exit"){
+				return;
+			}
+			continue;
+		}
+		index = atoi(input.c_str());
+		if (index < 1 || index > numContacts)
+		{
+			std::cout << "Invalid index: No contact displayed. Try again or type 'exit' to quit: " << std::endl;
+			continue;
+		}
+		break;
 	}
+	const Contact& to_print = contact[index - 1];
+	std::cout << BYELLOW << "First name: " << RESET << to_print.getFirstName() << std::endl;
+	std::cout << BYELLOW << "Last name: " << RESET<< to_print.getLastName() << std::endl;
+	std::cout << BYELLOW << "Nick name: " << RESET << to_print.getnickName() << std::endl;
+	std::cout << BYELLOW << "Phone number: " << RESET << to_print.getPhoneNumber() << std::endl;
+	std::cout << BYELLOW << "Darkest secret: " << RESET << to_print.getDarkestSecret() << std::endl;
 }
 
 void	PhoneBook::searchContact(void) const

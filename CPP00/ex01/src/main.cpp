@@ -11,6 +11,30 @@ void	displayMenu()
 	std::cout << "Enter your choice: ";
 }
 
+static bool	isValidNumber(const std::string& input)
+{
+	for (size_t i = 0; i < input.length(); i++)
+	{
+		if (!isdigit(input[i]) && input[i] != ' ' && input[i] != '-' && input[i] != '+')
+			return (false);
+	}
+	return (true);
+}
+
+void	enterNumber(std::string& phoneNumber)
+{
+	std::cout << BYELLOW << "Enter 'Phone Number': \n" << RESET;
+	while (true)
+	{
+		std::cout << "• ";
+		std::getline(std::cin, phoneNumber);
+		if (isValidNumber(phoneNumber))
+			break;
+		else
+			std::cout << "Invalid phone number entered: please enter a valid number\n";
+	}
+}
+
 int	main(void)
 {
 	char		choice;
@@ -52,9 +76,7 @@ int	main(void)
 				std::cout << BYELLOW << "Enter 'NickName': \n" << RESET;
 				std::cout << "• ";
 				std::getline(std::cin, nickName);
-				std::cout << BYELLOW << "Enter 'Phone Number': \n" << RESET;
-				std::cout << "• ";
-				std::getline(std::cin, phoneNumber);
+				enterNumber(phoneNumber);
 				std::cout << BYELLOW << "Enter 'Darkest Secret': \n" << RESET;
 				std::cout << "• ";
 				std::getline(std::cin, darkestSecret);
