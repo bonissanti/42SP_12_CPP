@@ -2,10 +2,13 @@
 
 int	main(void)
 {
-	Zombie	*heapZombie = newZombie("heapZombie");
-	heapZombie->announce();
+	int	n = 14;
+	Zombie	*heapZombie = zombieHorde(n, "foo");
 
-	randomChump("stackZombie");
-	delete heapZombie;
+	for (int i = 0; i < n; i++)
+		heapZombie[i].announce();
+
+	if (heapZombie)
+		delete[] heapZombie;
 	return (0);
 }

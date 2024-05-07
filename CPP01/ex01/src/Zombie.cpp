@@ -4,10 +4,18 @@ Zombie::Zombie(std::string init) : name(init) {}
 
 Zombie::~Zombie()
 {
-	std::cout << name << " : RIP" << std::endl;
+	static int	i = 0;
+	std::cout << name << " " << ++i << " : RIP" << std::endl;
 }
 
 void	Zombie::announce(void)
 {
-	std::cout << name << " : BraiiiiiiinnnzzzZ..." << std::endl;
+	static int	i = 0;
+
+	std::cout << name << " " << ++i << " : BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void	Zombie::setName(const std::string& zombieName)
+{
+	this->name = zombieName;
 }

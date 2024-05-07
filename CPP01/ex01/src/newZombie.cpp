@@ -1,14 +1,16 @@
 #include "../include/Zombie.hpp"
 
-Zombie *newZombie(int n, std::string name)
+Zombie *zombieHorde(int n, std::string name)
 {
 	if (n <= 0)
+	{
 		std::cout << "Invalid number, please pass positive numbers." << std::endl;
-
+		return (NULL);
+	}
 	Zombie *horde = new Zombie[n];
-	for (size_t i = 0; i < n; i++)
-		horde[i] = 
+	for (int i = 0; i < n; i++)
+		horde[i].setName(name);
 
-	return (new Zombie(name));
+	return (horde);
 }
 

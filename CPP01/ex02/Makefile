@@ -12,13 +12,12 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    = ZombieHorde
-HEADER  = ./include
+NAME    = ex02
 
 ################################# Sources ###################################
 
-ZOMBIE   = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
-SRC = $(addprefix ./src/, $(ZOMBIE))
+FILES   = main.cpp
+SRC = $(addprefix ./src/, $(FILES))
 
 ################################# Objects ###################################
 
@@ -28,7 +27,7 @@ OBJS        = $(SRC:.cpp=.o)
 ################################# Flags #####################################
 
 CPP = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -I$(HEADER)
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
 ################################ Progress ###################################
 

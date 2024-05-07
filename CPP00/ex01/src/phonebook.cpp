@@ -1,6 +1,4 @@
 #include "../include/PhoneBook.hpp"
-#include <iomanip>
-#include <limits>
 
 PhoneBook::PhoneBook() : numContacts(0)
 {

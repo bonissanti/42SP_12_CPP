@@ -17,8 +17,8 @@ HEADER  = ./include
 
 ################################# Sources ###################################
 
-ZOMBIE   = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
-SRC = $(addprefix ./src/, $(ZOMBIE))
+FILES   = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRC = $(addprefix ./src/, $(FILES))
 
 ################################# Objects ###################################
 
