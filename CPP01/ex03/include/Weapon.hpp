@@ -9,8 +9,9 @@ class Weapon
 	std::string	type;
 
 	public:
-	void	setType(const std::string& type);
+	Weapon(const std::string& initType) : type(initType) {}
 	const	std::string& getType(void) const;
+	void	setType(const std::string& type);
 };
 	
 #endif
