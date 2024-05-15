@@ -12,12 +12,12 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    = ZombieHorde
+NAME    = ex04
 HEADER  = ./include
 
 ################################# Sources ###################################
 
-FILES   = main.cpp
+FILES   = main.cpp Replace.cpp
 SRC = $(addprefix ./src/, $(FILES))
 
 ################################# Objects ###################################

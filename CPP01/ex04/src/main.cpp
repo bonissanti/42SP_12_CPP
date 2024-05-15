@@ -7,8 +7,8 @@ int	main(int argc, char **argv)
 		std::cerr << "Error\nUsage: <File Name> <Search String> <Replace String>" << std::endl;
 		return (1);
 	}
-	Modifier	toReplace(argv[1]);
-	modifier.ftReplace(argv[2], argv[3]);
+	Modifier mod(argv[1]);
+	mod.ftReplace(argv[2], argv[3]);
 	return (0);
 	
 }
