@@ -2,7 +2,6 @@
 
 int	main(int argc, char **argv)
 {
-<<<<<<< Updated upstream
 	if (argc != 4)
 	{
 		std::cerr << "Error\nUsage: <File Name> <Search String> <Replace String>" << std::endl;
@@ -27,17 +26,3 @@ int	main(int argc, char **argv)
 // 	std::cout << "Find test: " << found << std::endl;
 // 	return (0);
 // }
-=======
-	if (argc != 2)
-	{
-		std::cerr << "Invalid number of arguments";
-		return (1);
-	}
-	std::ofstream	testFile("file.txt\n");
-	if (testFile.is_open())
-		testFile << argv[1];
-	else
-		std::cerr << "Error in open file";
-	return (0);
-}
->>>>>>> Stashed changes

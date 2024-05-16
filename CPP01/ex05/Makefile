@@ -12,14 +12,14 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex04
-NAME_TEST	= test-ex04
+NAME    	= ex05
+NAME_TEST	= test-ex05
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Replace.cpp
+FILES   	= main.cpp Harl.cpp
 TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 
@@ -83,4 +83,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
