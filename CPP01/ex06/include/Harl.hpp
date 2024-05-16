@@ -12,17 +12,17 @@
 class Harl
 {
 	private:
-	typedef	void(*functionPtr)(void);
-	void	complain(std::string level);
-	functionPtr Harl::functions[4];
-	std::string	levels[4];
-
-	public:
-	Harl();
 	void	debug(void);
 	void	info(void);
 	void	warning(void);
 	void	error(void);
+	typedef	void(Harl::*functionPtr)(void);
+	functionPtr functions[4];
+	std::string	levels[4];
+
+	public:
+	Harl();
+	void	complain(std::string level);
 };
 
 #endif

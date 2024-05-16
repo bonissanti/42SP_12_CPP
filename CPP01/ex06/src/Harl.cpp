@@ -6,10 +6,10 @@ Harl::Harl()
 	levels[1] = "INFO";
 	levels[2] = "WARNING";
 	levels[3] = "ERROR";
-	functions[0] = &Harl::debug;
-	functions[1] = info;
-	functions[2] = warning;
-	functions[3] = error;
+	functions[0] = Harl::debug;
+	functions[1] = Harl::info;
+	functions[2] = Harl::warning;
+	functions[3] = Harl::error;
 }
 
 void	Harl::debug(void)
@@ -43,7 +43,7 @@ void	Harl::complain(std::string level)
 	for (size_t i = 0; i < 4; i++)
 	{
 		if (levels[i] == level)
-			(this->functions[i]());
+			(this->*functions[i])();
 	}
 	std::cout << "Uknown level: " << level << std::endl;
 }

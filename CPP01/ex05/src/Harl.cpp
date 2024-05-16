@@ -38,7 +38,7 @@ void	Harl::error(void)
 	std::cout << "This is unacceptable! I want to speak to the manager now" << std::endl;
 }
 
-void	Harl::complain(const std::string& level)
+void	Harl::complain(std::string level)
 {
 	for (size_t i = 0; i < 4; i++)
 	{
