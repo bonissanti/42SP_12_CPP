@@ -12,6 +12,7 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
+<<<<<<< Updated upstream
 NAME    = ex04
 HEADER  = ./include
 
@@ -20,10 +21,30 @@ HEADER  = ./include
 FILES   = main.cpp Replace.cpp
 SRC = $(addprefix ./src/, $(FILES))
 
+=======
+NAME    	= ex04
+NAME_TEST	= test-ex04
+HEADER  	= ./include
+
+################################# Sources ###################################
+
+TEST_DIR	= ./src/tests
+FILES   	= main.cpp
+TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
+SRC = $(addprefix ./src/, $(FILES))
+
+SRCS_COMMON = $(filter-out ./src/main.cpp, $(SRC))
+OBJS_COMMON = $(SRCS_COMMON:./src/%.cpp=$(OBJS_DIR)/%.o)
+
+>>>>>>> Stashed changes
 ################################# Objects ###################################
 
 OBJS_DIR    = ./objs
 OBJS        = $(SRC:.cpp=.o)
+<<<<<<< Updated upstream
+=======
+TEST_OBJS = $(TEST_SRCS:$(TEST_DIR)/%.cpp=$(OBJS_DIR)/tests/%.o)
+>>>>>>> Stashed changes
 
 ################################# Flags #####################################
 
@@ -49,7 +70,22 @@ $(NAME): $(OBJS:%=$(OBJS_DIR)/%)
 	@echo ""
 	@echo "$(GREEN)$(NAME) created$(RESET)"
 
+<<<<<<< Updated upstream
 $(OBJS_DIR)/%.o: %.cpp
+=======
+test: CPPFLAGS += -DTEST
+test: $(OBJS_COMMON) $(TEST_OBJS)
+	@$(CPP) $(OBJS_COMMON) $(TEST_OBJS) -o $(NAME_TEST)
+	@echo ""
+	@echo "$(GREEN)Test executable created$(RESET)"
+
+$(OBJS_DIR)/%.o: ./%.cpp
+	@mkdir -p $(@D)
+	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	$(call print_progress, $(BLUE_B)Compiling:$(RESET) $<)
+
+$(OBJS_DIR)/tests/%.o: $(TEST_DIR)/%.cpp
+>>>>>>> Stashed changes
 	@mkdir -p $(@D)
 	@$(CPP) $(CPPFLAGS) -c $< -o $@
 	$(call print_progress, $(BLUE_B)Compiling:$(RESET) $<)
@@ -59,7 +95,11 @@ clean:
 	@echo "$(RED)Objects deleted$(RESET)"
 
 fclean: clean
+<<<<<<< Updated upstream
 	@rm -f $(NAME)
+=======
+	@rm -f $(NAME) $(NAME_TEST)
+>>>>>>> Stashed changes
 	@echo "$(RED)$(NAME) deleted$(RESET)"
 
 re: fclean all
