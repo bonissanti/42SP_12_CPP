@@ -1,13 +1,46 @@
 #include "../include/Harl.hpp"
 
-int	main(void)
+void	Harl::printMessage(levelCode code)
 {
-	Harl	harl;
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	harl.complain("random");
-	harl.complain("124 456 789 0");
+	switch (code)
+	{
+		case DEBUG:
+			this->debug();
+		case INFO:
+			this->info();
+		case WARNING:
+			this->warning();
+		case ERROR:
+			this->error();
+			break ;
+		default:
+			return (this->complaining());
+	}
+}
+
+int	Harl::getIndex(std::string level)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (level == levels[i])
+			return (i);
+	}
+	return (-1);
+}
+
+int	main(int argc, char **argv)
+{
+	Harl		harl;
+	int			numLevel;
+	std::string	level;
+	
+	if (argc != 2)
+	{
+		std::cerr << "Invalid numbers of arguments: use -> ./harlFilter <level>" << std::endl;
+		return (1);
+	}
+	level = argv[1];
+	numLevel = harl.getIndex(level);
+	harl.printMessage(static_cast<Harl::levelCode>(numLevel));
 	return (0);
 }

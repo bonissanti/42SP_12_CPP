@@ -10,19 +10,20 @@
 #define RESET	"\033[0m"
 
 class Harl
-{
+{ 
 	private:
-	void	debug(void);
-	void	info(void);
-	void	warning(void);
-	void	error(void);
-	typedef	void(Harl::*functionPtr)(void);
-	functionPtr functions[4];
+	void		debug(void);
+	void		info(void);
+	void		warning(void);
+	void		error(void);
+	void		complaining(void);
 	std::string	levels[4];
 
 	public:
 	Harl();
-	void	complain(std::string level);
+	enum levelCode {DEBUG, INFO, WARNING, ERROR};
+	void	printMessage(levelCode code);
+	int		getIndex(std::string level);
 };
 
 #endif

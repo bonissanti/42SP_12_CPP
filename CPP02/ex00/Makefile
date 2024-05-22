@@ -12,14 +12,14 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex06
-NAME_TEST	= test-ex06
+NAME    	= ex00
+NAME_TEST	= test-ex00
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Harl.cpp
+FILES   	= main.cpp HarlFilter.cpp
 TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 
