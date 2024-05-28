@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include <iomanip>
-#include <cctype>
+#include <string>
 #include <cstdlib>
+#include <Phonebook.hpp>
 
-class Contact
+class Contacts
 {
 	private:
 	std::string	firstName;
@@ -16,21 +17,22 @@ class Contact
 	std::string	darkestSecret;
 
 	public:
-	Contact() : firstName(""), lastName(""), nickName(""), phoneNumber(""), darkestSecret(""){}
-	Contact(const std::string& fName, const std::string& lName, const std::string& nName,
-		 const std::string& pNumber, const std::string& dSecret);
-
-	std::string	getFirstName() const;
-	std::string	getLastName() const;
-	std::string getnickName() const;
-	std::string	getPhoneNumber() const;
-	std::string	getDarkestSecret() const;
-
-	void	setFirstName(const std::string& fName);
-	void	setLastName(const std::string& fName);
-	void	setNickName(const std::string& fName);
-	void	setPhoneNumber(const std::string& fName);
-	void	setDarkestSecret(const std::string& fName);
+	Contacts();
+	std::string fName;
+	std::string	lName;
+	std::string	nName;
+	std::string	pNumber;
+	std::string	dSecret;
+	void		setFirstName(std::string fName);
+	void		setLastName(std::string lName);
+	void		setNickName(std::string nName);
+	void		setPhoneNumber(std::string pNumber);
+	void		setDarkestSecret(std::string dSecret);
+	std::string	getFirstName(void) const;
+	std::string	getLastName(void) const;
+	std::string	getNickName(void) const;
+	std::string	getPhoneNumber(void) const;
+	std::string	getDarkestSecret(void) const;
 };
 
 #endif
