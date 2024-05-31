@@ -12,7 +12,7 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex00
+NAME    	= ex01
 NAME_TEST	= test-ex00
 HEADER  	= ./include
 
