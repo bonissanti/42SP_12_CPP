@@ -54,7 +54,7 @@ void	Account::displayAccountsInfos(void)
 {
 	_displayTimestamp();
 	std::cout << BGRN << " accounts:" << Account::_nbAccounts << ";total:" << _totalAmount;
-	std::cout << ";deposits:" << _totalNbDeposits << ";withdraws:" << _totalNbWithdrawals << RESET << std::endl;
+	std::cout << ";deposits:" << _totalNbDeposits << ";withdrawals:" << _totalNbWithdrawals << RESET << std::endl;
 }
 
 int	Account::getNbAccounts(void)

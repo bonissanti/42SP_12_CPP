@@ -5,7 +5,16 @@
 #include <iomanip>
 #include <string>
 #include <cstdlib>
-#include <Phonebook.hpp>
+#include <PhoneBook.hpp>
+
+#define BGRN "\e[1;32m"
+#define BYEL "\e[1;33m"
+#define BRED "\e[1;31m"
+#define BBLU "\e[1;34m" 
+#define BMAG "\e[1;35m"
+#define BCYN "\e[1;36m"
+#define BWTH "\e[1;37m"
+#define RESET "\e[0m"
 
 class Contacts
 {
@@ -18,16 +27,11 @@ class Contacts
 
 	public:
 	Contacts();
-	std::string fName;
-	std::string	lName;
-	std::string	nName;
-	std::string	pNumber;
-	std::string	dSecret;
-	void		setFirstName(std::string fName);
-	void		setLastName(std::string lName);
-	void		setNickName(std::string nName);
-	void		setPhoneNumber(std::string pNumber);
-	void		setDarkestSecret(std::string dSecret);
+	void		setFirstName(std::string firstName);
+	void		setLastName(std::string lastName);
+	void		setNickName(std::string nickName);
+	void		setPhoneNumber(std::string phoneNumber);
+	void		setDarkestSecret(std::string darkestSecret);
 	std::string	getFirstName(void) const;
 	std::string	getLastName(void) const;
 	std::string	getNickName(void) const;

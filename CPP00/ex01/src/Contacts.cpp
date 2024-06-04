@@ -1,13 +1,13 @@
-#include "../include/Phonebook.hpp"
+#include "../include/PhoneBook.hpp"
 #include "../include/Contacts.hpp"
 
 Contacts::Contacts()
 {
-	firstName = fName;
-	lastName = lName;
-	nickName = nName;
-	phoneNumber = pNumber;
-	darkestSecret = dSecret;
+	firstName = "";
+	lastName = "";
+	nickName = "";
+	phoneNumber = "";
+	darkestSecret = "";
 }
 
 std::string	Contacts::getFirstName(void) const

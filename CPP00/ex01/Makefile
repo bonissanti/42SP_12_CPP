@@ -12,12 +12,12 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    = Phonebook
+NAME    = PhoneBook
 HEADER  = ./include
 
 ################################# Sources ###################################
 
-PROGRAM   = Phonebook.cpp Contacts.cpp main.cpp
+PROGRAM   = PhoneBook.cpp Contacts.cpp main.cpp
 SRC = $(addprefix ./src/, $(PROGRAM))
 
 ################################# Objects ###################################

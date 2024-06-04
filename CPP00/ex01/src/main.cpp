@@ -1,15 +1,5 @@
-#include "../include/Phonebook.hpp"
+#include "../include/PhoneBook.hpp"
 #include "../include/Contacts.hpp"
-
-// int	main(void)
-// {
-// 	PhoneBook ph1;
-
-// 	ph1.setFirstName("otario");
-// 	std::cout << ph1.getFirstName() << std::endl;
-// 	return (0);
-// }
-
 
 int	main(void)
 {
@@ -20,19 +10,19 @@ int	main(void)
 	promptAgain = true;
 	while (promptAgain)
 	{
-		std::cout << "Enter an option: [A]: ADD, [B]: SEARCH, [C]: EXIT" << std::endl;
+		std::cout << BYEL << "Enter an option: [A]: ADD, [B]: SEARCH, [C]: EXIT" << RESET << std::endl;
+		std:: cout <<  "• ";
 		std::cin >> input;
-
 		if (input.compare("A") == 0)
 		{
 				pBook.addContact();
-				std::cout << "Contact added sucessfully! " << std::endl;
+				std::cout << BGRN << "Contact added sucessfully! " << RESET << std::endl;
 		}
 		else if (input.compare("B") == 0)
 				pBook.searchContact();
 		else if (input.compare("C") == 0)
 				promptAgain = false;
 		else
-				std::cout << "Invalid choice, please choose a valid option" << std::endl;
+				std::cout << BRED << "Invalid choice. Please choose a valid option" << RESET << std::endl << "• ";
 	}
 }
