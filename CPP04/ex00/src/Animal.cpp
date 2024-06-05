@@ -17,26 +17,41 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/DiamondTrap.hpp"
+#include "../include/Animal.hpp"
 
-// static	void	printingInfos(void)
-// {
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n\n";
-// 	std::cout << "Current status: " << std::endl;
-// 	std::cout << "Name: " << toPrint.getName() << " | " << "HP: " << toPrint.getHitP() << " | " 
-// 		<< "Energy: " << toPrint.getEnergyP() << " | " << "Attack Damage: " << toPrint.getAttackD() << std::endl;
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n";
-// }
-
-int	main(void)
-{
-	DiamondTrap	dt("Eustácio");
-
-	dt.attack("Random");
-	dt.whoAmI();
-	return (0);
+Animal::Animal(){
+	std::cout << "<Animal> Default constructor called" << std::endl;
+	this->type = "Unknown";
 }
+Animal::Animal(const std::string& type) : type(type){
+		std::cout << "<Animal> Parametrized constructor called" << std::endl;
+}
+Animal::~Animal(){
+	std::cout << "<Animal> Animal destructor called" << std::endl;
+}
+Animal::Animal(const Animal& toCopy){
+	std::cout << "<Animal> Copy constructor called" << std::endl;
+		*this = toCopy;
+}
+Animal& Animal::operator=(const Animal& toCopy){
+	std::cout << "<Animal> Copy assignment operator called" << std::endl;
+	if (this != &toCopy)
+		this->type = toCopy.type;
+	return (*this);
+}
+
+void	Animal::makeSound(void)
+{
+	std::cout << "Alooooo" << std::endl;
+}
+
+std::string	Animal::getType(void) const
+{
+	return (this->type);
+}
+
+void		Animal::setType(const std::string& newType)
+{
+	this->type = newType;
+}
+

@@ -21,14 +21,23 @@
 # define DIAMONDTRAP_HPP
 
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
-class DiamondTrap
+#define suffix "_clap_name"
+
+class DiamondTrap : public FragTrap, public ScavTrap
 {
+	private:
+	std::string	_name;
+
 	public:
+	DiamondTrap();
 	DiamondTrap(const std::string& name);
 	~DiamondTrap();
 	DiamondTrap(const DiamondTrap& toCopy);
 	DiamondTrap& operator=(const DiamondTrap& toCopy);
+	void	attack(const std::string& target);
+	void	whoAmI(void);
 };
 
 #endif

@@ -17,26 +17,35 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/DiamondTrap.hpp"
+#ifndef CATDOG_HPP
+# define CATDOG_HPP
 
-// static	void	printingInfos(void)
-// {
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n\n";
-// 	std::cout << "Current status: " << std::endl;
-// 	std::cout << "Name: " << toPrint.getName() << " | " << "HP: " << toPrint.getHitP() << " | " 
-// 		<< "Energy: " << toPrint.getEnergyP() << " | " << "Attack Damage: " << toPrint.getAttackD() << std::endl;
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n";
-// }
+#include "Animal.hpp"
 
-int	main(void)
+class cat : public Animal
 {
-	DiamondTrap	dt("Eustácio");
+	public:
+	cat();
+	cat(const std::string& type);
+	~cat();
+	cat(const cat& toCopy);
+	cat& operator=(const cat& toCopy);
 
-	dt.attack("Random");
-	dt.whoAmI();
-	return (0);
-}
+	void	makeSound(void);
+
+};
+
+class Dog : public Animal
+{
+	public:
+	Dog();
+	Dog(const std::string& type);
+	~Dog();
+	Dog(const Dog& toCopy);
+	Dog& operator=(const Dog& toCopy);
+
+	void	makeSound(void);
+
+};
+
+#endif

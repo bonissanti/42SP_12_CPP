@@ -21,13 +21,13 @@
 # define CLAPTRAP_HPP
 
 #include <iostream>
-#include <stdexcept>
-// #include "ScavTrap.hpp"
+#include <typeinfo>
 
 class ClapTrap
 {
 	protected:
 	std::string		name;
+	std::string		type;
 	unsigned int	hitPoints;
 	unsigned int	energyPoints;
 	unsigned int	attackDamage;
@@ -39,14 +39,16 @@ class ClapTrap
 	ClapTrap(const ClapTrap& toCopy);
 	ClapTrap& operator=(const ClapTrap& toCopy);
 
+	std::string		getName(void) const;
 	unsigned int	getHitP(void) const;
 	unsigned int	getEnergyP(void) const;
 	unsigned int	getAttackD(void) const;
-	std::string		getName(void) const;
+	std::string		getType(void) const;
+	void			setName(const std::string& name);
+	void			setType(const std::string& type);
 	void			setHitP(const unsigned int hitP);
 	void			setEnergyP(const unsigned int energyP);
 	void			setAttackD(const unsigned int attackD);
-	void			setName(const std::string& name);
 	
 	void			attack(const std::string& target);
 	void			takeDamage(unsigned int amount);

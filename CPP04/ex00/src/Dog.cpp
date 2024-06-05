@@ -17,26 +17,32 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/DiamondTrap.hpp"
+#include "../include/CatDog.hpp"
 
-// static	void	printingInfos(void)
-// {
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n\n";
-// 	std::cout << "Current status: " << std::endl;
-// 	std::cout << "Name: " << toPrint.getName() << " | " << "HP: " << toPrint.getHitP() << " | " 
-// 		<< "Energy: " << toPrint.getEnergyP() << " | " << "Attack Damage: " << toPrint.getAttackD() << std::endl;
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n";
-// }
+Dog::Dog(){
+	std::cout << "<Dog> Default constructor called" << std::endl;
+	this->type = "Dog";
+}
+Dog::Dog(const std::string& type) : Animal(type){
+		std::cout << "<Dog> Parametrized constructor called" << std::endl;
+	this->type = "Dog";
+}
+Dog::~Dog(){
+	std::cout << "<Dog> Dog destructor called" << std::endl;
+}
 
-int	main(void)
+Dog::Dog(const Dog& toCopy) : Animal(type){
+	std::cout << "<Dog> Copy constructor called" << std::endl;
+		*this = toCopy;
+}
+Dog& Dog::operator=(const Dog& toCopy){
+	std::cout << "<Dog> Copy assignment operator called" << std::endl;
+	if (this != &toCopy)
+		Animal::operator=(toCopy);
+	return (*this);
+}
+
+void	Dog::makeSound(void)
 {
-	DiamondTrap	dt("Eustácio");
-
-	dt.attack("Random");
-	dt.whoAmI();
-	return (0);
+	std::cout << "Woof Woof" << std::endl;
 }

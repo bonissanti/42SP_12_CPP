@@ -21,7 +21,7 @@
 
 FragTrap::FragTrap(const std::string& name) : ClapTrap(name){
 		std::cout << "<FragTrap> "<< "Default constructor called" << std::endl;
-		setHitP(0);
+		setHitP(100);
 		setEnergyP(100);
 		setAttackD(30);
 }

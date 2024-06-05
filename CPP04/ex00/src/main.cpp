@@ -17,26 +17,24 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/DiamondTrap.hpp"
-
-// static	void	printingInfos(void)
-// {
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n\n";
-// 	std::cout << "Current status: " << std::endl;
-// 	std::cout << "Name: " << toPrint.getName() << " | " << "HP: " << toPrint.getHitP() << " | " 
-// 		<< "Energy: " << toPrint.getEnergyP() << " | " << "Attack Damage: " << toPrint.getAttackD() << std::endl;
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n";
-// }
+#include "../include/CatDog.hpp"
 
 int	main(void)
 {
-	DiamondTrap	dt("Eustácio");
+	Animal *myCat = new cat();
+	Animal *myDog = new Dog();
+	Animal *meta = new Animal();
 
-	dt.attack("Random");
-	dt.whoAmI();
+	std::cout << myCat->getType() << std::endl;
+	std::cout << myDog->getType() << std::endl;
+	std::cout << meta->getType() << std::endl;
+
+	myCat->makeSound();
+	myDog->makeSound();
+	meta->makeSound();
+
+	delete meta;
+	delete myDog;
+	delete myCat;
 	return (0);
 }

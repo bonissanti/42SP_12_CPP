@@ -17,26 +17,31 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/DiamondTrap.hpp"
+#include "../include/CatDog.hpp"
 
-// static	void	printingInfos(void)
-// {
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n\n";
-// 	std::cout << "Current status: " << std::endl;
-// 	std::cout << "Name: " << toPrint.getName() << " | " << "HP: " << toPrint.getHitP() << " | " 
-// 		<< "Energy: " << toPrint.getEnergyP() << " | " << "Attack Damage: " << toPrint.getAttackD() << std::endl;
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n";
-// }
+cat::cat(){
+	std::cout << "<Cat> Default constructor called" << std::endl;
+	this->type = "Cat";
+}
+cat::cat(const std::string& type) : Animal(type){
+	std::cout << "<Cat> Parametrized constructor called" << std::endl;
+	this->type = Animal::type;
+}
+cat::~cat(){
+	std::cout << "<Cat> CatDog destructor called" << std::endl;
+}
+cat::cat(const cat& toCopy) : Animal(toCopy){
+	std::cout << "<Cat> Copy constructor called" << std::endl;
+		*this = toCopy;
+}
+cat& cat::operator=(const cat& toCopy){
+	std::cout << "<Cat> Copy assignment operator called" << std::endl;
+	if (this != &toCopy)
+		Animal::operator=(toCopy);
+	return (*this);
+}
 
-int	main(void)
+void	cat::makeSound(void)
 {
-	DiamondTrap	dt("Eustácio");
-
-	dt.attack("Random");
-	dt.whoAmI();
-	return (0);
+	std::cout << "Meow Meow" << std::endl;
 }

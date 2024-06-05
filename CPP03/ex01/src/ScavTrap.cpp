@@ -20,15 +20,19 @@
 #include "../include/ClapTrap.hpp"
 #include "../include/ScavTrap.hpp"
 
-// ScavTrap::ScavTrap(){
-// }
+ScavTrap::ScavTrap(){
+	std::cout << "<ScavTrap> Parameterized constructor called" << std::endl;
+	this->hitPoints = 100;
+	this->energyPoints = 50;
+	this->attackDamage = 20;
+}
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 {
-	std::cout << "<ScavTrap> default constructor called" << std::endl;
-	setHitP(100);
-	setEnergyP(50);
-	setAttackD(20);
+	std::cout << "<ScavTrap> Parameterized constructor called" << std::endl;
+	this->hitPoints = 100;
+	this->energyPoints = 50;
+	this->attackDamage = 20;
 }
 
 ScavTrap::~ScavTrap(){

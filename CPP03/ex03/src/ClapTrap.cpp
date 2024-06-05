@@ -3,33 +3,34 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/03/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/03/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⡿⣿⣿⣿⣿⡄⠀⠀⠀⠀                                                       */
-/* ⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⠿⠟⠀⠀⠻⣿⣿⡇⠀⠀⠀⠀                                                       */
-/* ⠀⠀⠀⠀⠀⠀⢀⣾⡿⠃⠀⠀⠀⠀⠀⠘⢿⣿⡀⠀⠀⠀                                                       */
-/* ⠀⠀⠀⠀⠀⣰⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡀⠀⠀   ⢽⣿⣿⠛⢻⣿⣿⣿⣿⠛⠛⠛⠛⢻⣿⣿⠿⠛⠛⠿⣿⡟⠛⠛⠛⠛⣿⡟⢿⣿⣿⣿⠛⢻⡟⠛⠛⠛⠻⣿⣿⣿ */
-/* ⠀⠀⠀⠀⢠⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣧⠀⠀   ⢸⣿⣿⠀⢸⣿⣿⣿⣿⠀⢿⣿⣿⣿⡿⠁⣴⣶⣶⣾⣿⡇⠀⣿⣿⣿⣿⡏⢀⠙⢿⣿⠀⢸⡇⠀⣷⣷⣆⠈⢿⣿ */
-/* ⠀⠀⠀⢀⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣆⠀   ⢸⣿⣿⠀⢸⣿⣿⣿⣿⠀⢤⣤⣴⣿⣧⠀⢿⣿⣤⠀⣿⡇⠀⣤⣤⣼⣿⡇⠀⣷⣄⠙⠀⢸⡇⠀⣿⣿⡟⠀⣸⣿ */
-/*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ⢸⣿⣿⣀⣈⣉⣉⣉⣿⣀⣈⣉⣉⣹⣿⣷⣄⣈⣁⣤⣿⣇⣀⣉⣉⣉⣿⣇⣀⣿⣿⣷⣄⣸⣧⣀⣉⣉⣀⣴⣿⣿ */
+/* ⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⠿⠟⠀⠀⠻⣿⣿⡇⠀⠀⠀⠀   ███████╗██╗██╗██╗██╗██╗██╗██╗██╗██╗   ██╗██╗   ██╗  */
+/* ⠀⠀⠀⠀⠀⠀⢀⣾⡿⠃⠀⠀⠀⠀⠀⠘⢿⣿⡀⠀⠀⠀   ██╔════╝██║██║██║██║██║██║██║██║██║   ██║██║   ██║  */
+/* ⠀⠀⠀⠀⠀⣰⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡀⠀⠀   ███████╗██║██║██║██║██║██║██║██║██║   ██║██║   ██║  */
+/* ⠀⠀⠀⠀⢠⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣧⠀⠀   ╚════██║██║██║██║██║██║██║██║██║██║   ██║██║   ██║  */
+/* ⠀⠀⠀⢀⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣆⠀   ███████║██║██║██║██║██║██║██║██║╚██████╔╝╚██████╔╝  */
+/*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
+
 
 #include "../include/ClapTrap.hpp"
 
-ClapTrap::ClapTrap(){
+ClapTrap::ClapTrap() : hitPoints(10), energyPoints(10), attackDamage(0){
 		std::cout << "<ClapTrap> default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string& name) : name(name), 
+ClapTrap::ClapTrap(const std::string& name) : name(name),
 	hitPoints(10), energyPoints(10), attackDamage(0){
 		std::cout << "<ClapTrap> Parametrized constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap(){
-	std::cout << "<ClapTrap> destructor called" << std::endl;
+	std::cout << "<ClapTrap> " << this->name << " destructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& toCopy){
@@ -42,6 +43,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& toCopy){
 	if (this != &toCopy)
 	{
 		this->name = toCopy.name;
+		this->type = toCopy.type;
 		this->hitPoints = toCopy.hitPoints;
 		this->energyPoints = toCopy.energyPoints;
 		this->attackDamage = toCopy.attackDamage;
@@ -68,19 +70,16 @@ unsigned int	ClapTrap::getAttackD(void) const
 
 void	ClapTrap::setHitP(const unsigned int hitP)
 {
-	std::cout << "<ClapTrap> configuring the HP of " << this->name << " to " << hitP << std::endl;
 	this->hitPoints = hitP;
 }
 
 void	ClapTrap::setEnergyP(const unsigned int energyP)
 {
-	std::cout << "<ClapTrap> configuring the Energy Point of " << this->name << " to " << energyP << std::endl;
 	this->energyPoints = energyP;
 }
 
 void	ClapTrap::setAttackD(const unsigned int attackD)
 {
-	std::cout << "<ClapTrap> configuring the Attack Damage of " << this->name << " to " << attackD << std::endl;
 	this->attackDamage = attackD;
 }
 
@@ -94,15 +93,25 @@ void	ClapTrap::setName(const std::string& name)
 	this->name = name;
 }
 
+std::string	ClapTrap::getType(void) const
+{
+	return (this->type);
+}
+
+void	ClapTrap::setType(const std::string& type)
+{
+	this->type = type;
+}
+
 void	ClapTrap::attack(const std::string& target)
 {
  	if (this->getHitP() == 0 || this->getEnergyP() == 0)
 	{
- 		std::cout << "<ClapTrap> " << this->getName() << "  is not able to attack because HP or energy points are insufficient. HP: "<< this->hitPoints << " | Energy: " << this->energyPoints << std::endl;
+ 		std::cout << this->getType() << this->getName() << "  is not able to attack because HP or energy points are insufficient. HP: "<< this->hitPoints << " | Energy: " << this->energyPoints << std::endl;
 		return ;
 	}
 	this->energyPoints--;
-	std::cout << "<ClapTrap> " << this->name << " attacks " << target << " causing a damage of " << this->getAttackD() << std::endl;	
+	std::cout << this->getType() << " " << this->getName() << " attacks " << target << " causing a damage of " << this->getAttackD() << std::endl;	
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)

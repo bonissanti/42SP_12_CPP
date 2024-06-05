@@ -17,26 +17,26 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/DiamondTrap.hpp"
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
-// static	void	printingInfos(void)
-// {
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n\n";
-// 	std::cout << "Current status: " << std::endl;
-// 	std::cout << "Name: " << toPrint.getName() << " | " << "HP: " << toPrint.getHitP() << " | " 
-// 		<< "Energy: " << toPrint.getEnergyP() << " | " << "Attack Damage: " << toPrint.getAttackD() << std::endl;
-// 	for (int i = 0; i < 64; i++)
-// 		std::cout << "_";
-// 	std::cout << "\n";
-// }
+#include <iostream>
 
-int	main(void)
+class Animal
 {
-	DiamondTrap	dt("Eustácio");
+	protected:
+	std::string	type;
 
-	dt.attack("Random");
-	dt.whoAmI();
-	return (0);
-}
+	public:
+	Animal();
+	Animal(const std::string& type);
+	virtual ~Animal();
+	Animal(const Animal& toCopy);
+	Animal& operator=(const Animal& toCopy);
+
+	virtual void	makeSound(void);
+	std::string		getType(void) const;
+	void			setType(const std::string& newType);
+};
+
+#endif

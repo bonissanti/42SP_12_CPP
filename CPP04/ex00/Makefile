@@ -12,14 +12,14 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex03
-NAME_TEST	= test-ex03
+NAME    	= ex00
+NAME_TEST	= test-ex01
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+FILES   	= main.cpp Animal.cpp CatDog.cpp Dog.cpp
 # TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 
@@ -35,7 +35,7 @@ TEST_OBJS = $(TEST_SRCS:$(TEST_DIR)/%.cpp=$(OBJS_DIR)/tests/%.o)
 ################################# Flags #####################################
 
 CPP = c++
-CPPFLAGS = -Wall -Wextra -Werror -Wshadow -Wno-shadow -std=c++98 -g3 -I$(HEADER)
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -I$(HEADER)
 
 ################################ Progress ###################################
 
