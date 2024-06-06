@@ -20,7 +20,6 @@ HEADER  	= ./include
 
 TEST_DIR	= ./src/tests
 FILES   	= main.cpp Replace.cpp
-TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 
 SRCS_COMMON = $(filter-out ./src/main.cpp, $(SRC))
