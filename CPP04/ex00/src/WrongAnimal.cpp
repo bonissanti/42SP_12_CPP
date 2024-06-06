@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/06/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/06/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,42 +17,40 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Animal.hpp"
+#include "../include/WrongAnimal.hpp"
 
-Animal::Animal(){
-	std::cout << "<Animal> Default constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+WrongAnimal::WrongAnimal(){
+	std::cout << "<WrongAnimal> Default constructor called" << std::endl;
+	this->type = "Unknown specie";
 }
-Animal::Animal(const std::string& type) : type(type){
-		std::cout << "<Animal> Parametrized constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+WrongAnimal::WrongAnimal(const std::string& type) : type(type){
+		std::cout << "<WrongAnimal> Parametrized constructor called" << std::endl;
 }
-Animal::~Animal(){
-	std::cout << "<Animal> Animal destructor called" << std::endl;
+WrongAnimal::~WrongAnimal(){
+	std::cout << "<WrongAnimal> destructor called" << std::endl;
 }
-Animal::Animal(const Animal& toCopy){
-	std::cout << "<Animal> Copy constructor called" << std::endl;
+WrongAnimal::WrongAnimal(const WrongAnimal& toCopy){
+	std::cout << "<WrongAnimal> Copy constructor called" << std::endl;
 		*this = toCopy;
 }
-Animal& Animal::operator=(const Animal& toCopy){
-	std::cout << "<Animal> Copy assignment operator called" << std::endl;
+WrongAnimal& WrongAnimal::operator=(const WrongAnimal& toCopy){
+	std::cout << "<WrongAnimal> Copy assignment operator called" << std::endl;
 	if (this != &toCopy)
 		this->type = toCopy.type;
 	return (*this);
 }
 
-void	Animal::makeSound(void)
+void	WrongAnimal::makeSound(void)
 {
-	std::cout << "A random animal sound" << std::endl;
+	std::cout << "What a strange sound is this?" << std::endl;
 }
 
-std::string	Animal::getType(void) const
+std::string	WrongAnimal::getType(void) const
 {
 	return (this->type);
 }
 
-void		Animal::setType(const std::string& newType)
+void	WrongAnimal::setType(const std::string& newType)
 {
 	this->type = newType;
 }
-

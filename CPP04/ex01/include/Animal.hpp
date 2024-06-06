@@ -17,42 +17,26 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Animal.hpp"
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
-Animal::Animal(){
-	std::cout << "<Animal> Default constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
-}
-Animal::Animal(const std::string& type) : type(type){
-		std::cout << "<Animal> Parametrized constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
-}
-Animal::~Animal(){
-	std::cout << "<Animal> Animal destructor called" << std::endl;
-}
-Animal::Animal(const Animal& toCopy){
-	std::cout << "<Animal> Copy constructor called" << std::endl;
-		*this = toCopy;
-}
-Animal& Animal::operator=(const Animal& toCopy){
-	std::cout << "<Animal> Copy assignment operator called" << std::endl;
-	if (this != &toCopy)
-		this->type = toCopy.type;
-	return (*this);
-}
+#include <iostream>
 
-void	Animal::makeSound(void)
+class Animal
 {
-	std::cout << "A random animal sound" << std::endl;
-}
+	protected:
+	std::string	type;
 
-std::string	Animal::getType(void) const
-{
-	return (this->type);
-}
+	public:
+	Animal();
+	Animal(const std::string& type);
+	virtual ~Animal();
+	Animal(const Animal& toCopy);
+	Animal& operator=(const Animal& toCopy);
 
-void		Animal::setType(const std::string& newType)
-{
-	this->type = newType;
-}
+	virtual void	makeSound(void);
+	std::string		getType(void) const;
+	void			setType(const std::string& newType);
+};
 
+#endif

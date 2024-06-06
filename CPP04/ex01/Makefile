@@ -12,14 +12,14 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex00
+NAME    	= ex01
 NAME_TEST	= test-ex01
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Animal.cpp CatDog.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+FILES   	= main.cpp Animal.cpp CatDog.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 # TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 

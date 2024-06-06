@@ -17,42 +17,48 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Animal.hpp"
+#include "../include/CatDog.hpp"
 
-Animal::Animal(){
-	std::cout << "<Animal> Default constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+cat::cat(){
+	std::cout << "<Cat> Default constructor called" << std::endl;
+	this->type = "Cat";
+	brain = new Brain();
 }
-Animal::Animal(const std::string& type) : type(type){
-		std::cout << "<Animal> Parametrized constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+
+cat::cat(const std::string& type) : Animal(type){
+	std::cout << "<Cat> Parametrized constructor called" << std::endl;
+	this->type = Animal::type;
+	this->brain = new Brain();
 }
-Animal::~Animal(){
-	std::cout << "<Animal> Animal destructor called" << std::endl;
+cat::~cat(){
+	std::cout << "<Cat> CatDog destructor called" << std::endl;
+	delete brain;
 }
-Animal::Animal(const Animal& toCopy){
-	std::cout << "<Animal> Copy constructor called" << std::endl;
+cat::cat(const cat& toCopy) : Animal(toCopy){
+	std::cout << "<Cat> Copy constructor called" << std::endl;
 		*this = toCopy;
 }
-Animal& Animal::operator=(const Animal& toCopy){
-	std::cout << "<Animal> Copy assignment operator called" << std::endl;
+cat& cat::operator=(const cat& toCopy){
+	std::cout << "<Cat> Copy assignment operator called" << std::endl;
 	if (this != &toCopy)
-		this->type = toCopy.type;
+		Animal::operator=(toCopy);
 	return (*this);
 }
 
-void	Animal::makeSound(void)
+void	cat::makeSound(void)
 {
-	std::cout << "A random animal sound" << std::endl;
+	std::cout << "Meow Meow" << std::endl;
 }
 
-std::string	Animal::getType(void) const
+void	cat::setBrain(unsigned int num, const std::string& idea)
 {
-	return (this->type);
+	while (num-- && num < 100)
+		this->brain->ideas[num] = idea;
 }
 
-void		Animal::setType(const std::string& newType)
+std::string	cat::getBrain(unsigned int num)
 {
-	this->type = newType;
+	if (num > 100)
+		return ("Invalid index, please insert a valid number");
+	return (this->brain->ideas[num]);
 }
-

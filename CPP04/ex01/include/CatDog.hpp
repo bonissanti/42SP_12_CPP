@@ -17,42 +17,42 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Animal.hpp"
+#ifndef CATDOG_HPP
+# define CATDOG_HPP
 
-Animal::Animal(){
-	std::cout << "<Animal> Default constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
-}
-Animal::Animal(const std::string& type) : type(type){
-		std::cout << "<Animal> Parametrized constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
-}
-Animal::~Animal(){
-	std::cout << "<Animal> Animal destructor called" << std::endl;
-}
-Animal::Animal(const Animal& toCopy){
-	std::cout << "<Animal> Copy constructor called" << std::endl;
-		*this = toCopy;
-}
-Animal& Animal::operator=(const Animal& toCopy){
-	std::cout << "<Animal> Copy assignment operator called" << std::endl;
-	if (this != &toCopy)
-		this->type = toCopy.type;
-	return (*this);
-}
+#include "Brain.hpp"
 
-void	Animal::makeSound(void)
+class cat : public Animal
 {
-	std::cout << "A random animal sound" << std::endl;
-}
+	private:
+	Brain *brain;
 
-std::string	Animal::getType(void) const
+	public:
+	cat();
+	~cat();
+	cat(const std::string& type);
+	cat(const cat& toCopy);
+	cat& operator=(const cat& toCopy);
+
+	void	makeSound(void);
+	std::string	getBrain(unsigned int num);
+	void	setBrain(unsigned int num, const std::string& idea);
+
+};
+
+class Dog : public Animal
 {
-	return (this->type);
-}
+	private:
 
-void		Animal::setType(const std::string& newType)
-{
-	this->type = newType;
-}
+	public:
+	Dog();
+	Dog(const std::string& type);
+	~Dog();
+	Dog(const Dog& toCopy);
+	Dog& operator=(const Dog& toCopy);
 
+	void	makeSound(void);
+
+};
+
+#endif

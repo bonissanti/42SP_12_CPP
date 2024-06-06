@@ -17,42 +17,32 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Animal.hpp"
+#include "../include/CatDog.hpp"
 
-Animal::Animal(){
-	std::cout << "<Animal> Default constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+Dog::Dog(){
+	std::cout << "<Dog> Default constructor called" << std::endl;
+	this->type = "Dog";
 }
-Animal::Animal(const std::string& type) : type(type){
-		std::cout << "<Animal> Parametrized constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+Dog::Dog(const std::string& type) : Animal(type){
+		std::cout << "<Dog> Parametrized constructor called" << std::endl;
+	this->type = "Dog";
 }
-Animal::~Animal(){
-	std::cout << "<Animal> Animal destructor called" << std::endl;
+Dog::~Dog(){
+	std::cout << "<Dog> Dog destructor called" << std::endl;
 }
-Animal::Animal(const Animal& toCopy){
-	std::cout << "<Animal> Copy constructor called" << std::endl;
+
+Dog::Dog(const Dog& toCopy) : Animal(type){
+	std::cout << "<Dog> Copy constructor called" << std::endl;
 		*this = toCopy;
 }
-Animal& Animal::operator=(const Animal& toCopy){
-	std::cout << "<Animal> Copy assignment operator called" << std::endl;
+Dog& Dog::operator=(const Dog& toCopy){
+	std::cout << "<Dog> Copy assignment operator called" << std::endl;
 	if (this != &toCopy)
-		this->type = toCopy.type;
+		Animal::operator=(toCopy);
 	return (*this);
 }
 
-void	Animal::makeSound(void)
+void	Dog::makeSound(void)
 {
-	std::cout << "A random animal sound" << std::endl;
+	std::cout << "Woof Woof" << std::endl;
 }
-
-std::string	Animal::getType(void) const
-{
-	return (this->type);
-}
-
-void		Animal::setType(const std::string& newType)
-{
-	this->type = newType;
-}
-
