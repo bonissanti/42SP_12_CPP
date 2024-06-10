@@ -19,8 +19,8 @@ HEADER  	= ./include
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp AMateria.cpp IMateriaSource.cpp MateriaSource.cpp \
-				ice.cpp cure.cpp ICharacter.cpp Character.cpp
+FILES   	= main.cpp AMateria.cpp MateriaSource.cpp \
+				ice.cpp cure.cpp Character.cpp
 
 SRC = $(addprefix ./src/, $(FILES))
 

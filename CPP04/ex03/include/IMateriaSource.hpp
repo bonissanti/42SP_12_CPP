@@ -26,14 +26,9 @@
 class IMateriaSource
 {
 	public:
-	IMateriaSource();
-	virtual ~IMateriaSource();
-	IMateriaSource(const std::string& type);
-	IMateriaSource(const IMateriaSource& toCopy);
-	IMateriaSource& operator=(const IMateriaSource& toCopy);
-
-	virtual	void learnMateria(AMateria *toLearn) = 0;
-	virtual AMateria *createMateria(std::string const & type) = 0;
+	virtual ~IMateriaSource() {}	
+	virtual void learnMateria(AMateria*) = 0;
+	virtual AMateria* createMateria(std::string const & type) = 0;
 };
 
 #endif

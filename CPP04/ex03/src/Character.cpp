@@ -26,42 +26,39 @@ Character::Character(){
 	
 }
 
-Character::Character(const std::string& name) : name(name){
-	#ifdef TEST
-	std::cout << "<Character> Default constructor called" << std::endl;
-	#endif
+Character::Character(const std::string& name) : name(name)
+{
 	for (int i = 0; i < 4; i++)
 		this->inventory[i] = NULL;
 }
 
-Character::~Character(){
-	#ifdef TEST
-	std::cout << "<Character> Destructor called" << std::endl;
-	#endif
+Character::~Character()
+{
 	for (int i = 0; i < 4; i++)
 		if (this->inventory[i])
 			delete this->inventory[i];
 }
 
-Character::Character(const Character& toCopy) : ICharacter(toCopy){
-	#ifdef TEST
-	std::cout << "<Character> Copy constructor called" << std::endl;
-	#endif
+Character::Character(const Character& toCopy)
+{
+	for (int i = 0; i < 4; i++)
+		this->inventory[i] = NULL;
 	*this = toCopy;
 }
 
-Character& Character::operator=(const Character& toCopy){
-	#ifdef TEST
-	std::cout << "<Character> Copy assignment operator called" << std::endl;
-	#endif
-
+Character& Character::operator=(const Character& toCopy)
+{
 	if (this != &toCopy)
 	{
+		this->name = toCopy.name;
 		for (int i = 0; i < 4; i++)
 		{
 			if (this->inventory[i])
 				delete this->inventory[i];
-			this->inventory[i] = toCopy.inventory[i]->clone();
+			if (toCopy.inventory[i])
+				this->inventory[i] = toCopy.inventory[i]->clone();
+			else
+				this->inventory[i] = NULL;
 		}
 	}
 	return (*this);
@@ -111,8 +108,11 @@ void	Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx > 4)
 	{
-		std::cout << "Invalid idx. Please, try a valid index" << std::endl;
+		std::cout << "<Chracter> Invalid idx. Please, try a valid index" << std::endl;
 		return ;
 	}	
-	this->inventory[idx]->use(target);
+	if (this->inventory[idx])
+		this->inventory[idx]->use(target);
+	else
+		std::cout << "<Character> Empty index" << std::endl;
 }

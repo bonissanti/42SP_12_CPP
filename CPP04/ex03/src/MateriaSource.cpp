@@ -19,18 +19,14 @@
 
 #include "../include/MateriaSource.hpp"
 
-MateriaSource::MateriaSource(){
-	#ifdef TEST
-	std::cout << "<MateriaSource> Default constructor called" << std::endl;
-	#endif
+MateriaSource::MateriaSource()
+{
 	for (int i = 0; i < 4; i++)
 		this->copied[i] = NULL;
 }
 
-MateriaSource::~MateriaSource(){
-	#ifdef TEST
-	std::cout << "<MateriaSource> Destructor called" << std::endl;
-	#endif
+MateriaSource::~MateriaSource()
+{
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->copied[i])
@@ -38,24 +34,25 @@ MateriaSource::~MateriaSource(){
 	}
 }
 
-MateriaSource::MateriaSource(const MateriaSource& toCopy) : IMateriaSource(toCopy){
-	#ifdef TEST
-	std::cout << "<MateriaSource> Copy constructor called" << std::endl;
-	#endif
+MateriaSource::MateriaSource(const MateriaSource& toCopy)
+{
+	for (int i = 0; i < 4; i++)
+		this->copied[i] = NULL;
 	*this = toCopy;
 }
 
-MateriaSource& MateriaSource::operator=(const MateriaSource& toCopy){
-	#ifdef TEST
-	std::cout << "<MateriaSource> Copy assignment operator called" << std::endl;
-	#endif
+MateriaSource& MateriaSource::operator=(const MateriaSource& toCopy)
+{
 	if (this != &toCopy)
 	{
 		for (int i = 0; i < 4; i++)
 		{
 			if (this->copied[i])
 				delete this->copied[i];
-			this->copied[i] = toCopy.copied[i]->clone();
+			if (toCopy.copied[i])
+				this->copied[i] = toCopy.copied[i]->clone();
+			else
+				this->copied[i] = NULL;
 		}
 	}
 	return (*this);
