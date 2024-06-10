@@ -24,7 +24,7 @@ int	main(void)
 {
 	std::cout << "SUBJECT - TEST\n";
 	{
-		Animal *myCat = new cat();
+		Animal *myCat = new Cat();
 		Animal *myDog = new Dog();
 		Animal *meta = new Animal();
 

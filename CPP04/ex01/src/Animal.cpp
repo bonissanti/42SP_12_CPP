@@ -23,17 +23,21 @@ Animal::Animal(){
 	std::cout << "<Animal> Default constructor called" << std::endl;
 	this->type = "Talvez seja um mamífero";
 }
+
 Animal::Animal(const std::string& type) : type(type){
 		std::cout << "<Animal> Parametrized constructor called" << std::endl;
 	this->type = "Talvez seja um mamífero";
 }
+
 Animal::~Animal(){
 	std::cout << "<Animal> Animal destructor called" << std::endl;
 }
+
 Animal::Animal(const Animal& toCopy){
 	std::cout << "<Animal> Copy constructor called" << std::endl;
 		*this = toCopy;
 }
+
 Animal& Animal::operator=(const Animal& toCopy){
 	std::cout << "<Animal> Copy assignment operator called" << std::endl;
 	if (this != &toCopy)

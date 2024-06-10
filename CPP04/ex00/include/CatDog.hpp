@@ -17,19 +17,19 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef CATDOG_HPP
-# define CATDOG_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
 #include "Animal.hpp"
 
-class cat : public Animal
+class Cat : public Animal
 {
 	public:
-	cat();
-	cat(const std::string& type);
-	~cat();
-	cat(const cat& toCopy);
-	cat& operator=(const cat& toCopy);
+	Cat();
+	Cat(const std::string& type);
+	~Cat();
+	Cat(const Cat& toCopy);
+	Cat& operator=(const Cat& toCopy);
 
 	void	makeSound(void);
 

@@ -12,15 +12,16 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex01
-NAME_TEST	= test-ex01
+NAME    	= ex03
+NAME_TEST	= test-ex03
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
-# TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
+FILES   	= main.cpp AMateria.cpp IMateriaSource.cpp MateriaSource.cpp \
+				ice.cpp cure.cpp ICharacter.cpp Character.cpp
+
 SRC = $(addprefix ./src/, $(FILES))
 
 SRCS_COMMON = $(filter-out ./src/main.cpp, $(SRC))
@@ -57,10 +58,10 @@ $(NAME): $(OBJS:%=$(OBJS_DIR)/%)
 	@echo "$(GREEN)$(NAME) created$(RESET)"
 
 test: CPPFLAGS += -DTEST
-test: $(OBJS_COMMON) $(TEST_OBJS)
-	@$(CPP) $(OBJS_COMMON) $(TEST_OBJS) -o $(NAME_TEST)
+test: $(OBJS:%=$(OBJS_DIR)/%)
+	@$(CPP) $(OBJS:%=$(OBJS_DIR)/%) -o $(NAME)
 	@echo ""
-	@echo "$(GREEN)Test executable created$(RESET)"
+	@echo "$(GREEN)$(NAME) created$(RESET)"
 
 $(OBJS_DIR)/%.o: ./%.cpp
 	@mkdir -p $(@D)

@@ -79,7 +79,7 @@ void	PhoneBook::addContact(void)
 	this->numContacts++;
 }
 
-std::string	truncate(const std::string& str)
+std::string	trunCate(const std::string& str)
 {
 	if (str.length() >= 10)
 		return (str.substr(0, 9) + ".");
@@ -98,9 +98,9 @@ void	PhoneBook::displayingContacts(void)
 	for (int i = 0; i < 8; i++)
 	{
 		std::cout << std::right << std::setw(10) << i << " | ";
-		std::cout << std::right << std::setw(10) << truncate(contacts[i].getFirstName()) << " | ";
-		std::cout << std::right << std::setw(10) << truncate(this->contacts[i].getLastName()) << " | ";
-		std::cout << std::right << std::setw(10) << truncate(this->contacts[i].getNickName()) << std::endl;
+		std::cout << std::right << std::setw(10) << trunCate(contacts[i].getFirstName()) << " | ";
+		std::cout << std::right << std::setw(10) << trunCate(this->contacts[i].getLastName()) << " | ";
+		std::cout << std::right << std::setw(10) << trunCate(this->contacts[i].getNickName()) << std::endl;
 	}
 }
 

@@ -18,97 +18,57 @@
 /*************************************************************************************/
 
 #include "../include/CatDog.hpp"
-#include "../include/WrongCat.hpp"
 
-int	main(void)
+Cat::Cat(){
+	std::cout << "<Cat> Default constructor called" << std::endl;
+	this->type = "Cat";
+	brain = new Brain();
+}
+
+Cat::Cat(const std::string& type) : AAnimal(type){
+	std::cout << "<Cat> Parametrized constructor called" << std::endl;
+	this->type = AAnimal::type;
+	this->brain = new Brain();
+}
+
+Cat::~Cat(){
+	std::cout << "<Cat> Cat destructor called" << std::endl;
+	delete brain;
+}
+
+Cat::Cat(const Cat& toCopy) : AAnimal(toCopy){
+	std::cout << "<Cat> Copy constructor called" << std::endl;
+		this->brain = new Brain();
+		*this = toCopy;
+}
+
+Cat& Cat::operator=(const Cat& toCopy){
+	std::cout << "<Cat> Copy assignment operator called" << std::endl;
+	if (this != &toCopy)
+	{
+		this->type = toCopy.type;
+		this->brain = toCopy.brain;
+	}
+	return (*this);
+}
+
+void	Cat::makeSound(void)
 {
+	std::cout << "Meow Meow" << std::endl;
+}
+
+void	Cat::setBrain(unsigned int num, const std::string& idea)
+{
+	while (num < 100)
 	{
-		std::cout << "CONSTRUCT/DESTRUCT TEST" << std::endl;
-		Animal	*myDog = new Dog();
-
-		delete myDog;
+		this->brain->ideas[num] = idea;
+		num--;
 	}
+}
 
-	std::cout << "\n";
-	{
-		std::cout << "BRAIN TEST" << std::endl;
-		Cat *frederico = new Cat();
-		std::cout << "\n";
-		Dog *preto = new Dog();
-
-		std::cout << "\n";
-		frederico->setBrain(7, "Bro, where's my toy?");
-		preto->setBrain(5, "Me deixa sair para a rua, humano");
-
-		std::cout << "Cat says: " << frederico->getBrain(5) << std::endl;
-		std::cout << "Dog says: " << preto->getBrain(4) << std::endl;
-		std::cout << "\n";
-
-		delete frederico;
-		std::cout << "\n";
-		delete preto;
-	}
-
-	std::cout << "\n";
-	{
-		std::cout << "SUBJECT TEST" << std::endl;
-
-		Animal *animal[100];
-
-		for (int i = 0; i < 50; i++)
-			animal[i] = new Cat();
-
-		for (int i = 50; i < 100; i++)
-			animal[i] = new Dog();
-
-		std::cout << "\n--------------------> Printing type <--------------------\n";
-
-		for (int i = 0; i < 100; i++)
-				std::cout << animal[i]->getType() << std::endl;
-
-		std::cout << "\n--------------------> Destructors calls <--------------------\n";
-
-		for (int i = 0; i < 100; i++)
-			delete animal[i];
-	}
-
-	std::cout << "\n";
-	{
-		std::cout << "DEEP COPY TEST" << std::endl;
-
-		Cat *myCat1 = new Cat();
-		Cat *myCat2 = new Cat();
-
-
-		myCat1->setBrain(2, "Eu odeio aquele myCat2"); 
-		myCat2->setBrain(2, "O myCat1 é muito parça"); 
-
-		std::cout << myCat1->getBrain(1) << std::endl;
-		std::cout << myCat2->getBrain(1) << std::endl;
-
-		 
-
-		std::cout << "\nSHALLOW COPY TEST" << std::endl;
-
-		Dog *myDog1 = new Dog();
-		Dog *myDog2 = new Dog();
-
-		myDog1->setBrain(2, "Humano pulguento");
-
-		*myDog2 = *myDog1;
-		std::cout << myDog1->getBrain(1) << std::endl;
-		std::cout << myDog2->getBrain(1) << std::endl;
-
-		myDog1->setBrain(2, "Vou arrancar sua perna");
-		std::cout << myDog2->getBrain(1) << std::endl; //At shallow copy, this will print "Vou arrancar sua perna"
-
-		delete myCat1;
-		delete myCat2;
-		delete myDog1;
-		delete myDog2;
-	}
-
-
-	
-	return (0);
+std::string	Cat::getBrain(unsigned int num)
+{
+	if (num > 100)
+		return ("Invalid index, please insert a valid number");
+	return (this->brain->ideas[num]);
 }

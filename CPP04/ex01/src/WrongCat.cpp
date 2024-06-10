@@ -21,11 +21,11 @@
 
 WrongCat::WrongCat(){
 	std::cout << "<WrongCat> Default constructor called" << std::endl;
-	this->type = "Wrong cat";
+	this->type = "Wrong Cat";
 }
 WrongCat::WrongCat(const std::string& type) : WrongAnimal(type){
 		std::cout << "<WrongCat> Parametrized constructor called" << std::endl;
-	this->type = "Wrong cat";
+	this->type = "Wrong Cat";
 }
 WrongCat::~WrongCat(){
 	std::cout << "<WrongCat> Destructor called" << std::endl;

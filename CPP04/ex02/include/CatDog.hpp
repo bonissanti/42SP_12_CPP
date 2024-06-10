@@ -17,31 +17,46 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/CatDog.hpp"
+#ifndef CAT_HPP
+# define CAT_HPP
 
-cat::cat(){
-	std::cout << "<Cat> Default constructor called" << std::endl;
-	this->type = "Cat";
-}
-cat::cat(const std::string& type) : Animal(type){
-	std::cout << "<Cat> Parametrized constructor called" << std::endl;
-	this->type = Animal::type;
-}
-cat::~cat(){
-	std::cout << "<Cat> CatDog destructor called" << std::endl;
-}
-cat::cat(const cat& toCopy) : Animal(toCopy){
-	std::cout << "<Cat> Copy constructor called" << std::endl;
-		*this = toCopy;
-}
-cat& cat::operator=(const cat& toCopy){
-	std::cout << "<Cat> Copy assignment operator called" << std::endl;
-	if (this != &toCopy)
-		Animal::operator=(toCopy);
-	return (*this);
-}
+#include "Brain.hpp"
 
-void	cat::makeSound(void)
+class Cat : public AAnimal
 {
-	std::cout << "Meow Meow" << std::endl;
-}
+	private:
+	Brain *brain;
+
+	public:
+	Cat();
+	~Cat();
+	Cat(const std::string& type);
+	Cat(const Cat& toCopy);
+	Cat& operator=(const Cat& toCopy);
+
+	void	makeSound(void);
+	std::string	getBrain(unsigned int num);
+	void	setBrain(unsigned int num, const std::string& idea);
+
+};
+
+// FIXME: Separar em outro arquivo .hpp
+class Dog : public AAnimal
+{
+	private:
+	Brain	*brain;
+
+	public:
+	Dog();
+	Dog(const std::string& type);
+	~Dog();
+	Dog(const Dog& toCopy);
+	Dog& operator=(const Dog& toCopy);
+
+	void	makeSound(void);
+	std::string	getBrain(unsigned int num);
+	void	setBrain(unsigned int num, const std::string& idea);
+
+};
+
+#endif

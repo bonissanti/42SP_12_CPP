@@ -19,7 +19,7 @@ HEADER  	= ./include
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Animal.cpp CatDog.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+FILES   	= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 # TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 

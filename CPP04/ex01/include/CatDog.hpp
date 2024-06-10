@@ -17,22 +17,22 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef CATDOG_HPP
-# define CATDOG_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
 #include "Brain.hpp"
 
-class cat : public Animal
+class Cat : public Animal
 {
 	private:
 	Brain *brain;
 
 	public:
-	cat();
-	~cat();
-	cat(const std::string& type);
-	cat(const cat& toCopy);
-	cat& operator=(const cat& toCopy);
+	Cat();
+	~Cat();
+	Cat(const std::string& type);
+	Cat(const Cat& toCopy);
+	Cat& operator=(const Cat& toCopy);
 
 	void	makeSound(void);
 	std::string	getBrain(unsigned int num);
@@ -43,6 +43,7 @@ class cat : public Animal
 class Dog : public Animal
 {
 	private:
+	Brain	*brain;
 
 	public:
 	Dog();
@@ -52,6 +53,8 @@ class Dog : public Animal
 	Dog& operator=(const Dog& toCopy);
 
 	void	makeSound(void);
+	std::string	getBrain(unsigned int num);
+	void	setBrain(unsigned int num, const std::string& idea);
 
 };
 
