@@ -52,7 +52,8 @@ class Fixed
 	Fixed		operator/(const Fixed& obj);
 	Fixed&		operator++(void);
 	Fixed		operator++(int);
-
+	Fixed&		operator--(void);
+	Fixed		operator--(int);
 
 	static Fixed		max(Fixed& a, Fixed& b);
 	static const Fixed		max(const Fixed& a, const Fixed& b);

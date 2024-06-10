@@ -27,13 +27,13 @@ Fixed::Fixed()
 
 Fixed::Fixed(const int intValue)
 {
-	rawBits = intValue << fractionalBits;
+	this->rawBits = intValue << fractionalBits;
 	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float floatValue)
 {
-	rawBits = (roundf(floatValue * (1 << fractionalBits)));
+	this->rawBits = (roundf(floatValue * (1 << fractionalBits)));
 	std::cout << "Float constructor called" << std::endl;
 }
 

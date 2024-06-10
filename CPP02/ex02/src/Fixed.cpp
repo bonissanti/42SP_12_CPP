@@ -23,30 +23,25 @@ const int Fixed::fractionalBits = 8;
 
 Fixed::Fixed() : rawBits(0)
 {
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int intValue)
 {
 	rawBits = intValue << fractionalBits;
-	std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(float floatValue)
 {
 	rawBits = roundf((floatValue) * (1 << fractionalBits));
-	std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& toCopy)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = toCopy;
 }
 
 Fixed& Fixed::operator=(const Fixed& toCopy)
 {
-	std::cout << "Copy Assignment operator called" << std::endl;
 	if (this != &toCopy)
 		this->rawBits = toCopy.rawBits;
 	return (*this);
@@ -54,7 +49,6 @@ Fixed& Fixed::operator=(const Fixed& toCopy)
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const
@@ -147,6 +141,21 @@ Fixed		Fixed::operator++(int)
 {
 	Fixed	temp = *this;
 	this->rawBits++;
+	return (temp);
+}
+
+// Pre-decrement
+Fixed&		Fixed::operator--(void)
+{
+	this->rawBits--;
+	return (*this);
+}
+
+//Post-decrement
+Fixed		Fixed::operator--(int)
+{
+	Fixed	temp = *this;
+	this->rawBits--;
 	return (temp);
 }
 
