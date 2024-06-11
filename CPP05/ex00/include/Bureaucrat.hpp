@@ -22,16 +22,22 @@
 
 #include <iostream>
 #include <exception>
+#define BRED	"\033[0;31m"
+#define BYELLOW	"\033[1;33m"
+#define BBLUE	"\033[1;34m"
+#define BLACK	"\033[1;30m"
+#define BGREEN	"\033[0;32m"
+#define RESET	"\033[0m"
 
 class	Bureaucrat
 {
 	private:
-	std::string name;
+	const std::string name;
 	int			grade;
 
 	public:
 	Bureaucrat();
-	Bureaucrat(const std::string name, int grade);
+	Bureaucrat(std::string name, int grade);
 	~Bureaucrat();
 	Bureaucrat(const Bureaucrat& toCopy);
 	Bureaucrat& operator=(const Bureaucrat& toCopy);
@@ -44,8 +50,8 @@ class	Bureaucrat
 	class	GradeTooHighException : public std::exception
 	{
 		public:
-		char *what() const throw(){
-				return ("fucker");
+		char const *what() const throw(){
+				return (BRED"Error: Grade too high. Max possible is 0"RESET);
 		}
 	};
 
@@ -53,7 +59,7 @@ class	Bureaucrat
 	{
 		public:
 		char const *what() const throw(){
-			return ("sucker");
+			return (BRED"Error: Grade too low. Min possible is 150"RESET);
 		}
 	};
 };

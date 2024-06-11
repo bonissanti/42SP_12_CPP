@@ -21,7 +21,28 @@
 
 int	main(void)
 {
-	Bureaucrat otario("otario", 1);
+	{
+		std::cout << BLACK << "*** TEST INCREMENT GRADE ***" << RESET << std::endl;
+		Bureaucrat otario("otario", 1);
+		std::cout << otario << std::endl;
+		otario++;
 
-	std::cout << otario << std::endl;
+		std::cout << otario << std::endl;
+		otario++;
+
+		std::cout << otario << std::endl;
+	}
+	std::cout << '\n';
+	{
+		std::cout << BLACK << "*** TEST DECREMENT GRADE ***" << RESET << std::endl;
+		Bureaucrat vacilao("vacilão", 149);
+		std::cout << vacilao << std::endl;
+		vacilao--;
+
+		std::cout << vacilao << std::endl;
+		vacilao--;
+
+		std::cout << vacilao << std::endl;
+	}
+	return (0);
 }

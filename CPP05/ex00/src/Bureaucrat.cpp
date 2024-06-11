@@ -20,23 +20,30 @@
 #include "../include/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(){
-	std::cout << "Default constructor called" << std::endl;
+	if (grade < 0)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+}
+
+Bureaucrat::Bureaucrat(std::string name, int grade) : name(name){
+	if (grade < 0)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
 }
 
 Bureaucrat::~Bureaucrat(){
-	std::cout << "ClapTrap destructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& toCopy){
-	std::cout << "Copy constructor called" << std::endl;
 		*this = toCopy;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& toCopy){
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &toCopy)
 	{
-		this->name = toCopy.name;
+		(std::string&)this->name = toCopy.name;
 		this->grade = toCopy.grade;
 	}
 	return (*this);
@@ -54,17 +61,38 @@ int	Bureaucrat::getGrade(void) const
 
 Bureaucrat&	Bureaucrat::operator++(int)
 {
-	this->grade++;
+	try
+	{
+		if (this->grade <= 0)
+			throw Bureaucrat::GradeTooHighException();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return (*this);
+	}
+	this->grade--;
 	return (*this);
 }
 
 Bureaucrat& Bureaucrat::operator--(int)
 {
-	this->grade--;
+	try
+	{
+		if (this->grade >= 150)
+			throw Bureaucrat::GradeTooLowException();
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return (*this);
+	}
+	this->grade++;
 	return (*this);
 }
 
-std::ostream&	operator<<(std::ostream os, const Bureaucrat toPrint)
+std::ostream&	operator<<(std::ostream& os, const Bureaucrat& toPrint)
 {
-	os << "Name: " << toPrint.getName() << "Bureaucrat grade: " << toPrint.getGrade(); 
+	os << BGREEN << "Name: " << RESET << toPrint.getName() << BGREEN << ", Bureaucrat grade: " << RESET << toPrint.getGrade();
+	return (os);
 }
