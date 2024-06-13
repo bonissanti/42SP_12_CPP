@@ -20,6 +20,8 @@
 #include "../include/Bureaucrat.hpp"
 #include "../include/AForm.hpp"
 #include "../include/ShrubberyCreationForm.hpp"
+#include "../include/RobotomyRequestForm.hpp"
+#include "../include/PresidentialPardonForm.hpp"
 
 // static	void	printingInfos(const Form *a, const Form *b, const Form *c)
 // {
@@ -44,8 +46,179 @@
 // 	#endif
 // }
 
-int	main(void)
+static void	testPresidential()
 {
+	std::cout << BYELLOW << "PRESIDENTIAL TEST ########################################" << RESET << std::endl;
+	{
+		try
+		{
+			std::cout << BLACK << "**** TEST INITIALIZER CONSTRUCTORS (only in test mode) ****" << RESET << std::endl;
+			Presidential a;
+			Presidential b(a);
+			Presidential c = b;
+			a = Presidential("College");
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** VALID TESTS ****" << RESET << std::endl;
+			Presidential 	order("Amnesty Order");
+			Bureaucrat	bob("Bob", 24); // need at least 25 to sign
+			order.beSigned(bob);
+
+			Bureaucrat	tim("Tim", 3); // needs at least 5 to execute
+			order.execute(tim);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** INVALID SIGN/EXECUTE ****" << RESET << std::endl;
+			Presidential 	order("Amnesty Order");
+			Bureaucrat	bob("Bob", 50);  // need at least 25 to sign
+			order.beSigned(bob);
+
+			Bureaucrat	tim("Tim", 20); // needs at least 5 to execute
+			order.execute(tim);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** DON'T SIGN BUT HAS GRADE TO EXECUTE (won't) ****" << RESET << std::endl;
+			Presidential 	order("Order");
+			Bureaucrat	random("Random", 39);  // need at least 25 to sign
+			order.beSigned(random);
+
+			Bureaucrat	gardener("Gardener", 4); // needs at least 5 to execute
+			order.execute(gardener);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** INVALID EXECUTE ONLY ****" << RESET << std::endl;
+			Presidential 	order("Order");
+			Bureaucrat	random("Random", 20);  // need at least 25 to sign
+			order.beSigned(random);
+
+			Bureaucrat	senate("senate", 50); // needs at least 5 to execute
+			order.execute(senate);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+}
+
+static void	testRobotomy()
+{
+	std::cout << BYELLOW << "ROBOTOMY TEST ########################################" RESET << std::endl;
+	{
+		try
+		{
+			std::cout << BLACK << "**** TEST INITIALIZER CONSTRUCTORS (only in test mode) ****" << RESET << std::endl;
+			Robotomy a;
+			Robotomy b(a);
+			Robotomy c = b;
+			a = Robotomy("College");
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** VALID TESTS ****" << RESET << std::endl;
+			Robotomy 	robotomy("Presidential");
+			Bureaucrat	marvin("Marvin", 40); // need at least 70 to sign
+			robotomy.beSigned(marvin);
+
+			Bureaucrat	tim("Tim Man", 20); // needs at least 45 to execute
+			robotomy.execute(tim);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** INVALID SIGN/EXECUTE ****" << RESET << std::endl;
+			Robotomy 	robotomy("Robotomy");
+			Bureaucrat	owner("", 73);  // need at least 70 to sign
+			robotomy.beSigned(owner);
+
+			Bureaucrat	gardener("Gardener", 20); // needs at least 45 to execute
+			robotomy.execute(gardener);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** DON'T SIIGN BUT HAS GRADE TO EXECUTE (won't) ****" << RESET << std::endl;
+			Robotomy 	robotomy("Robotomy");
+			Bureaucrat	owner("", 53);  // need at least 70 to sign
+			robotomy.beSigned(owner);
+
+			Bureaucrat	gardener("Gardener", 60); // needs at least 45 to execute
+			robotomy.execute(gardener);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+	std::cout << '\n';
+	{
+		try
+		{
+			std::cout << BLACK << "**** INVALID EXECUTE ONLY ****" << RESET << std::endl;
+			Robotomy 	robotomy("Robotomy");
+			Bureaucrat	random("Random", 30);  // need at least 70 to sign
+			robotomy.beSigned(random);
+
+			Bureaucrat	lazy("lazy", 50); // needs at least 45 to execute
+			robotomy.execute(lazy);
+		}
+		catch(const std::exception& e){
+			std::cerr << e.what() << '\n';
+		}
+	}
+}
+
+static void	testShrubbery()
+{
+	std::cout << BYELLOW << "SHRUBBERY TEST ########################################" << RESET << std::endl;
 	{
 		try
 		{
@@ -58,7 +231,6 @@ int	main(void)
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';
 		}
-		
 	}
 
 	std::cout << '\n';
@@ -93,14 +265,13 @@ int	main(void)
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';
 		}
-		
 	}
 
 	std::cout << '\n';
 	{
 		try
 		{
-			std::cout << BLACK << "**** INVALID EXECUTE TEST ****" << RESET << std::endl;
+			std::cout << BLACK << "**** INVALID EXECUTE ONLY ****" << RESET << std::endl;
 			Shrubbery 	a("Lazy-Gardener");
 			Bureaucrat	owner("Owner", 30);
 			a.beSigned(owner);
@@ -112,57 +283,16 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 	}
-	return (0);
 }
 
-// int main(void)
-// {
-// 	{
-// 		std::cout << BLACK << "**** TEST INITIALIZER CONSTRUCTORS (only in test mode) ****" << RESET << std::endl;
-// 		Form	a;
-// 		Form	b(a);
-// 		Form 	c = b;
-// 		a = Form("TEST", 150, 150);
-// 		printingInfos(&a, &b, &c);
-// 	}
-
-// 	std::cout << '\n';
-// 	{
-// 		std::cout << BLACK << "**** TEST INVALID GRADE ****" << RESET << std::endl;
-// 		Form	a("Lower grade to sign", 151, 50);
-// 		Form	b("Higher grade to sign", 0, 50);
-// 		Form	c("Lower grade to execute", 50, 151);
-// 		Form	d("Higher grade to execute", 50, 0);
-// 	}
-
-// 	std::cout << '\n';
-// 	{
-// 		std::cout << BLACK << "**** TEST BUREAUCRAT SIGNS FORM ****" << RESET << std::endl;
-// 		Form a("Declaração de guerra", 30, 40);
-// 		Bureaucrat	Putin("Putin", 15);
-// 		a.beSigned(Putin);
-
-// 		Form b("Brazilian republic", 50, 70);
-// 		Bureaucrat	Fonseca("D.Fonseca", 45);
-// 		b.beSigned(Fonseca);
-
-// 		Form c("Demissional doc", 150, 50);
-// 		Bureaucrat	hr("HR", 150);
-// 		c.beSigned(hr);
-// 	}
-
-// 	std::cout << '\n';
-// 	{
-// 		std::cout << BLACK << "**** TEST INVALID SIGNS ****" << RESET << std::endl;
-// 		Form a("Sell Company", 3, 3);
-// 		Bureaucrat	intern("Carlitos the Intern", 150);
-// 		a.beSigned(intern);	
-
-// 		Form b("Buy a house", 149, 149);
-// 		Bureaucrat	strangeGuy("Random guy", 148);
-// 		strangeGuy--;
-// 		strangeGuy--;
-// 		b.beSigned(strangeGuy);
-// 	}
-// 	return (0);		
-// }
+int	main(void)
+{
+	std::cout << '\n';
+	testShrubbery();
+	std::cout << '\n';
+	testRobotomy();
+	std::cout << '\n';
+	testPresidential();
+	std::cout << '\n';
+	return (0);
+}
