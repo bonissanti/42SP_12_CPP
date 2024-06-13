@@ -17,7 +17,8 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/CatDog.hpp"
+#include "../include/Cat.hpp"
+#include "../include/Dog.hpp"
 #include "../include/WrongCat.hpp"
 
 int	main(void)

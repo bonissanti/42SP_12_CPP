@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,32 +17,32 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Dog.hpp"
+#ifndef BUREAUCRAT_HPP
+# define BUREAUCRAT_HPP
 
-Dog::Dog(){
-	std::cout << "<Dog> Default constructor called" << std::endl;
-	this->type = "Dog";
-}
-Dog::Dog(const std::string& type) : Animal(type){
-		std::cout << "<Dog> Parametrized constructor called" << std::endl;
-	this->type = "Dog";
-}
-Dog::~Dog(){
-	std::cout << "<Dog> Dog destructor called" << std::endl;
-}
+#include <iostream>
+#include <exception>
+#include <fstream>
+#include "AForm.hpp"
 
-Dog::Dog(const Dog& toCopy) : Animal(type){
-	std::cout << "<Dog> Copy constructor called" << std::endl;
-		*this = toCopy;
-}
-Dog& Dog::operator=(const Dog& toCopy){
-	std::cout << "<Dog> Copy assignment operator called" << std::endl;
-	if (this != &toCopy)
-		Animal::operator=(toCopy);
-	return (*this);
-}
+#define BRED	"\033[0;31m"
+#define BYELLOW	"\033[1;33m"
+#define BBLUE	"\033[1;34m"
+#define BLACK	"\033[1;30m"
+#define BGREEN	"\033[0;32m"
+#define RESET	"\033[0m"
 
-void	Dog::makeSound(void)
+class	AForm;
+
+class	Intern
 {
-	std::cout << "Woof Woof" << std::endl;
-}
+	public:
+	Intern();
+	~Intern();
+	Intern(const Intern& toCopy);
+	Intern& operator=(const Intern& toCopy);
+
+	AForm* makeForm(const std::string& formName, const std::string& target);
+};
+
+#endif

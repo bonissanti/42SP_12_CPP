@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/12/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/12/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,32 +17,57 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Dog.hpp"
+#include "../include/PresidentialPardonForm.hpp"
 
-Dog::Dog(){
-	std::cout << "<Dog> Default constructor called" << std::endl;
-	this->type = "Dog";
-}
-Dog::Dog(const std::string& type) : Animal(type){
-		std::cout << "<Dog> Parametrized constructor called" << std::endl;
-	this->type = "Dog";
-}
-Dog::~Dog(){
-	std::cout << "<Dog> Dog destructor called" << std::endl;
+Presidential::Presidential() : AForm("Presidential form", 25, 5), target("House") {
+	debugMode(3, "<PRESIDENTIAL> Default Constructor called"); 
 }
 
-Dog::Dog(const Dog& toCopy) : Animal(type){
-	std::cout << "<Dog> Copy constructor called" << std::endl;
+Presidential::Presidential(const std::string& target) : AForm("Presidential form", 25, 5), target(target)
+{
+	debugMode(3, "<PRESIDENTIAL> Parametrized constructor called");
+	if (this->getToSign() < 1 || this->getExecute() < 1)
+		throw Presidential::GradeTooHighException();
+	
+	else if (this->getToSign() > 25 || this->getExecute() > 5)
+		throw Presidential::GradeTooLowException();
+}
+
+Presidential::~Presidential(){
+	debugMode(3, "<PRESIDENTIAL> Destructor called");
+}
+
+Presidential::Presidential(const Presidential& toCopy) : AForm("Presidential form", 25, 5), target(toCopy.target){
+	debugMode(3, "<PRESIDENTIAL> Copy constructor called");
+	if (this != &toCopy)
 		*this = toCopy;
 }
-Dog& Dog::operator=(const Dog& toCopy){
-	std::cout << "<Dog> Copy assignment operator called" << std::endl;
+
+Presidential& Presidential::operator=(const Presidential& toCopy){
+	debugMode(3, "<PRESIDENTIAL> Copy assignment operator called");
 	if (this != &toCopy)
-		Animal::operator=(toCopy);
+		this->target = toCopy.target;
 	return (*this);
 }
 
-void	Dog::makeSound(void)
+void	Presidential::execute(Bureaucrat const& executor) const
 {
-	std::cout << "Woof Woof" << std::endl;
+	try
+	{
+		if (executor.getGrade() > this->getExecute())
+			throw Presidential::GradeTooLowException();
+
+		else if (!this->getBoolSign())
+			throw Presidential::NotSigned();
+	}
+	catch(const std::exception& e)
+	{
+		//TODO: bad message here
+		std::cout << BRED << this->target << " couldn't execute '" << this->getName() << "' because " 
+			<< e.what() << RESET << std::endl;
+		return ;
+	}
+	executor.executeForm(*this);
+	std::cout << BGREEN << this->target << " has been pardoned by Zaphod Beeblebrox " << std::endl;
 }
+
