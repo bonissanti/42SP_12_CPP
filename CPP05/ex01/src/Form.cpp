@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/12/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/12/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,90 +17,105 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Bureaucrat.hpp"
+#include "../include/Form.hpp"
 
-Bureaucrat::Bureaucrat() : name("Random"), grade(75){
+Form::Form() : name("Admissional doc"), sign(false), gradeToSign(5), gradeToExecute(10) {
+	debugMode(this, NULL, "<FORM> Default Constructor called");
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : name(name){
-	if (grade < 1){
-		throw Bureaucrat::GradeTooHighException();
-	}
-	else if (grade > 150){
-		throw Bureaucrat::GradeTooLowException();
-	}
-	else
-		this->grade = grade;
+Form::Form(const std::string& name, int gradeToSign, int gradeToExecute) : name(name),
+	sign(false), gradeToSign(gradeToSign),	gradeToExecute(gradeToExecute)
+{
+	debugMode(this, NULL, "<FORM> Parametrized constructor called");
+	if (gradeToSign < 1 || gradeToExecute < 1)
+		throw Form::GradeTooHighException();
+	
+	else if (gradeToSign > 150 || gradeToExecute > 150)
+		throw Form::GradeTooLowException();
 }
 
-Bureaucrat::~Bureaucrat(){
+Form::~Form(){
+	debugMode(this, NULL, "<FORM> Destructor called");
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& toCopy){
-		*this = toCopy;
+Form::Form(const Form& toCopy) : name(toCopy.name), sign(toCopy.sign), 
+	gradeToSign(toCopy.gradeToSign), gradeToExecute(toCopy.gradeToExecute){
+	debugMode(this, NULL, "<FORM> Copy constructor called");
 }
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& toCopy){
+Form& Form::operator=(const Form& toCopy){
+	debugMode(this, NULL, "<FORM> Copy assignment operator called");
 	if (this != &toCopy)
-	{
-		(std::string&)this->name = toCopy.name;
-		this->grade = toCopy.grade;
-	}
+		new (this) Form(toCopy); // Placement new
 	return (*this);
 }
 
-char const* Bureaucrat::GradeTooHighException::what() const throw(){
-	return (BRED "Error: Grade too high. Max possible is 1" RESET);
+
+void	Form::beSigned(Bureaucrat& personToSign)
+{
+	try
+	{
+		if (personToSign.getGrade() > this->gradeToSign)
+			throw (Form::GradeTooLowException());
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << BRED << personToSign.getName() << " couldn't sign '" << this->name << "' because " 
+			<< e.what() << RESET << std::endl;
+		return ;
+	}
+	this->sign = true;
+	personToSign.signForm(*this);
 }
 
-char const* Bureaucrat::GradeTooLowException::what() const throw(){
-	return (BRED "Error: Grade too low. Min possible is 150" RESET);
-}
-
-std::string	Bureaucrat::getName(void) const
+const std::string& Form::getName(void) const
 {
 	return (this->name);
 }
 
-int	Bureaucrat::getGrade(void) const
+bool	Form::getBoolSign(void) const
 {
-	return (this->grade);
+	return (this->sign);
 }
 
-Bureaucrat&	Bureaucrat::operator++(int)
+//FIXME: verificar se na 42 posso usar 'const int'
+int	Form::getToSign(void) const
 {
-	try
-	{
-		if (this->grade <= 1)
-			throw Bureaucrat::GradeTooHighException();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return (*this);
-	}
-	this->grade--;
-	return (*this);
+	return (this->gradeToSign);
 }
 
-Bureaucrat& Bureaucrat::operator--(int)
+//FIXME: verificar se na 42 posso usar 'const int'
+int	Form::getExecute(void) const
 {
-	try
-	{
-		if (this->grade >= 150)
-			throw Bureaucrat::GradeTooLowException();
-	}
-	catch (const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		return (*this);
-	}
-	this->grade++;
-	return (*this);
+	return (this->gradeToExecute);
 }
 
-std::ostream&	operator<<(std::ostream& os, const Bureaucrat& toPrint)
+char const* Form::GradeTooHighException::what() const throw(){
+	return (BRED "<FORM> Grade too high." RESET);
+}
+
+char const* Form::GradeTooLowException::what() const throw(){
+	return (BRED "<FORM> Grade too low." RESET);
+}
+
+std::ostream&	operator<<(std::ostream& os, const Form& toPrint)
 {
-	os << BGREEN << "Name: " << RESET << toPrint.getName() << BGREEN << ", Bureaucrat grade: " << RESET << toPrint.getGrade();
+	os << toPrint.getName();
 	return (os);
+}
+
+void	debugMode(const Form *toPrint, const Bureaucrat *toPrint2, const std::string& msg)
+{
+	#ifndef TEST
+	(void)toPrint;
+	(void)toPrint2;
+	(void)msg;
+	#endif
+
+	#ifdef TEST
+	if (toPrint)
+		std::cout << msg << std::endl;
+	else if (toPrint2)
+		std::cout << msg << std::endl;
+	#endif
 }

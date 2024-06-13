@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/12/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/12/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,49 +17,49 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef AFORM_CPP
+# define AFORM_CPP
 
-#include <iostream>
-#include <exception>
-#define BRED	"\033[0;31m"
-#define BYELLOW	"\033[1;33m"
-#define BBLUE	"\033[1;34m"
-#define BLACK	"\033[1;30m"
-#define BGREEN	"\033[0;32m"
-#define RESET	"\033[0m"
+#include "Bureaucrat.hpp"
 
-class	Bureaucrat
+class Bureaucrat;
+
+class AForm
 {
 	private:
-	const std::string name;
-	int			grade;
+	const std::string	name;
+	bool		sign;
+	const int	gradeToSign;
+	const int	gradeToExecute;
 
 	public:
-	Bureaucrat();
-	Bureaucrat(std::string name, int grade);
-	~Bureaucrat();
-	Bureaucrat(const Bureaucrat& toCopy);
-	Bureaucrat& operator=(const Bureaucrat& toCopy);
-	std::string getName(void) const;
-	int getGrade(void) const;
+	AForm();
+	AForm(const std::string& name, int gradeToSign, int gradeToExecute);
+	virtual ~AForm();
+	AForm(const AForm& toCopy);
+	AForm& 				operator=(const AForm& toCopy);
 
-	Bureaucrat&	operator++(int);
-	Bureaucrat&	operator--(int);
+	const std::string&	getName(void) const;
+	bool			getBoolSign(void) const;
+	int				getToSign(void) const;	//FIXME: verificar se na 42 posso usar 'const int' 
+	int				getExecute(void) const; //FIXME: verificar se na 42 posso usar 'const int'
+	void			beSigned(Bureaucrat& personToSign);
+	virtual void	execute(Bureaucrat const& executor) const = 0; // talvez não seja assim
 
-	class	GradeTooHighException : public std::exception
+	class GradeTooHighException : public std::exception
 	{
-		public:
 		char const *what() const throw();
 	};
-
-	class	GradeTooLowException : public std::exception
+	class GradeTooLowException : public std::exception
 	{
-		public:
+		char const *what() const throw();
+	};
+	class NotSigned : public std::exception
+	{
 		char const *what() const throw();
 	};
 };
 
-std::ostream&	operator<<(std::ostream& os, const Bureaucrat& toPrint);
-
+std::ostream& operator<<(std::ostream& os, const AForm& toPrint);
+void	debugMode(int level, const std::string &msg);
 #endif

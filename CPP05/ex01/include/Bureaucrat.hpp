@@ -22,12 +22,16 @@
 
 #include <iostream>
 #include <exception>
+#include "Form.hpp"
+
 #define BRED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
 #define BBLUE	"\033[1;34m"
 #define BLACK	"\033[1;30m"
 #define BGREEN	"\033[0;32m"
 #define RESET	"\033[0m"
+
+class	Form;
 
 class	Bureaucrat
 {
@@ -46,6 +50,7 @@ class	Bureaucrat
 
 	Bureaucrat&	operator++(int);
 	Bureaucrat&	operator--(int);
+	void		signForm(const Form& form);
 
 	class	GradeTooHighException : public std::exception
 	{
