@@ -20,20 +20,20 @@
 #include "../include/Brain.hpp"
 
 Brain::Brain(){
-	std::cout << "<Brain> Default constructor called" << std::endl;
+	debugMode(3, "<BRAIN> Default constructor called");
 }
 
 Brain::~Brain(){
-	std::cout << "<Brain> Destructor called" << std::endl;
+	debugMode(3, "<BRAIN> Destructor called");
 }
 
 Brain::Brain(const Brain& toCopy){
-	std::cout << "<Brain> Copy constructor called" << std::endl;
+	debugMode(3, "<BRAIN> Copy constructor called");
 		*this = toCopy;
 }
 
 Brain& Brain::operator=(const Brain& toCopy){
-	std::cout << "<Brain> Copy assignment operator called" << std::endl;
+	debugMode(3, "<BRAIN> Copy assignment operator called");
 	if (this != &toCopy)
 		for (int i = 0; i < 100; i++)
 			this->ideas[i] = toCopy.ideas[i];

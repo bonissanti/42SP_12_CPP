@@ -17,43 +17,26 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/ice.hpp"
+#ifndef DOG_HPP
+# define DOG_HPP
 
-ice::ice(){
-	#ifdef TEST
-	std::cout << "<ice> Parametrized constructor called" << std::endl;
-	#endif
-	this->type = "ice";
-}
+#include "Brain.hpp"
 
-ice::~ice(){
-	#ifdef TEST
-	std::cout << "<ice> ice destructor called" << std::endl;
-	#endif
-}
-
-ice::ice(const ice& toCopy) : AMateria(toCopy){
-	#ifdef TEST
-	std::cout << "<ice> Copy constructor called" << std::endl;
-	#endif
-	*this = toCopy;
-}
-
-ice& ice::operator=(const ice& toCopy){
-	#ifdef TEST
-	std::cout << "<ice> Copy assignment operator called" << std::endl;
-	#endif
-	if (this != &toCopy)
-		this->type = toCopy.type;
-	return (*this);
-}
-
-ice* ice::clone(void) const
+class Dog : public Animal
 {
-	return (new ice(*this));
-}
+	private:
+	Brain	*brain;
 
-void	ice::use(ICharacter &target)
-{
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
-}
+	public:
+	Dog();
+	~Dog();
+	Dog(const Dog& toCopy);
+	Dog& operator=(const Dog& toCopy);
+
+	void	makeSound(void);
+	std::string	getBrain(unsigned int num);
+	void	setBrain(unsigned int num, const std::string& idea);
+
+};
+
+#endif

@@ -21,7 +21,6 @@
 
 int	main(int argc, char **argv)
 {
-	ScalarConverter conv;
 	std::string	charToString;
 
 	if (argc != 2)
@@ -29,8 +28,8 @@ int	main(int argc, char **argv)
 		std::cerr << "Error: Invalid number of arguments" << std::endl;
 		return (1);
 	}
-
 	charToString = argv[1];
-	conv.converter(charToString);
+	ScalarConverter::converter(charToString);
+	//TODO:Create tests
 	return (0);
 }

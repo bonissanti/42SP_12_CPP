@@ -12,14 +12,14 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex02
+NAME    	= ex03
 NAME_TEST	= test-ex01
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+FILES   	= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 # TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 

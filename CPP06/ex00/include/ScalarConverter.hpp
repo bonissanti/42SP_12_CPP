@@ -41,12 +41,12 @@
 class	ScalarConverter
 {
 	private:
-
-	public:
 	ScalarConverter();
-	~ScalarConverter();
 	ScalarConverter(const ScalarConverter& toCopy);
 	ScalarConverter& operator=(const ScalarConverter& toCopy);
+
+	public:
+	~ScalarConverter();
 
 	static void converter(std::string toConvert);
 };

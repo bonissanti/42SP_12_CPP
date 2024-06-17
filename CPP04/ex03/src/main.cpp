@@ -21,28 +21,28 @@
 
 int	main(void)
 {
-	std::cout << "********** SUBJECT TEST **********\n";
+	std::cout << BWHITE << "********** SUBJECT TEST **********\n" << RESET;
 	{
 		IMateriaSource *src = new MateriaSource();
-		src->learnMateria(new ice()); // add types allowed of materials
-		src->learnMateria(new cure());
+		src->learnMateria(new Ice()); // add types allowed of materials
+		src->learnMateria(new Cure());
 
 		ICharacter *me = new Character("me"); // creating the character to use this materials
 
-		std::cout << "\n----------> Verify material <----------\n" << std::endl;
+		std::cout << MAGENTA << "\n----------> Verify material <----------\n" << RESET << std::endl;
 		AMateria *tmp;
 		tmp = src->createMateria("batata"); // invalid material, doesn't have to add
 		me->equip(tmp);	// invalid
-		tmp = src->createMateria("cure"); // ok
+		tmp = src->createMateria("Cure"); // ok
 		me->equip(tmp); // ok
-		tmp = src->createMateria("ice");
+		tmp = src->createMateria("Ice");
 		me->equip(tmp);
-		tmp = src->createMateria("cure");
+		tmp = src->createMateria("Cure");
 		me->equip(tmp);
-		tmp = src->createMateria("ice");
+		tmp = src->createMateria("Ice");
 		me->equip(tmp);
 
-		std::cout << "\n----------> Character + use <----------\n" << std::endl;
+		std::cout << MAGENTA << "\n----------> Character + use <----------\n" << RESET << std::endl;
 		ICharacter *bob = new Character("Bob"); // target
 		me->use(0, *bob);	
 		me->use(1, *bob);	
@@ -51,32 +51,33 @@ int	main(void)
 		delete me; 
 		delete src;
 	}
+
 	std::cout << "\n";
 	{
-		std::cout << "\n********** DEEP COPY TEST **********\n" << std::endl;
+		std::cout << BWHITE << "********** DEEP COPY TEST **********\n" << RESET << std::endl;
 		IMateriaSource *src = new MateriaSource();
-		src->learnMateria(new ice());
+		src->learnMateria(new Ice());
 		
 		Character *original = new Character("Original");
 
-		std::cout << "\n----------> Verify material <----------\n" << std::endl;
+		std::cout << MAGENTA << "----------> Verify material <----------\n" << RESET << std::endl;
 		AMateria *tmp;
-		tmp = src->createMateria("ice");
+		tmp = src->createMateria("Ice");
 		original->equip(tmp);
 
-		std::cout << "\n----------> Original vs Copy <----------\n" << std::endl;
+		std::cout << MAGENTA << "\n----------> Original vs Copy <----------\n" << RESET << std::endl;
 		Character *copy = new Character(*original);
-		std::cout << "Original name: " << original->getName() << std::endl;
-		std::cout << "Copy name: " << copy->getName() << std::endl;
+		std::cout << YELLOW << "Original name: " << GREEN << original->getName() << std::endl;
+		std::cout << YELLOW << "Copy name: " << GREEN << copy->getName() << std::endl;
 		Character target("target");
 
-		std::cout << "\n----------> Equal prints <----------\n" << std::endl;
+		std::cout << MAGENTA << "\n----------> Equal prints <----------\n" << RESET << std::endl;
 		original->use(0, target);	
 		copy->use(0, target);	
 
-		std::cout << "\n----------> Different prints <----------\n" << std::endl;
-		src->learnMateria(new cure());
-		tmp = src->createMateria("cure");
+		std::cout << MAGENTA << "\n----------> Different prints <----------\n" << RESET << std::endl;
+		src->learnMateria(new Cure());
+		tmp = src->createMateria("Cure");
 		original->equip(tmp);
 		original->use(1, target);
 		copy->use(1, target);

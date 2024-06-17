@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/06/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/06/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,31 +17,28 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/WrongCat.hpp"
+#ifndef DATA_HPP
+# define DATA_HPP
 
-WrongCat::WrongCat(){
-	std::cout << "<WrongCat> Default constructor called" << std::endl;
-	this->type = "Wrong Cat";
-}
-WrongCat::WrongCat(const std::string& type) : WrongAnimal(type){
-		std::cout << "<WrongCat> Parametrized constructor called" << std::endl;
-	this->type = "Wrong Cat";
-}
-WrongCat::~WrongCat(){
-	std::cout << "<WrongCat> Destructor called" << std::endl;
-}
-WrongCat::WrongCat(const WrongCat& toCopy) : WrongAnimal(type){
-	std::cout << "<WrongCat> Copy constructor called" << std::endl;
-		*this = toCopy;
-}
-WrongCat& WrongCat::operator=(const WrongCat& toCopy){
-	std::cout << "<WrongCat> Copy assignment operator called" << std::endl;
-	if (this != &toCopy)
-		this->type = toCopy.type;
-	return (*this);
-}
+#include <iostream>
+#include <stdint.h>
+#include <fstream>
+#define BRED	"\033[0;31m"
+#define BYELLOW	"\033[1;33m"
+#define YELLOW	"\033[0;33m"
+#define BBLUE	"\033[1;34m"
+#define BLACK	"\033[1;30m"
+#define BGREEN	"\033[0;32m"
+#define RESET	"\033[0m"
 
-void	WrongCat::makeSound(void)
+struct Data
 {
-	std::cout << "<WrongCat> Meow Meow" << std::endl;
-}
+	int			number;
+	std::string	text;
+	bool		isOkay;
+	float		value;
+};
+
+std::ostream& operator<<(std::ostream& os, const Data& toPrint);
+
+#endif

@@ -17,44 +17,26 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Cat.hpp"
-#include "../include/Dog.hpp"
+#ifndef CAT_HPP
+# define CAT_HPP
 
-int	main(void)
+#include "Brain.hpp"
+
+class Cat : public Animal
 {
-	std::cout << BWHITE << "\n--------------------> Constructors <--------------------\n" << RESET << std::endl;
+	private:
+	Brain *brain;
 
-	AAnimal *myDog = new Dog();
-	AAnimal *myCat = new Cat();
-	AAnimal *animalsArray[20];
+	public:
+	Cat();
+	~Cat();
+	Cat(const Cat& toCopy);
+	Cat& operator=(const Cat& toCopy);
 
-	// AAnimal *meta = new AAnimal(); not work
-	
-	std::cout << BWHITE << "\n--------------------> Dog and Cat sounds <--------------------\n" << RESET << std::endl;
+	void	makeSound(void);
+	std::string	getBrain(unsigned int num);
+	void	setBrain(unsigned int num, const std::string& idea);
 
-	std::cout << YELLOW << "myDog sound is: "; 
-	myDog->makeSound();	
-	std::cout << YELLOW << "myCat sound is: "; 
-	myCat->makeSound();
+};
 
-	std::cout << BWHITE << "\n--------------------> More constructors <--------------------\n" << RESET << std::endl;
-
-	for (int i = 0; i < 10; i++)
-		animalsArray[i] = new Dog();
-
-	for (int i = 10; i < 20; i++)
-		animalsArray[i] = new Cat();
-
-	std::cout << BWHITE << "\n--------------------> Printing types <--------------------\n" << RESET << std::endl;
-
-	for (int i = 0; i < 20; i++)
-		std::cout << GREEN << animalsArray[i]->getType() << RESET << std::endl;
-
-	std::cout << BWHITE << "\n--------------------> Destructors <--------------------\n" << RESET << std::endl;
-	delete myDog;
-	delete myCat;
-
-	for (int i = 0; i < 20; i++)
-		delete animalsArray[i];
-	return (0);
-}
+#endif

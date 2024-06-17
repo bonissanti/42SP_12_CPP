@@ -26,7 +26,6 @@ class WrongCat : public WrongAnimal
 {
 	public:
 	WrongCat();
-	WrongCat(const std::string& type);
 	virtual ~WrongCat();
 	WrongCat(const WrongCat& toCopy);
 	WrongCat& operator=(const WrongCat& toCopy);

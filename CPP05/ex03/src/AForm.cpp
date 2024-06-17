@@ -117,14 +117,30 @@ void	debugMode(int level, const std::string& msg)
 	#endif
 
 	#ifdef TEST
-	if (level == 0) // AForm
+	switch (level)
+	{
+		case 0:
 		std::cout << msg << std::endl;
-	else if (level == 1) // Bureaucrat
+		break;
+	
+		case 1:
 		std::cout << msg << std::endl;
-	else if (level == 2) /// Shrubbery
+		break;
+
+		case 2:
 		std::cout << msg << std::endl;
-	else if (level == 3) 
+		break;
+
+		case 3:
 		std::cout << msg << std::endl;
+		break;
+		
+		case 4:
+		std::cout << msg << std::endl;
+		break;
+		default:
+		break;
+	}
 	#endif
 }
 

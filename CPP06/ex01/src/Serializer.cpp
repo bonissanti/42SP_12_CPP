@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/08/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/08/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,21 +17,40 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef ICE_HPP
-# define ICE_HPP
+#include "../include/Serializer.hpp"
 
-#include "AMateria.hpp"
+Serializer::Serializer(){
+}
 
-class ice : public AMateria
+Serializer::~Serializer(){
+}
+
+Serializer::Serializer(const Serializer& toCopy){
+		*this = toCopy;
+}
+
+Serializer& Serializer::operator=(const Serializer& toCopy){
+	(void)toCopy;
+	return (*this);
+}
+
+
+uintptr_t	Serializer::serialize(Data* ptr)
 {
-	public:
-	ice();
-	~ice();
-	ice(const ice& toCopy);
-	ice& operator=(const ice& toCopy);
+	return  (reinterpret_cast<uintptr_t>(ptr));
+}
 
-	virtual ice	*clone(void) const;
-	void	use(ICharacter& target);
-};
+Data*	Serializer::deserialize(uintptr_t raw)
+{
+	return (reinterpret_cast<Data*>(raw));
+}
 
-#endif
+std::ostream& operator<<(std::ostream& os, const Data& toPrint)
+{
+	os << BYELLOW << toPrint.text << std::endl;
+	os << YELLOW << toPrint.text << " int value: " << RESET << toPrint.number << std::endl;
+	os << YELLOW << toPrint.text << " bool value: " << RESET << toPrint.isOkay << std::endl;
+	os.precision(1);
+	os << YELLOW << toPrint.text << " float value: " << RESET << std::fixed << toPrint.value << std::endl;
+	return (os);
+}

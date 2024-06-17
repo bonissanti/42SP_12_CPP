@@ -68,7 +68,7 @@ void	Robotomy::execute(Bureaucrat const& executor) const
 		return ;
 	}
 	executor.executeForm(*this);
-	std::cout << BGREEN << "*** Driling Noises ***" << std::endl;
+	std::cout << BWHITE << "*** Driling Noises ***" << std::endl;
 	std::cout << this->target << " has been robotomized sucessfully " << RESET << std::endl;
 }
 

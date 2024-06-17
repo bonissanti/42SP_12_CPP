@@ -20,22 +20,25 @@
 #include "../include/Animal.hpp"
 
 Animal::Animal(){
-	std::cout << "<Animal> Default constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+	debugMode(0, "<ANIMAL> Default constructor called");
+	this->type = "Random Animal";
 }
+
 Animal::Animal(const std::string& type) : type(type){
-		std::cout << "<Animal> Parametrized constructor called" << std::endl;
-	this->type = "Talvez seja um mamífero";
+	debugMode(0, "<ANIMAL> Parametrized constructor called");
 }
+
 Animal::~Animal(){
-	std::cout << "<Animal> Animal destructor called" << std::endl;
+	debugMode(0, "<ANIMAL> Destructor called");
 }
+
 Animal::Animal(const Animal& toCopy){
-	std::cout << "<Animal> Copy constructor called" << std::endl;
+	debugMode(0, "<ANIMAL> Copy constructor called");
 		*this = toCopy;
 }
+
 Animal& Animal::operator=(const Animal& toCopy){
-	std::cout << "<Animal> Copy assignment operator called" << std::endl;
+	debugMode(0, "<ANIMAL> Copy assignment operator called");
 	if (this != &toCopy)
 		this->type = toCopy.type;
 	return (*this);
@@ -43,7 +46,7 @@ Animal& Animal::operator=(const Animal& toCopy){
 
 void	Animal::makeSound(void)
 {
-	std::cout << "A random animal sound" << std::endl;
+	std::cout << GREEN << "A random animal sound" << RESET << std::endl;
 }
 
 std::string	Animal::getType(void) const
@@ -56,3 +59,30 @@ void		Animal::setType(const std::string& newType)
 	this->type = newType;
 }
 
+void	debugMode(int level, const std::string& msg)
+{
+	#ifndef TEST
+	(void)level;
+	(void)msg;
+	#endif
+
+	#ifdef TEST
+	switch (level)
+	{
+		case 0:
+		std::cout << YELLOW << msg << RESET << std::endl;
+		break;
+	
+		case 1:
+		std::cout << YELLOW << msg << RESET << std::endl;
+		break;
+
+		case 2:
+		std::cout << YELLOW << msg << RESET << std::endl;
+		break;
+
+		default:
+		break;
+	}
+	#endif
+}

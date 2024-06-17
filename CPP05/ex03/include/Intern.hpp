@@ -17,20 +17,17 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef INTERN_HPP
+# define INTERN_HPP
 
 #include <iostream>
 #include <exception>
 #include <fstream>
+#include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
-
-#define BRED	"\033[0;31m"
-#define BYELLOW	"\033[1;33m"
-#define BBLUE	"\033[1;34m"
-#define BLACK	"\033[1;30m"
-#define BGREEN	"\033[0;32m"
-#define RESET	"\033[0m"
 
 class	AForm;
 
@@ -41,7 +38,7 @@ class	Intern
 	~Intern();
 	Intern(const Intern& toCopy);
 	Intern& operator=(const Intern& toCopy);
-
+	enum eForm {PresidentialPardonForm, RobotomyRequestForm, ShrubberyCreationForm};
 	AForm* makeForm(const std::string& formName, const std::string& target);
 };
 

@@ -17,33 +17,27 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/CatDog.hpp"
+#include "../include/Cat.hpp"
 
 Cat::Cat(){
-	std::cout << "<Cat> Default constructor called" << std::endl;
+	debugMode(1, "<CAT> Default constructor called");
 	this->type = "Cat";
 	brain = new Brain();
 }
 
-Cat::Cat(const std::string& type) : AAnimal(type){
-	std::cout << "<Cat> Parametrized constructor called" << std::endl;
-	this->type = AAnimal::type;
-	this->brain = new Brain();
-}
-
 Cat::~Cat(){
-	std::cout << "<Cat> Cat destructor called" << std::endl;
+	debugMode(1, "<CAT> Destructor called");
 	delete brain;
 }
 
 Cat::Cat(const Cat& toCopy) : AAnimal(toCopy){
-	std::cout << "<Cat> Copy constructor called" << std::endl;
+	debugMode(1, "<CAT> Copy constructor called");
 		this->brain = new Brain();
 		*this = toCopy;
 }
 
 Cat& Cat::operator=(const Cat& toCopy){
-	std::cout << "<Cat> Copy assignment operator called" << std::endl;
+	debugMode(1, "<CAT> Copy assignment operator called");
 	if (this != &toCopy)
 	{
 		this->type = toCopy.type;
@@ -54,7 +48,7 @@ Cat& Cat::operator=(const Cat& toCopy){
 
 void	Cat::makeSound(void)
 {
-	std::cout << "Meow Meow" << std::endl;
+	std::cout << GREEN << "Meow Meow" << RESET << std::endl;
 }
 
 void	Cat::setBrain(unsigned int num, const std::string& idea)

@@ -19,7 +19,7 @@ HEADER  	= ./include
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+FILES   	= main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 # TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 
@@ -57,10 +57,10 @@ $(NAME): $(OBJS:%=$(OBJS_DIR)/%)
 	@echo "$(GREEN)$(NAME) created$(RESET)"
 
 test: CPPFLAGS += -DTEST
-test: $(OBJS_COMMON) $(TEST_OBJS)
-	@$(CPP) $(OBJS_COMMON) $(TEST_OBJS) -o $(NAME_TEST)
+test: $(OBJS:%=$(OBJS_DIR)/%)
+	@$(CPP) $(OBJS:%=$(OBJS_DIR)/%) -o $(NAME)
 	@echo ""
-	@echo "$(GREEN)Test executable created$(RESET)"
+	@echo "$(GREEN)$(NAME) created$(RESET)"
 
 $(OBJS_DIR)/%.o: ./%.cpp
 	@mkdir -p $(@D)

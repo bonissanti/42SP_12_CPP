@@ -17,93 +17,83 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/CatDog.hpp"
-#include "../include/WrongCat.hpp"
+#include "../include/Cat.hpp"
+#include "../include/Dog.hpp"
 
 int	main(void)
 {
 	{
-		std::cout << "CONSTRUCT/DESTRUCT TEST" << std::endl;
+		std::cout << BWHITE << "*** SUBJECT TEST ***" << RESET << std::endl;
 		Animal	*myDog = new Dog();
+		Animal	*myCat = new Cat();
 
+		delete myDog;
+		delete myCat;
+	}
+
+	std::cout << "\n";
+	{
+		std::cout << BWHITE << "*** BRAIN TEST ***" << RESET << std::endl;
+		Cat *myCat = new Cat();
+		Dog *myDog = new Dog();
+
+		std::cout << "\n";
+		std::cout << YELLOW << "- Setting idea to 'myCat' and 'myDog' -" << GREEN << std::endl;
+		myCat->setBrain(7, "Bro, where's my toy?");
+		myDog->setBrain(5, "Let's go for a walk, human");
+
+		std::cout << YELLOW << "Cat says: " << GREEN << myCat->getBrain(5) << RESET << std::endl;
+		std::cout << YELLOW << "Dog says: " << GREEN << myDog->getBrain(4) << RESET << std::endl;
+		std::cout << "\n";
+
+		delete myCat;
 		delete myDog;
 	}
 
 	std::cout << "\n";
 	{
-		std::cout << "BRAIN TEST" << std::endl;
-		Cat *frederico = new Cat();
-		std::cout << "\n";
-		Dog *preto = new Dog();
-
-		std::cout << "\n";
-		frederico->setBrain(7, "Bro, where's my toy?");
-		preto->setBrain(5, "Me deixa sair para a rua, humano");
-
-		std::cout << "Cat says: " << frederico->getBrain(5) << std::endl;
-		std::cout << "Dog says: " << preto->getBrain(4) << std::endl;
-		std::cout << "\n";
-
-		delete frederico;
-		std::cout << "\n";
-		delete preto;
-	}
-
-	std::cout << "\n";
-	{
-		std::cout << "SUBJECT TEST" << std::endl;
+		std::cout << BWHITE << "*** SUBJECT TEST ***" << RESET << std::endl;
 
 		Animal *animal[100];
 
+		std::cout << YELLOW << "- Creating an array of 100 animals (50 cats/50 dogs) -" << GREEN << std::endl;
 		for (int i = 0; i < 50; i++)
 			animal[i] = new Cat();
 
 		for (int i = 50; i < 100; i++)
 			animal[i] = new Dog();
 
-		std::cout << "\n--------------------> Printing type <--------------------\n";
+		std::cout << "\n--------------------> Printing type of each animal <--------------------\n";
 
 		for (int i = 0; i < 100; i++)
 				std::cout << animal[i]->getType() << std::endl;
 
-		std::cout << "\n--------------------> Destructors calls <--------------------\n";
+		std::cout << "\n--------------------> Destructors calls (to see, run 'make test') <--------------------\n";
 
 		for (int i = 0; i < 100; i++)
 			delete animal[i];
 	}
 
-	std::cout << "\n";
 	{
-		std::cout << "DEEP COPY TEST" << std::endl;
-
-		Cat *myCat1 = new Cat();
-		Cat *myCat2 = new Cat();
-
-
-		myCat1->setBrain(2, "Eu odeio aquele myCat2"); 
-		myCat2->setBrain(2, "O myCat1 é muito parça"); 
-
-		std::cout << myCat1->getBrain(1) << std::endl;
-		std::cout << myCat2->getBrain(1) << std::endl;
-
-		 
-
-		std::cout << "\nSHALLOW COPY TEST" << std::endl;
+		std::cout << BWHITE << "\nDEEP COPY TEST" << RESET << std::endl;
 
 		Dog *myDog1 = new Dog();
 		Dog *myDog2 = new Dog();
 
-		myDog1->setBrain(2, "Humano pulguento");
+		std::cout << YELLOW << "- Setting idea to 'myDog1' -" << GREEN << std::endl;
+		myDog1->setBrain(2, "I hate cats");
 
 		*myDog2 = *myDog1;
-		std::cout << myDog1->getBrain(1) << std::endl;
-		std::cout << myDog2->getBrain(1) << std::endl;
+		std::cout << YELLOW << "- Copying 'myDog1' to 'myDog2' -" << GREEN << std::endl;
+		std::cout << YELLOW << "myDog1 says: " << GREEN << myDog1->getBrain(1) << std::endl;
+		std::cout << YELLOW << "myDog2 says: " << GREEN << myDog2->getBrain(1) << std::endl;
 
-		myDog1->setBrain(2, "Vou arrancar sua perna");
-		std::cout << myDog2->getBrain(1) << std::endl; //At shallow copy, this will print "Vou arrancar sua perna"
-
-		delete myCat1;
-		delete myCat2;
+		std::cout << "\n";
+		std::cout << YELLOW << "- Setting new idea to 'myDog1' -" << GREEN << std::endl;
+		myDog1->setBrain(2, "I love cats");
+		std::cout << YELLOW << "myDog1 says: " << GREEN << myDog1->getBrain(1) << std::endl; //At shallow copy, this will print "Vou arrancar sua perna"
+		std::cout << YELLOW << "myDog2 says: " << GREEN << myDog2->getBrain(1) << RESET << " // at shallow copy, this will be 'I love cats' as well" << std::endl; //At shallow copy, this will print "Vou arrancar sua perna"
+		
 		delete myDog1;
 		delete myDog2;
 	}

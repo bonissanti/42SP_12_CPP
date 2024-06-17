@@ -17,30 +17,27 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/CatDog.hpp"
+#include "../include/Dog.hpp"
 
 Dog::Dog(){
-	std::cout << "<Dog> Default constructor called" << std::endl;
+	debugMode(2, "<DOG> Default constructor called");
 	this->type = "Dog";
 	brain = new Brain();
 }
-Dog::Dog(const std::string& type) : Animal(type){
-		std::cout << "<Dog> Parametrized constructor called" << std::endl;
-	this->type = "Dog";
-}
 
 Dog::~Dog(){
-	std::cout << "<Dog> Dog destructor called" << std::endl;
+	debugMode(2, "<DOG> Destructor called");
 	delete brain;
 }
 
 Dog::Dog(const Dog& toCopy) : Animal(type){
-	std::cout << "<Dog> Copy constructor called" << std::endl;
+	debugMode(2, "<DOG> Copy constructor called");
 	 	this->brain = new Brain(*toCopy.brain);
 		*this = toCopy;
 }
+
 Dog& Dog::operator=(const Dog& toCopy){
-	std::cout << "<Dog> Copy assignment operator called" << std::endl;
+	debugMode(2, "<DOG> Copy assignment operator called");
 	if (this != &toCopy)
 	{
 		this->type = toCopy.type;
@@ -52,13 +49,13 @@ Dog& Dog::operator=(const Dog& toCopy){
 
 void	Dog::makeSound(void)
 {
-	std::cout << "Woof Woof" << std::endl;
+	std::cout << GREEN << "Woof Woof" << RESET << std::endl;
 }
 
 std::string	Dog::getBrain(unsigned int num)
 {
 	if (num > 100)
-		return ("Invalid index, please insert a valid number");
+		return (RED "Invalid index, please insert a valid number" RESET);
 	return (this->brain->ideas[num]);
 }
 

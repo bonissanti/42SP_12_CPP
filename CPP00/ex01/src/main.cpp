@@ -23,6 +23,6 @@ int	main(void)
 		else if (input.compare("C") == 0)
 				promptAgain = false;
 		else
-				std::cout << BRED << "Invalid choice. Please choose a valid option" << RESET << std::endl << "• ";
+				std::cout << BRED << "Invalid choIce. Please choose a valid option" << RESET << std::endl << "• ";
 	}
 }

@@ -68,6 +68,6 @@ void	Presidential::execute(Bureaucrat const& executor) const
 		return ;
 	}
 	executor.executeForm(*this);
-	std::cout << BGREEN << this->target << " has been pardoned by Zaphod Beeblebrox " << std::endl;
+	std::cout << BWHITE << this->target << " has been pardoned by Zaphod Beeblebrox " << std::endl;
 }
 

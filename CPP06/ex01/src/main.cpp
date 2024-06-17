@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,45 +17,23 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#include "../include/Serializer.hpp"
 
-#include "Brain.hpp"
-
-class Cat : public Animal
+int	main(void)
 {
-	private:
-	Brain *brain;
+	Data		obj;
+	uintptr_t	ptr;
 
-	public:
-	Cat();
-	~Cat();
-	Cat(const std::string& type);
-	Cat(const Cat& toCopy);
-	Cat& operator=(const Cat& toCopy);
+	obj.number = 42;
+	obj.text = "original";
+	obj.isOkay = true;
+	obj.value = 0.0f;
 
-	void	makeSound(void);
-	std::string	getBrain(unsigned int num);
-	void	setBrain(unsigned int num, const std::string& idea);
+	std::cout << obj << std::endl;
+	ptr = Serializer::serialize(&obj);	
 
-};
-
-class Dog : public Animal
-{
-	private:
-	Brain	*brain;
-
-	public:
-	Dog();
-	Dog(const std::string& type);
-	~Dog();
-	Dog(const Dog& toCopy);
-	Dog& operator=(const Dog& toCopy);
-
-	void	makeSound(void);
-	std::string	getBrain(unsigned int num);
-	void	setBrain(unsigned int num, const std::string& idea);
-
-};
-
-#endif
+	Data *newObj = Serializer::deserialize(ptr);
+	newObj->text = "deserialized";
+	std::cout << *newObj;	
+	return (0);
+}

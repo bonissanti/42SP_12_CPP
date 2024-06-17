@@ -17,25 +17,24 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/WrongCatDog.hpp"
+#include "../include/WrongCat.hpp"
 
 WrongCat::WrongCat(){
-	std::cout << "<WrongCat> Default constructor called" << std::endl;
+	debugMode2(1, "<WRONGCAT> Default constructor called");
 	this->type = "Wrong Cat";
 }
-WrongCat::WrongCat(const std::string& type) : WrongAnimal(type){
-		std::cout << "<WrongCat> Parametrized constructor called" << std::endl;
-	this->type = "Wrong Cat";
-}
+
 WrongCat::~WrongCat(){
-	std::cout << "<WrongCat> Destructor called" << std::endl;
+	debugMode2(1, "<WRONGCAT> Destructor called");
 }
+
 WrongCat::WrongCat(const WrongCat& toCopy) : WrongAnimal(type){
-	std::cout << "<WrongCat> Copy constructor called" << std::endl;
+	debugMode2(1, "<WRONGCAT> Copy constructor called");
 		*this = toCopy;
 }
+
 WrongCat& WrongCat::operator=(const WrongCat& toCopy){
-	std::cout << "<WrongCat> Copy assignment operator called" << std::endl;
+	debugMode2(1, "<WRONGCAT> Copy assignment operator called");
 	if (this != &toCopy)
 		this->type = toCopy.type;
 	return (*this);
@@ -43,5 +42,5 @@ WrongCat& WrongCat::operator=(const WrongCat& toCopy){
 
 void	WrongCat::makeSound(void)
 {
-	std::cout << "<WrongCat> Meow Meow" << std::endl;
+	std::cout << GREEN << "<WrongCat> Meow Meow" << RESET << std::endl;
 }

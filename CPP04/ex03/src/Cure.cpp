@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/06/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/06/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,40 +17,35 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/WrongAnimal.hpp"
+#include "../include/Cure.hpp"
 
-WrongAnimal::WrongAnimal(){
-	std::cout << "<WrongAnimal> Default constructor called" << std::endl;
-	this->type = "Unknown specie";
+Cure::Cure(){
+	debugMode("<CURE> Default constructor called");
+	this->type = "Cure";
 }
-WrongAnimal::WrongAnimal(const std::string& type) : type(type){
-		std::cout << "<WrongAnimal> Parametrized constructor called" << std::endl;
+
+Cure::~Cure(){
+	debugMode("<CURE> Destructor called");
 }
-WrongAnimal::~WrongAnimal(){
-	std::cout << "<WrongAnimal> destructor called" << std::endl;
+
+Cure::Cure(const Cure& toCopy) : AMateria(toCopy){
+	debugMode("<CURE> Copy constructor called");
+	*this = toCopy;
 }
-WrongAnimal::WrongAnimal(const WrongAnimal& toCopy){
-	std::cout << "<WrongAnimal> Copy constructor called" << std::endl;
-		*this = toCopy;
-}
-WrongAnimal& WrongAnimal::operator=(const WrongAnimal& toCopy){
-	std::cout << "<WrongAnimal> Copy assignment operator called" << std::endl;
+
+Cure& Cure::operator=(const Cure& toCopy){
+	debugMode("<CURE> Copy assignment operator called");
 	if (this != &toCopy)
 		this->type = toCopy.type;
 	return (*this);
 }
 
-void	WrongAnimal::makeSound(void)
+Cure* Cure::clone(void) const
 {
-	std::cout << "What a strange sound is this?" << std::endl;
+	return (new Cure(*this));
 }
 
-std::string	WrongAnimal::getType(void) const
+void	Cure::use(ICharacter &target)
 {
-	return (this->type);
-}
-
-void	WrongAnimal::setType(const std::string& newType)
-{
-	this->type = newType;
+	std::cout << YELLOW << "* heals " << GREEN << target.getName()  <<"'s wounds *" << RESET << std::endl;
 }

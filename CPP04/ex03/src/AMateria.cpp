@@ -20,34 +20,24 @@
 #include "../include/AMateria.hpp"
 
 AMateria::AMateria(){
-	#ifdef TEST
-	std::cout << "<AMateria> Default constructor called" << std::endl;
-	#endif
-	this->type = "";
+	debugMode("<AMATERIA> Default constructor called");
+	this->type = "Unknown";
 }
 AMateria::AMateria(const std::string& type) : type(type){
-	#ifdef TEST
-	std::cout << "<AMateria> Parametrized constructor called" << std::endl;
-	#endif
+	debugMode("<AMATERIA> Parametrized constructor called");
 }
 
 AMateria::~AMateria(){
-	#ifdef TEST
-	std::cout << "<AMateria> AMateria destructor called" << std::endl;
-	#endif
+	debugMode("<AMATERIA> destructor called");
 }
 
 AMateria::AMateria(const AMateria& toCopy){
-	#ifdef TEST
-	std::cout << "<AMateria> Copy constructor called" << std::endl;
-	#endif
-		*this = toCopy;
+	debugMode("<AMATERIA> Copy constructor called");
+	*this = toCopy;
 }
 
 AMateria& AMateria::operator=(const AMateria& toCopy){
-	#ifdef TEST
-	std::cout << "<AMateria> Copy assignment operator called" << std::endl;
-	#endif
+	debugMode("<AMATERIA> Copy assignment operator called");
 	if (this != &toCopy)
 		this->type = toCopy.type;
 	return (*this);
@@ -60,5 +50,16 @@ std::string const & AMateria::getType(void) const
 
 void	AMateria::use(ICharacter &target)
 {
-	std::cout << "Using " << this->type << " on " << target.getName() << std::endl;
+	std::cout << YELLOW << "Using " << GREEN << this->type << YELLOW << " on " << GREEN << target.getName() << std::endl;
+}
+
+void	debugMode(const std::string& msg)
+{
+	#ifndef TEST
+	(void)msg;
+	#endif
+
+	#ifdef TEST
+	std::cout << BLUE << msg << RESET << std::endl;
+	#endif
 }

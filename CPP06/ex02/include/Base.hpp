@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/06/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/06/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,21 +17,31 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef WRONGCAT_HPP
-# define WRONGCAT_HPP
+#ifndef BASE_HPP
+# define BASE_HPP
 
-#include "WrongAnimal.hpp"
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#define RED	"\033[0;31m"
+#define BYELLOW	"\033[1;33m"
+#define YELLOW	"\033[0;33m"
+#define BBLUE	"\033[1;34m"
+#define BLACK	"\033[1;30m"
+#define GREEN	"\033[0;32m"
+#define RESET	"\033[0m"
 
-class WrongCat : public WrongAnimal
+class	Base
 {
 	public:
-	WrongCat();
-	WrongCat(const std::string& type);
-	virtual ~WrongCat();
-	WrongCat(const WrongCat& toCopy);
-	WrongCat& operator=(const WrongCat& toCopy);
-
-	virtual	void	makeSound(void);
+	virtual ~Base();
 };
+
+class A : public Base{};
+class B : public Base{};
+class C : public Base{};
+
+Base	*generate(void);
+void	identity(Base *p);
 
 #endif

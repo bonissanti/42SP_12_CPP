@@ -26,7 +26,6 @@ class Dog : public Animal
 {
 	public:
 	Dog();
-	Dog(const std::string& type);
 	~Dog();
 	Dog(const Dog& toCopy);
 	Dog& operator=(const Dog& toCopy);

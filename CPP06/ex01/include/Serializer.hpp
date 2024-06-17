@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,46 +17,23 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
 
-#include "Brain.hpp"
+#include "Data.hpp"
 
-class Cat : public AAnimal
+class	Serializer
 {
 	private:
-	Brain *brain;
+	Serializer();
+	Serializer(const Serializer& toCopy);
+	Serializer& operator=(const Serializer& toCopy);
 
 	public:
-	Cat();
-	~Cat();
-	Cat(const std::string& type);
-	Cat(const Cat& toCopy);
-	Cat& operator=(const Cat& toCopy);
-
-	void	makeSound(void);
-	std::string	getBrain(unsigned int num);
-	void	setBrain(unsigned int num, const std::string& idea);
-
+	~Serializer();
+	static uintptr_t serialize(Data *ptr);
+	static Data *deserialize(uintptr_t raw);
 };
 
-// FIXME: Separar em outro arquivo .hpp
-class Dog : public AAnimal
-{
-	private:
-	Brain	*brain;
-
-	public:
-	Dog();
-	Dog(const std::string& type);
-	~Dog();
-	Dog(const Dog& toCopy);
-	Dog& operator=(const Dog& toCopy);
-
-	void	makeSound(void);
-	std::string	getBrain(unsigned int num);
-	void	setBrain(unsigned int num, const std::string& idea);
-
-};
 
 #endif

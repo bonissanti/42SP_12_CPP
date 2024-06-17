@@ -20,21 +20,25 @@
 #include "../include/WrongAnimal.hpp"
 
 WrongAnimal::WrongAnimal(){
-	std::cout << "<WrongAnimal> Default constructor called" << std::endl;
+	debugMode2(0, "<WRONGANIMAL> Default constructor called");
 	this->type = "Unknown specie";
 }
+
 WrongAnimal::WrongAnimal(const std::string& type) : type(type){
-		std::cout << "<WrongAnimal> Parametrized constructor called" << std::endl;
+	debugMode2(0, "<WRONGANIMAL> Parametrized constructor called");
 }
+
 WrongAnimal::~WrongAnimal(){
-	std::cout << "<WrongAnimal> destructor called" << std::endl;
+	debugMode2(0, "<WRONGANIMAL> Destructor called");
 }
+
 WrongAnimal::WrongAnimal(const WrongAnimal& toCopy){
-	std::cout << "<WrongAnimal> Copy constructor called" << std::endl;
+	debugMode2(0, "<WRONGANIMAL> Copy constructor called");
 		*this = toCopy;
 }
+
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& toCopy){
-	std::cout << "<WrongAnimal> Copy assignment operator called" << std::endl;
+	debugMode2(0, "<WRONGANIMAL> Copy assignment operator called");
 	if (this != &toCopy)
 		this->type = toCopy.type;
 	return (*this);
@@ -42,7 +46,7 @@ WrongAnimal& WrongAnimal::operator=(const WrongAnimal& toCopy){
 
 void	WrongAnimal::makeSound(void)
 {
-	std::cout << "What a strange sound is this?" << std::endl;
+	std::cout << GREEN << "* Unknown sound *" << RESET << std::endl;
 }
 
 std::string	WrongAnimal::getType(void) const
@@ -53,4 +57,28 @@ std::string	WrongAnimal::getType(void) const
 void	WrongAnimal::setType(const std::string& newType)
 {
 	this->type = newType;
+}
+
+void	debugMode2(int level, const std::string& msg)
+{
+	#ifndef TEST
+	(void)level;
+	(void)msg;
+	#endif
+
+	#ifdef TEST
+	switch (level)
+	{
+		case 0:
+		std::cout << YELLOW << msg << RESET << std::endl;
+		break;
+	
+		case 1:
+		std::cout << YELLOW << msg << RESET << std::endl;
+		break;
+
+		default:
+		break;
+	}
+	#endif
 }

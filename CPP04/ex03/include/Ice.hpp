@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/05/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/05/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/08/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/08/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,43 +17,21 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/cure.hpp"
+#ifndef ICE_HPP
+# define ICE_HPP
 
-cure::cure(){
-	#ifdef TEST
-	std::cout << "<cure> Parametrized constructor called" << std::endl;
-	#endif
-	this->type = "cure";
-}
+#include "AMateria.hpp"
 
-cure::~cure(){
-	#ifdef TEST
-	std::cout << "<cure> cure destructor called" << std::endl;
-	#endif
-}
-
-cure::cure(const cure& toCopy) : AMateria(toCopy){
-	#ifdef TEST
-	std::cout << "<cure> Copy constructor called" << std::endl;
-	#endif
-	*this = toCopy;
-}
-
-cure& cure::operator=(const cure& toCopy){
-	#ifdef TEST
-	std::cout << "<cure> Copy assignment operator called" << std::endl;
-	#endif
-	if (this != &toCopy)
-		this->type = toCopy.type;
-	return (*this);
-}
-
-cure* cure::clone(void) const
+class Ice : public AMateria
 {
-	return (new cure(*this));
-}
+	public:
+	Ice();
+	~Ice();
+	Ice(const Ice& toCopy);
+	Ice& operator=(const Ice& toCopy);
 
-void	cure::use(ICharacter &target)
-{
-	std::cout << "* heals " << target.getName()  <<"'s wounds *" << std::endl;
-}
+	virtual Ice	*clone(void) const;
+	void	use(ICharacter& target);
+};
+
+#endif

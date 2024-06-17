@@ -21,12 +21,14 @@
 
 MateriaSource::MateriaSource()
 {
+	debugMode("<MATERIASOURCE> Default constructor called");
 	for (int i = 0; i < 4; i++)
 		this->copied[i] = NULL;
 }
 
 MateriaSource::~MateriaSource()
 {
+	debugMode("<MATERIASOURCE> destructor called");
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->copied[i])
@@ -36,6 +38,7 @@ MateriaSource::~MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource& toCopy)
 {
+	debugMode("<MATERIASOURCE> Copy constructor called");
 	for (int i = 0; i < 4; i++)
 		this->copied[i] = NULL;
 	*this = toCopy;
@@ -43,6 +46,7 @@ MateriaSource::MateriaSource(const MateriaSource& toCopy)
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& toCopy)
 {
+	debugMode("<MATERIASOURCE> Copy assignment operator called");
 	if (this != &toCopy)
 	{
 		for (int i = 0; i < 4; i++)
@@ -75,9 +79,10 @@ AMateria*	MateriaSource::createMateria(std::string const & type)
 {
 	for (int i = 0; i < 4; i++)
 	{
+		std::cout << YELLOW << "<MateriaSource> Materia " << GREEN << "'" << type << "' created" << std::endl;
 		if (this->copied[i] != NULL && this->copied[i]->getType() == type)
 			return (this->copied[i]);
 	}
-	std::cout << "<MateriaSource> Materia not found" << std::endl;
+	std::cout << RED << "<MateriaSource> Materia not found" << RESET << std::endl;
 	return (0);
 }

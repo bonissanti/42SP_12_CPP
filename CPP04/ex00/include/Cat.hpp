@@ -26,13 +26,11 @@ class Cat : public Animal
 {
 	public:
 	Cat();
-	Cat(const std::string& type);
 	~Cat();
 	Cat(const Cat& toCopy);
 	Cat& operator=(const Cat& toCopy);
 
 	void	makeSound(void);
-
 };
 
 #endif

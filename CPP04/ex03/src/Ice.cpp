@@ -17,44 +17,35 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Cat.hpp"
-#include "../include/Dog.hpp"
+#include "../include/Ice.hpp"
 
-int	main(void)
+Ice::Ice(){
+	debugMode("<ICE> Default constructor called");
+	this->type = "Ice";
+}
+
+Ice::~Ice(){
+	debugMode("<ICE> destructor called");
+}
+
+Ice::Ice(const Ice& toCopy) : AMateria(toCopy){
+	debugMode("<ICE> Copy constructor called");
+	*this = toCopy;
+}
+
+Ice& Ice::operator=(const Ice& toCopy){
+	debugMode("<ICE> Copy assignment operator called");
+	if (this != &toCopy)
+		this->type = toCopy.type;
+	return (*this);
+}
+
+Ice* Ice::clone(void) const
 {
-	std::cout << BWHITE << "\n--------------------> Constructors <--------------------\n" << RESET << std::endl;
+	return (new Ice(*this));
+}
 
-	AAnimal *myDog = new Dog();
-	AAnimal *myCat = new Cat();
-	AAnimal *animalsArray[20];
-
-	// AAnimal *meta = new AAnimal(); not work
-	
-	std::cout << BWHITE << "\n--------------------> Dog and Cat sounds <--------------------\n" << RESET << std::endl;
-
-	std::cout << YELLOW << "myDog sound is: "; 
-	myDog->makeSound();	
-	std::cout << YELLOW << "myCat sound is: "; 
-	myCat->makeSound();
-
-	std::cout << BWHITE << "\n--------------------> More constructors <--------------------\n" << RESET << std::endl;
-
-	for (int i = 0; i < 10; i++)
-		animalsArray[i] = new Dog();
-
-	for (int i = 10; i < 20; i++)
-		animalsArray[i] = new Cat();
-
-	std::cout << BWHITE << "\n--------------------> Printing types <--------------------\n" << RESET << std::endl;
-
-	for (int i = 0; i < 20; i++)
-		std::cout << GREEN << animalsArray[i]->getType() << RESET << std::endl;
-
-	std::cout << BWHITE << "\n--------------------> Destructors <--------------------\n" << RESET << std::endl;
-	delete myDog;
-	delete myCat;
-
-	for (int i = 0; i < 20; i++)
-		delete animalsArray[i];
-	return (0);
+void	Ice::use(ICharacter &target)
+{
+	std::cout << YELLOW << "* shoots an Ice bolt at " << GREEN << target.getName() << RESET << " *" << std::endl;
 }
