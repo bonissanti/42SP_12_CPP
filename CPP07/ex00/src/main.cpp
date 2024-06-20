@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/19/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/19/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,35 +17,43 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Base.hpp"
+#include "../include/whatever.hpp"
 
 int	main(void)
 {
-	Base *obj;
+	{
+		std::cout << BWHITE << "*** SUBJECT TEST - INT ***\n" << RESET << std::endl;
+		int	a = 2;
+		int	b = 3;
 
-	for (int i = 1; i < 6; i++)
-	{
-		std::cout << YELLOW << "Random test #" << i << RESET << std::endl;
-		obj = generate();
-		identity(obj);
-		identity(*obj);
-		std::cout << '\n';
-		sleep(1);
+		::swap(a, b);
+		std::cout << YELLOW << "a = " << GREEN << a << YELLOW << ", b is: " << GREEN << b << std::endl;
+		std::cout << YELLOW << "min(a, b) = " << GREEN << ::min(a, b) << std::endl;
+		std::cout << YELLOW << "max(a, b) = " << GREEN << ::max(a, b) << std::endl;
 	}
-	std::cout << '\n';
+
+	std::cout << std::endl;
 	{
-		std::cout << YELLOW << "Pointer to ref test" << RESET << std::endl;
-		obj = generate();
-		Base &ref = *obj;
-		identity(obj);
-		identity(ref);
+		std::cout << BWHITE << "*** SUBJECT TEST - STRING ***\n" << RESET << std::endl;
+		std::string c = "chaine1";
+		std::string d = "chaine2";
+
+		::swap(c, d);
+		std::cout << YELLOW << "c = " << GREEN << c << YELLOW << ", d is: " << GREEN << d << std::endl;
+		std::cout << YELLOW << "min(c, d) = " << GREEN << ::min(c, d) << std::endl;
+		std::cout << YELLOW << "max(c, d) = " << GREEN << ::max(c, d) << std::endl;
 	}
-	std::cout << '\n';
+
+	std::cout << std::endl;
 	{
-		std::cout << YELLOW << "Invalid test" << RESET << std::endl;
-		obj = NULL;
-		identity(obj);
-		identity(*obj);
-	}
+		std::cout << BWHITE << "*** TEST - FLOAT ***\n" << RESET << std::endl;
+		float e = 89.0f;
+		float f = 89.1f;
+
+		::swap(e, f);
+		std::cout << YELLOW << "e = " << GREEN << e << YELLOW << ", f is: " << GREEN << f << std::endl;
+		std::cout << YELLOW << "min(e, f) = " << GREEN << ::min(e, f) << std::endl;
+		std::cout << YELLOW << "max(e, f) = " << GREEN << ::max(e, f) << std::endl;
+	}	
 	return (0);
 }

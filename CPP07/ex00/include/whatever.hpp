@@ -17,35 +17,41 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Base.hpp"
+#ifndef WHATEVER_HPP
+# define WHATEVER_HPP
 
-int	main(void)
+#include <iostream>
+#define RED	"\033[0;31m"
+#define BYELLOW	"\033[1;33m"
+#define YELLOW	"\033[0;33m"
+#define BBLUE	"\033[1;34m"
+#define BWHITE	"\033[1;37m"
+#define BLACK	"\033[1;30m"
+#define GREEN	"\033[0;32m"
+#define RESET	"\033[0m"
+
+template<typename T>
+void	swap(T& a, T& b)
 {
-	Base *obj;
-
-	for (int i = 1; i < 6; i++)
-	{
-		std::cout << YELLOW << "Random test #" << i << RESET << std::endl;
-		obj = generate();
-		identity(obj);
-		identity(*obj);
-		std::cout << '\n';
-		sleep(1);
-	}
-	std::cout << '\n';
-	{
-		std::cout << YELLOW << "Pointer to ref test" << RESET << std::endl;
-		obj = generate();
-		Base &ref = *obj;
-		identity(obj);
-		identity(ref);
-	}
-	std::cout << '\n';
-	{
-		std::cout << YELLOW << "Invalid test" << RESET << std::endl;
-		obj = NULL;
-		identity(obj);
-		identity(*obj);
-	}
-	return (0);
+	T temp = a;
+	a = b;
+	b = temp;
 }
+
+template<typename T>
+T	min(T& a, T& b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+template<typename T>
+T	max(T& a, T& b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+#endif

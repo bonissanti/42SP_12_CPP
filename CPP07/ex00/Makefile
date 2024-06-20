@@ -12,14 +12,15 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex02
+NAME    	= ex00
 NAME_TEST	= test-ex01
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp Base.cpp
+FILES   	= main.cpp
+# TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 
 SRCS_COMMON = $(filter-out ./src/main.cpp, $(SRC))
@@ -56,10 +57,10 @@ $(NAME): $(OBJS:%=$(OBJS_DIR)/%)
 	@echo "$(GREEN)$(NAME) created$(RESET)"
 
 test: CPPFLAGS += -DTEST
-test: $(OBJS:%=$(OBJS_DIR)/%)
-	@$(CPP) $(OBJS:%=$(OBJS_DIR)/%) -o $(NAME)
+test: $(OBJS_COMMON) $(TEST_OBJS)
+	@$(CPP) $(OBJS_COMMON) $(TEST_OBJS) -o $(NAME_TEST)
 	@echo ""
-	@echo "$(GREEN)$(NAME) created$(RESET)"
+	@echo "$(GREEN)Test executable created$(RESET)"
 
 $(OBJS_DIR)/%.o: ./%.cpp
 	@mkdir -p $(@D)

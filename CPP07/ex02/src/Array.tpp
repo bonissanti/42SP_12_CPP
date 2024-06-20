@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/20/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/20/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,35 +17,80 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Base.hpp"
+#ifndef ARRAY_TPP
+# define ARRAY_TPP
 
-int	main(void)
+#include "../include/Array.hpp"
+
+template <class T>
+Array<T>::Array()
 {
-	Base *obj;
-
-	for (int i = 1; i < 6; i++)
-	{
-		std::cout << YELLOW << "Random test #" << i << RESET << std::endl;
-		obj = generate();
-		identity(obj);
-		identity(*obj);
-		std::cout << '\n';
-		sleep(1);
-	}
-	std::cout << '\n';
-	{
-		std::cout << YELLOW << "Pointer to ref test" << RESET << std::endl;
-		obj = generate();
-		Base &ref = *obj;
-		identity(obj);
-		identity(ref);
-	}
-	std::cout << '\n';
-	{
-		std::cout << YELLOW << "Invalid test" << RESET << std::endl;
-		obj = NULL;
-		identity(obj);
-		identity(*obj);
-	}
-	return (0);
+	debugMode("<ARRAY> Default Constructor called");
+	this->array = new T[0];
+	this->n = 0;
 }
+
+template <class T>
+Array<T>::Array(unsigned int n) : n(n)
+{
+	debugMode("<ARRAY> Parametrized constructor called");
+	this->array = new T[n];
+}
+
+template <class T>
+Array<T>::~Array(){
+	debugMode("<ARRAY> Destructor called");
+	delete[] array;
+}
+
+template <class T>
+Array<T>::Array(const Array& toCopy)
+{
+	debugMode("<ARRAY> Copy constructor called");
+	this->array = new T[toCopy.n];
+	*this = toCopy;
+}
+
+template <class T>
+Array<T>& Array<T>::operator=(const Array& toCopy)
+{
+	debugMode("<ARRAY> Copy assignment operator called");
+	if (this != &toCopy)
+	{
+		if (this->array)
+			delete[] this->array;
+		this->n = toCopy.n;
+		this->array = new T[this->n];
+
+		for (unsigned int i = 0; i < this->n; i++)
+			this->array[i] = toCopy.array[i];
+	}
+	return (*this);
+}
+
+template <class T>
+unsigned int	Array<T>::size(void) const
+{
+	return (this->n);
+}
+
+template <class T>
+T&	Array<T>::operator[](unsigned int index)
+{
+	if (index > this->size() - 1)
+		throw std::out_of_range(RED "Index out of bounds" RESET);
+	return (this->array[index]);
+}
+
+void	debugMode(const std::string& msg)
+{
+	#ifndef TEST
+	(void)msg;
+	#endif
+
+	#ifdef TEST
+	std::cout << BBLUE << msg << RESET << std::endl;
+	#endif
+}
+
+#endif

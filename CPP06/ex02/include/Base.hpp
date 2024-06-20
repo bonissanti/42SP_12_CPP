@@ -23,6 +23,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <exception>
+#include <unistd.h>
+
 #define RED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
 #define YELLOW	"\033[0;33m"
@@ -43,5 +46,6 @@ class C : public Base{};
 
 Base	*generate(void);
 void	identity(Base *p);
+void	identity(Base &p);
 
 #endif

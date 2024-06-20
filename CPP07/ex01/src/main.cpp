@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/19/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/19/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,35 +17,46 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/Base.hpp"
+#include "../include/iter.hpp"
 
 int	main(void)
 {
-	Base *obj;
+	{
+		std::cout << BWHITE << "*** INT TEST ***" << RESET << std::endl;
+		int	ptr[] = {23, 435, 232, 1, 759, 0};
+		size_t length = sizeof(ptr) / sizeof(ptr[0]);
 
-	for (int i = 1; i < 6; i++)
-	{
-		std::cout << YELLOW << "Random test #" << i << RESET << std::endl;
-		obj = generate();
-		identity(obj);
-		identity(*obj);
+		::iter(ptr, length, printing);
 		std::cout << '\n';
-		sleep(1);
+		::iter(ptr, length, increment);
+		std::cout << '\n';
+		::iter(ptr, length, decrement);
 	}
+
 	std::cout << '\n';
 	{
-		std::cout << YELLOW << "Pointer to ref test" << RESET << std::endl;
-		obj = generate();
-		Base &ref = *obj;
-		identity(obj);
-		identity(ref);
+		std::cout << BWHITE << "*** STRING TEST ***" << RESET << std::endl;
+		std::string test[] = {"a", "b", "c", "d"};
+		size_t length = sizeof(test) / sizeof(test[0]);
+
+		::iter(test, length, printing);
+		// std::cout << '\n'; 
+		// ::iter(test, length, increment); not work
+		// std::cout << '\n';
+		// ::iter(test, length, decrement); not work
 	}
+
 	std::cout << '\n';
 	{
-		std::cout << YELLOW << "Invalid test" << RESET << std::endl;
-		obj = NULL;
-		identity(obj);
-		identity(*obj);
+		std::cout << BWHITE << "*** FLOAT TEST ***" << RESET << std::endl;
+		float	ptr[] = {23.0f, 435.5f, 232.2f, 1.0f, 759.32f, 0.23f};
+		size_t length = sizeof(ptr) / sizeof(ptr[0]);
+
+		::iter(ptr, length, printing);
+		std::cout << '\n';
+		::iter(ptr, length, increment);
+		std::cout << '\n';
+		::iter(ptr, length, decrement);
 	}
 	return (0);
 }
