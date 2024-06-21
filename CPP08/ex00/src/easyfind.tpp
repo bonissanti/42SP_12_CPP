@@ -19,3 +19,14 @@
 
 #include "../include/easyfind.hpp"
 
+template <typename T>
+void	easyfind(T& src, int valueToFind)
+{
+	typename T::iterator it = std::find(src.begin(), src.end(), valueToFind);
+
+	if (it != src.end())
+		std::cout << YELLOW << "Founded! " << GREEN << "index: " << std::distance(src.begin(), it) 
+			<< YELLOW << " has the " << GREEN << "value: " << *it << RESET << std::endl;
+	else
+		throw std::out_of_range(RED "Index/value not found in container" RESET);
+}
