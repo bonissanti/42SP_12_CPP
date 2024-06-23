@@ -57,17 +57,17 @@ int	main(void)
 
 		Bureaucrat	ceo("ceo", 1);
 		Bureaucrat	random("random", 26);
-		Bureaucrat	owner("owner", 39);	
+		Bureaucrat	bruh("bruh", 39);	
 		Bureaucrat	intern("carlitos", 150);
 
 		if (president)
-			president->beSigned(ceo);
+			ceo.signForm(*president);	
 		if (robotomy)
-			robotomy->beSigned(random);
+			random.signForm(*robotomy);
 		if (shrubber)
-			shrubber->beSigned(owner);
+			bruh.signForm(*shrubber);
 		if (internPromotion)
-			internPromotion->beSigned(intern);
+		 	intern.signForm(*internPromotion);
 
 		Bureaucrat	marvin("marvin", 30);
 		Bureaucrat	garden("garden", 15);
@@ -75,28 +75,28 @@ int	main(void)
 		std::cout << '\n';
 		if (president)
 		{
-			president->execute(ceo);
+			ceo.executeForm(*president);
 			delete president;
 		}
 
 		std::cout << '\n';
 		if (robotomy)
 		{
-			robotomy->execute(marvin);
+			marvin.executeForm(*robotomy);
 			delete robotomy;
 		}
 
 		std::cout << '\n';
 		if (shrubber)
 		{
-			shrubber->execute(garden);
+			garden.executeForm(*shrubber);
 			delete shrubber;
 		}
 
 		std::cout << '\n';
 		if (internPromotion)
 		{
-			internPromotion->execute(intern);
+			intern.executeForm(*internPromotion);
 			delete internPromotion;
 		}
 	}

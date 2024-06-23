@@ -20,13 +20,13 @@
 #include "../include/AForm.hpp"
 
 AForm::AForm() : name("Admissional doc"), sign(false), gradeToSign(5), gradeToExecute(10) {
-	debugMode(0, "<AFORM> Default Constructor called");
+	debugMode("<AFORM> Default Constructor called");
 }
 
 AForm::AForm(const std::string& name, int gradeToSign, int gradeToExecute) : name(name),
 	sign(false), gradeToSign(gradeToSign),	gradeToExecute(gradeToExecute)
 {
-	debugMode(0, "<AFORM> Parametrized constructor called");
+	debugMode("<AFORM> Parametrized constructor called");
 	if (gradeToSign < 1 || gradeToExecute < 1)
 		throw AForm::GradeTooHighException();
 	
@@ -35,37 +35,31 @@ AForm::AForm(const std::string& name, int gradeToSign, int gradeToExecute) : nam
 }
 
 AForm::~AForm(){
-	debugMode(0, "<AFORM> Destructor called");
+	debugMode("<AFORM> Destructor called");
 }
 
 AForm::AForm(const AForm& toCopy) : name(toCopy.name), sign(toCopy.sign), 
 	gradeToSign(toCopy.gradeToSign), gradeToExecute(toCopy.gradeToExecute){
-	debugMode(0, "<AFORM> Copy constructor called");
+	debugMode("<AFORM> Copy constructor called");
 }
 
 AForm& AForm::operator=(const AForm& toCopy){
-	debugMode(0, "<AFORM> Copy assignment operator called");
+	debugMode("<AFORM> Copy assignment operator called");
 	if (this != &toCopy)
+	{
+		const_cast<std::string&>(this->name) = toCopy.name;
 		this->sign = toCopy.sign;
+		const_cast<int&>(this->gradeToSign) = toCopy.gradeToSign;
+		const_cast<int&>(this->gradeToExecute) = toCopy.gradeToExecute;
+	}
 	return (*this);
 }
 
-
 void	AForm::beSigned(Bureaucrat& personToSign)
 {
-	try
-	{
-		if (personToSign.getGrade() > this->gradeToSign)
-			throw (AForm::GradeTooLowException());
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << BRED << personToSign.getName() << " couldn't sign '" << this->name << "' because " 
-			<< e.what() << RESET << std::endl;
-		return ;
-	}
+	if (personToSign.getGrade() > this->gradeToSign)
+		throw (AForm::GradeTooLowException());
 	this->sign = true;
-	personToSign.signForm(*this);
 }
 
 const std::string& AForm::getName(void) const
@@ -78,28 +72,26 @@ bool	AForm::getBoolSign(void) const
 	return (this->sign);
 }
 
-//FIXME: verificar se na 42 posso usar 'const int'
 int	AForm::getToSign(void) const
 {
 	return (this->gradeToSign);
 }
 
-//FIXME: verificar se na 42 posso usar 'const int'
 int	AForm::getExecute(void) const
 {
 	return (this->gradeToExecute);
 }
 
 char const* AForm::GradeTooHighException::what() const throw(){
-	return (BRED "<AFORM> Grade too high." RESET);
+	return (RED "<AFORM> Grade too high." RESET);
 }
 
 char const* AForm::GradeTooLowException::what() const throw(){
-	return (BRED "<AFORM> Grade too low." RESET);
+	return (RED "<AFORM> Grade too low." RESET);
 }
 
 char const* AForm::NotSigned::what() const throw(){
-	return (BRED "<AFORM> Form needs to be signed before execute." RESET);
+	return (RED "<AFORM> Form needs to be signed before execute." RESET);
 }
 
 
@@ -109,38 +101,14 @@ std::ostream&	operator<<(std::ostream& os, const AForm& toPrint)
 	return (os);
 }
 
-void	debugMode(int level, const std::string& msg)
+void	debugMode(const std::string& msg)
 {
 	#ifndef TEST
-	(void)level;
 	(void)msg;
 	#endif
 
 	#ifdef TEST
-	switch (level)
-	{
-		case 0:
-		std::cout << msg << std::endl;
-		break;
-	
-		case 1:
-		std::cout << msg << std::endl;
-		break;
-
-		case 2:
-		std::cout << msg << std::endl;
-		break;
-
-		case 3:
-		std::cout << msg << std::endl;
-		break;
-		
-		case 4:
-		std::cout << msg << std::endl;
-		break;
-		default:
-		break;
-	}
+	std::cout << BBLUE << msg << RESET << std::endl;
 	#endif
 }
 

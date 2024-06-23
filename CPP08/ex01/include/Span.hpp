@@ -17,8 +17,8 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef SPAN_HPP
+# define SPAN_HPP
 
 #include <iostream>
 #include <vector>
@@ -40,19 +40,18 @@ template <class T>
 class Span
 {
 	private:
-	unsigned int n;
-	std::vector<int> vectors;
-
+	unsigned int capacity;
+	std::vector<int> myVec;
+	
 	public:
-	Span();
 	Span(unsigned int n);
 	~Span();
 	Span(const Span& toCopy);
 	Span& operator=(const Span& toCopy);
 
 	void	addNumber(int num);
-	T&		shortestSpan(void) const;
-	T&		longestSpan(void) const;
+	int		shortestSpan(void) const;
+	int		longestSpan(void) const;
 };
 
 void	debugMode(const std::string& msg);

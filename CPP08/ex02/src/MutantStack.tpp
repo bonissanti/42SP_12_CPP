@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/19/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/19/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,60 +17,43 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#include "../include/MutantStack.hpp"
 
-#include <iostream>
-#include <exception>
-#include <fstream>
-#include "AForm.hpp"
+template <class T, class container>
+MutantStack<T, container>::MutantStack(){
+	debugMode("<SPAN> Default Constructor called");
+}
 
-#define RED	"\033[0;31m"
-#define BYELLOW	"\033[1;33m"
-#define YELLOW	"\033[0;33m"
-#define BBLUE	"\033[0;34m"
-#define BWHITE	"\033[1;37m"
-#define BLACK	"\033[1;30m"
-#define GREEN	"\033[0;32m"
-#define RESET	"\033[0m"
+template <class T, class container>
+MutantStack<T, container>::~MutantStack(){
+	debugMode("<SPAN> Destructor called");
+}
 
+template <class T, class container>
+MutantStack<T, container>::MutantStack(const MutantStack& toCopy){
+	debugMode("<SPAN> Copy Constructor called");
+		*this = toCopy;
+}
 
+template <class T, class container>
+MutantStack<T, container>& MutantStack<T, container>::operator=(const MutantStack& toCopy){
+	debugMode("<SPAN> Copy Assignment Operator called");
+	if (this != &toCopy)
+	{
+		this->myVec = toCopy.myVec;
+		this->capacity = toCopy.capacity;
+	}
+	return (*this);
+}
 
-class	AForm;
-
-class	Bureaucrat
+template <class T, class container>
+typename MutantStack<T, container>::iterator MutantStack<T, container>::begin()
 {
-	private:
-	const std::string name;
-	int			grade;
+	return (this->c.begin());
+}
 
-	public:
-	Bureaucrat();
-	Bureaucrat(std::string name, int grade);
-	~Bureaucrat();
-	Bureaucrat(const Bureaucrat& toCopy);
-	Bureaucrat& operator=(const Bureaucrat& toCopy);
-	std::string getName(void) const;
-	int getGrade(void) const;
-
-	Bureaucrat&	operator++(int);
-	Bureaucrat&	operator--(int);
-	void		signForm(AForm& form);
-	void		executeForm(AForm const& form) const;
-
-	class	GradeTooHighException : public std::exception
-	{
-		public:
-		char const *what() const throw();
-	};
-
-	class	GradeTooLowException : public std::exception
-	{
-		public:
-		char const *what() const throw();
-	};
-};
-
-std::ostream&	operator<<(std::ostream& os, const Bureaucrat& toPrint);
-
-#endif
+template <class T, class container>
+typename MutantStack<T, container>::iterator MutantStack<T, container>::end()
+{
+	return (this->c.end());
+}

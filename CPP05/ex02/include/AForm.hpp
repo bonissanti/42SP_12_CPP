@@ -41,10 +41,10 @@ class AForm
 
 	const std::string&	getName(void) const;
 	bool			getBoolSign(void) const;
-	int				getToSign(void) const;	//FIXME: verificar se na 42 posso usar 'const int' 
-	int				getExecute(void) const; //FIXME: verificar se na 42 posso usar 'const int'
+	int				getToSign(void) const;
+	int				getExecute(void) const;
 	void			beSigned(Bureaucrat& personToSign);
-	virtual void	execute(Bureaucrat const& executor) const = 0; // talvez não seja assim
+	virtual void	execute(Bureaucrat const& executor) const = 0;
 
 	class GradeTooHighException : public std::exception
 	{
@@ -61,5 +61,6 @@ class AForm
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& toPrint);
-void	debugMode(int level, const std::string &msg);
+void	debugMode(const std::string& msg);
+
 #endif

@@ -20,40 +20,20 @@
 #include "../include/Bureaucrat.hpp"
 #include "../include/Form.hpp"
 
-static	void	printingInfos(const Form *a, const Form *b, const Form *c)
-{
-	#ifndef TEST
-	(void) a;
-	(void) b;
-	(void) c;
-	#endif
-
-	#ifdef TEST
-	std::cout << "'a' name is: " << a->getName() << std::endl;
-	std::cout << "'b' name is: " << b->getName() << std::endl;
-	std::cout << "'c' name is: " << c->getName() << std::endl;
-
-	std::cout << "'a' grade to sign: " << a->getToSign() << std::endl;
-	std::cout << "'b' grade to sign: " << b->getToSign() << std::endl;
-	std::cout << "'c' grade to sign: " << c->getToSign() << std::endl;
-
-	std::cout << "'a' grade to execute: " << a->getExecute() << std::endl;
-	std::cout << "'b' grade to execute: " << b->getExecute() << std::endl;
-	std::cout << "'c' grade to execute: " << c->getExecute() << std::endl;
-	#endif
-}
-
 int main(void)
 {
 	{
 		try
 		{
-			std::cout << BLACK << "**** TEST INITIALIZER CONSTRUCTORS (only in test mode) ****" << RESET << std::endl;
+			std::cout << YELLOW << "**** TEST INITIALIZER CONSTRUCTORS (infos about them only in test mode) ****" << RESET << std::endl;
 			Form	a;
 			Form	b(a);
 			Form 	c = b;
 			a = Form("TEST", 150, 150);
-			printingInfos(&a, &b, &c);
+			std::cout << YELLOW << "-----> Printing infos about forms <-----" << std::endl;
+			std::cout << a << std::endl;
+			std::cout << b << std::endl;
+			std::cout << c << std::endl;
 		}
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';
@@ -62,7 +42,7 @@ int main(void)
 
 	std::cout << '\n';
 	{
-		std::cout << BLACK << "**** TEST INVALID GRADE ****" << RESET << std::endl;
+		std::cout << YELLOW << "**** TEST INVALID GRADE ****" << RESET << std::endl;
 		try{
 			Form	a("Lower grade to sign", 151, 50);
 		}
@@ -96,33 +76,44 @@ int main(void)
 	{
 		try
 		{
-			std::cout << BLACK << "**** TEST BUREAUCRAT SIGNS FORM ****" << RESET << std::endl;
+			std::cout << YELLOW << "**** TEST BUREAUCRAT SIGNS FORM ****" << RESET << std::endl;
 			Form a("War declaration", 30, 40);
-			Bureaucrat	Putin("Putin", 15);
-			a.beSigned(Putin);
+			Bureaucrat	putin("Putin", 1);
+			putin.signForm(a);
 
 			Form b("Brazilian republic", 50, 70);
-			Bureaucrat	Fonseca("D.Fonseca", 45);
-			b.beSigned(Fonseca);
+			Bureaucrat	fonseca("D.Fonseca", 45);
+			fonseca.signForm(b);
 
 			Form c("Resignation letter", 150, 50);
 			Bureaucrat	hr("HR", 150);
-			c.beSigned(hr);
+			hr.signForm(c);
+			std::cout << '\n';
+
+			std::cout << YELLOW << "-----> Printing infos about Bureaucrats <-----" << RESET << std::endl;
+			std::cout << putin << std::endl;
+			std::cout << fonseca << std::endl;
+			std::cout << hr << std::endl;
+
+			std::cout << YELLOW << "-----> Printing infos about forms <-----" << RESET << std::endl;
+			std::cout << a << std::endl;
+			std::cout << b << std::endl;
+			std::cout << c << std::endl;
 		}
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';
 		}
+
 	}
 
 	std::cout << '\n';
 	{
 		try
 		{
-			std::cout << BLACK << "**** TEST INVALID SIGNS ****" << RESET << std::endl;
+			std::cout << YELLOW << "**** TEST INVALID SIGNS ****" << RESET << std::endl;
 			Form a("Sell Company", 3, 3);
 			Bureaucrat	intern("Carlitos the Intern", 150);
-			a.beSigned(intern);	
-
+			intern.signForm(a);
 		}
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';
@@ -131,10 +122,10 @@ int main(void)
 		try
 		{
 			Form b("Buy a house", 149, 149);
-			Bureaucrat	strangeGuy("Random guy", 148);
-			strangeGuy--;
-			strangeGuy--;
-			b.beSigned(strangeGuy);
+			Bureaucrat	strangeGuy("Random guy", 2);
+			strangeGuy++;
+			strangeGuy++;
+			strangeGuy.signForm(b);
 		}
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';

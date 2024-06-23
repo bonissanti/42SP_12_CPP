@@ -41,13 +41,10 @@ class Form
 
 	const std::string&	getName(void) const;
 	bool		getBoolSign(void) const;
-	void		beSigned(Bureaucrat& personToSign);
-
-	//FIXME: verificar se na 42 posso usar 'const int'
 	int			getToSign(void) const;
-
-	//FIXME: verificar se na 42 posso usar 'const int'
 	int			getExecute(void) const;
+
+	void		beSigned(Bureaucrat& personToSign);
 
 	class GradeTooHighException : public std::exception
 	{
@@ -60,5 +57,5 @@ class Form
 };
 
 std::ostream& operator<<(std::ostream& os, const Form& toPrint);
-void	debugMode(const Form *toPrint, const Bureaucrat *toPrint2, const std::string &msg);
+void	debugMode(const std::string &msg);
 #endif

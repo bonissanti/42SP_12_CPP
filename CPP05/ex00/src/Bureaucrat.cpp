@@ -43,18 +43,18 @@ Bureaucrat::Bureaucrat(const Bureaucrat& toCopy){
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& toCopy){
 	if (this != &toCopy)
 	{
-		(std::string&)this->name = toCopy.name;
+		const_cast<std::string&>(this->name) = toCopy.name;
 		this->grade = toCopy.grade;
 	}
 	return (*this);
 }
 
 char const* Bureaucrat::GradeTooHighException::what() const throw(){
-	return (BRED "Error: Grade too high. Max possible is 1" RESET);
+	return (RED "Error: Grade too high. Max possible is 1" RESET);
 }
 
 char const* Bureaucrat::GradeTooLowException::what() const throw(){
-	return (BRED "Error: Grade too low. Min possible is 150" RESET);
+	return (RED "Error: Grade too low. Min possible is 150" RESET);
 }
 
 std::string	Bureaucrat::getName(void) const
@@ -69,9 +69,10 @@ int	Bureaucrat::getGrade(void) const
 
 Bureaucrat&	Bureaucrat::operator++(int)
 {
+	int	newGrade = this->grade - 1;
 	try
 	{
-		if (this->grade <= 1)
+		if (newGrade < 1)
 			throw Bureaucrat::GradeTooHighException();
 	}
 	catch(const std::exception& e)
@@ -85,9 +86,10 @@ Bureaucrat&	Bureaucrat::operator++(int)
 
 Bureaucrat& Bureaucrat::operator--(int)
 {
+	int	newGrade = this->grade + 1;
 	try
 	{
-		if (this->grade >= 150)
+		if (newGrade > 150)
 			throw Bureaucrat::GradeTooLowException();
 	}
 	catch (const std::exception& e)
@@ -101,6 +103,6 @@ Bureaucrat& Bureaucrat::operator--(int)
 
 std::ostream&	operator<<(std::ostream& os, const Bureaucrat& toPrint)
 {
-	os << BGREEN << "Name: " << RESET << toPrint.getName() << BGREEN << ", Bureaucrat grade: " << RESET << toPrint.getGrade();
+	os << GREEN << "Name: " << RESET << toPrint.getName() << GREEN << ", Bureaucrat grade: " << RESET << toPrint.getGrade() << std::endl;
 	return (os);
 }

@@ -39,7 +39,12 @@ class	Intern
 	Intern(const Intern& toCopy);
 	Intern& operator=(const Intern& toCopy);
 	enum eForm {PresidentialPardonForm, RobotomyRequestForm, ShrubberyCreationForm};
+	
 	AForm* makeForm(const std::string& formName, const std::string& target);
+
+	AForm*	createPresidentialForm(const std::string& target);
+	AForm*	createRobotomyForm(const std::string& target);
+	AForm*	createShrubberyForm(const std::string& target);
 };
 
 #endif

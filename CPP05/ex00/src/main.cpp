@@ -24,7 +24,7 @@ int	main(void)
 	{
 		try
 		{
-			std::cout << BLACK << "*** TEST INSTANTIATE WRONG HIGH VALUE ***" << RESET << std::endl;
+			std::cout << YELLOW << "*** TEST INSTANTIATE WRONG HIGH VALUE ***" << RESET << std::endl;
 			Bureaucrat carlitos("Carlitos", 0);
 			std::cout << carlitos << std::endl;
 		}
@@ -37,7 +37,7 @@ int	main(void)
 	{
 		try
 		{
-			std::cout << BLACK << "*** TEST INSTANTIATE WRONG LOW VALUE ***" << RESET << std::endl;
+			std::cout << YELLOW << "*** TEST INSTANTIATE WRONG LOW VALUE ***" << RESET << std::endl;
 			Bureaucrat bob("Bob", 151);
 			std::cout << bob << std::endl;
 		}
@@ -50,7 +50,7 @@ int	main(void)
 	{
 		try
 		{
-			std::cout << BLACK << "*** TEST HIGH GRADE ***" << RESET << std::endl;
+			std::cout << YELLOW << "*** TEST HIGH GRADE ***" << RESET << std::endl;
 			Bureaucrat random("Random", 11);
 			std::cout << random << std::endl;
 			random++;
@@ -72,7 +72,7 @@ int	main(void)
 	{
 		try
 		{
-			std::cout << BLACK << "*** TEST LOW GRADE ***" << RESET << std::endl;
+			std::cout << YELLOW << "*** TEST LOW GRADE ***" << RESET << std::endl;
 			Bureaucrat steven("Steven", 140);
 			std::cout << steven << std::endl;
 			steven--;
@@ -94,7 +94,7 @@ int	main(void)
 	{
 		try
 		{
-			std::cout << BLACK << "*** TEST INVALID DECREMENT GRADE ***" << RESET << std::endl;
+			std::cout << YELLOW << "*** TEST INVALID DECREMENT GRADE ***" << RESET << std::endl;
 			Bureaucrat carlitos("Carlitos", 150);
 			std::cout << carlitos << std::endl;
 			carlitos--;
@@ -110,7 +110,7 @@ int	main(void)
 	{
 		try
 		{
-			std::cout << BLACK << "*** TEST INSTANTIATE WRONG LOW VALUE ***" << RESET << std::endl;
+			std::cout << YELLOW << "*** TEST INVALID INCREMENT GRADE ***" << RESET << std::endl;
 			Bureaucrat bob("Bob", 1);
 			std::cout << bob << std::endl;
 			bob++;

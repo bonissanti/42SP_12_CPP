@@ -20,57 +20,50 @@
 #include "../include/Intern.hpp"
 
 Intern::Intern(){
-	debugMode(4, "<INTERN> default constructor called");
+	debugMode("<INTERN> default constructor called");
 }
 
 Intern::~Intern(){
-	debugMode(4, "<INTERN> destructor called");
+	debugMode("<INTERN> destructor called");
 }
 
 Intern::Intern(const Intern& toCopy){
-	debugMode(4, "<INTERN> copy constructor called");
+	debugMode("<INTERN> copy constructor called");
 		*this = toCopy;
 }
 
 Intern& Intern::operator=(const Intern& toCopy){
-	debugMode(4, "<INTERN> copy assignment operator called");
+	debugMode("<INTERN> copy assignment operator called");
 	(void)toCopy;
 	return (*this);
 }
 
-static	int	getIndexForm(const std::string& formName)
+AForm*	Intern::createPresidentialForm(const std::string& target)
 {
-	std::string forms[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};
-	for (int i = 0; i < 3; i++)
-	{
-		if (formName == forms[i])
-		{
-			std::cout << GREEN << "Intern creates "<< BGREEN << forms[i] << RESET << std::endl;
-			return (i);
-		}
-	}
-	return (-1);
+		return (new Presidential(target));
+}
+
+AForm*	Intern::createRobotomyForm(const std::string& target)
+{
+		return (new Robotomy(target));
+}
+
+AForm*	Intern::createShrubberyForm(const std::string& target)
+{
+		return (new Shrubbery(target));
 }
 
 AForm*	Intern::makeForm(const std::string& formName, const std::string& target)
 {
-	int 	index;
-
-	index = getIndexForm(formName);
-	switch (index)
+	std::string forms[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};
+	AForm	*(Intern::*function[])(const std::string&) = {createPresidentialForm, createRobotomyForm, createShrubberyForm};
+	for (int i = 0; i < 3; i++)
 	{
-		case PresidentialPardonForm:
-		return (new Presidential(target));
-
-		case RobotomyRequestForm:
-		return (new Robotomy(target));
-
-		case ShrubberyCreationForm:
-		return (new Shrubbery(target));
-	
-		default:
-		std::cout << BRED << "<INTERN> Error: Form name informed doesn't exists, try a valid name" << RESET << std::endl;
-		break;
+		if (formName == forms[i])
+		{
+			std::cout << GREEN << "Intern creates "<< GREEN << forms[i] << RESET << std::endl;
+			return (this->*function[i])(target);
+		}
 	}
 	return (NULL);
 }

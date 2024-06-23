@@ -20,13 +20,13 @@
 #include "../include/Form.hpp"
 
 Form::Form() : name("Admissional doc"), sign(false), gradeToSign(5), gradeToExecute(10) {
-	debugMode(this, NULL, "<FORM> Default Constructor called");
+	debugMode("<FORM> Default Constructor called");
 }
 
 Form::Form(const std::string& name, int gradeToSign, int gradeToExecute) : name(name),
 	sign(false), gradeToSign(gradeToSign),	gradeToExecute(gradeToExecute)
 {
-	debugMode(this, NULL, "<FORM> Parametrized constructor called");
+	debugMode("<FORM> Parametrized constructor called");
 	if (gradeToSign < 1 || gradeToExecute < 1)
 		throw Form::GradeTooHighException();
 	
@@ -35,37 +35,31 @@ Form::Form(const std::string& name, int gradeToSign, int gradeToExecute) : name(
 }
 
 Form::~Form(){
-	debugMode(this, NULL, "<FORM> Destructor called");
+	debugMode("<FORM> Destructor called");
 }
 
 Form::Form(const Form& toCopy) : name(toCopy.name), sign(toCopy.sign), 
 	gradeToSign(toCopy.gradeToSign), gradeToExecute(toCopy.gradeToExecute){
-	debugMode(this, NULL, "<FORM> Copy constructor called");
+	debugMode("<FORM> Copy constructor called");
 }
 
 Form& Form::operator=(const Form& toCopy){
-	debugMode(this, NULL, "<FORM> Copy assignment operator called");
+	debugMode("<FORM> Copy assignment operator called");
 	if (this != &toCopy)
-		new (this) Form(toCopy); // Placement new
+	{
+		const_cast<std::string&>(this->name) = toCopy.name;
+		this->sign = toCopy.sign;
+		const_cast<int&>(this->gradeToSign) = toCopy.gradeToSign;
+		const_cast<int&>(this->gradeToExecute) = toCopy.gradeToExecute;
+	}
 	return (*this);
 }
 
-
 void	Form::beSigned(Bureaucrat& personToSign)
 {
-	try
-	{
-		if (personToSign.getGrade() > this->gradeToSign)
-			throw (Form::GradeTooLowException());
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << BRED << personToSign.getName() << " couldn't sign '" << this->name << "' because " 
-			<< e.what() << RESET << std::endl;
-		return ;
-	}
+	if (personToSign.getGrade() > this->gradeToSign)
+		throw (Form::GradeTooLowException());
 	this->sign = true;
-	personToSign.signForm(*this);
 }
 
 const std::string& Form::getName(void) const
@@ -91,31 +85,29 @@ int	Form::getExecute(void) const
 }
 
 char const* Form::GradeTooHighException::what() const throw(){
-	return (BRED "<FORM> Grade too high." RESET);
+	return (RED "<FORM> Grade too high." RESET);
 }
 
 char const* Form::GradeTooLowException::what() const throw(){
-	return (BRED "<FORM> Grade too low." RESET);
+	return (RED "<FORM> Grade too low." RESET);
 }
 
 std::ostream&	operator<<(std::ostream& os, const Form& toPrint)
 {
-	os << toPrint.getName();
+	os << GREEN << "Name: " << RESET << toPrint.getName() 
+		<< GREEN << " | grade to sign: " << RESET << toPrint.getToSign()
+		<< GREEN << " | grade to execute: " << RESET << toPrint.getExecute()
+		<< GREEN << " | signed? " << RESET << toPrint.getBoolSign() << std::endl;
 	return (os);
 }
 
-void	debugMode(const Form *toPrint, const Bureaucrat *toPrint2, const std::string& msg)
+void	debugMode(const std::string& msg)
 {
 	#ifndef TEST
-	(void)toPrint;
-	(void)toPrint2;
 	(void)msg;
 	#endif
 
 	#ifdef TEST
-	if (toPrint)
-		std::cout << msg << std::endl;
-	else if (toPrint2)
-		std::cout << msg << std::endl;
+	std::cout << BBLUE << msg << RESET << std::endl;
 	#endif
 }
