@@ -21,12 +21,11 @@
 # define MUTANTSTACK_HPP
 
 #include <iostream>
-#include <vector>
 #include <deque>
+#include <list>
 #include <stack>
 #include <algorithm>
-#include <cstdlib>
-#include <ctime>
+#include <iterator>
 
 #define RED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
@@ -37,7 +36,7 @@
 #define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
-template <class T, class container=std::deque<T>>
+template<typename T, class container=std::deque<T> >
 class MutantStack : public std::stack<T>
 {
 	private:
@@ -49,8 +48,13 @@ class MutantStack : public std::stack<T>
 	MutantStack& operator=(const MutantStack& toCopy);
 
 	typedef typename container::iterator iterator;
+	typedef typename container::reverse_iterator reverseIterator;
 	iterator begin();
 	iterator end();
+	reverseIterator rbegin();
+	reverseIterator rend();
+
+	void	swap(MutantStack &toCopy);
 };
 
 void	debugMode(const std::string& msg);
