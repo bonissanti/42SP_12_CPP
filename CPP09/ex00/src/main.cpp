@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/19/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/19/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,29 +17,44 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#include "../include/BitcoinExchange.hpp"
 
-#include <iostream>
-#include <vector>
-#include <list>
-#include <algorithm>
-#include <cstdlib>
-#include <ctime>
-#include <limits>
+int main(int argc, char **argv)
+{
+	(void)argv;
+	(void)argc;
+	// if (argc != 2)
+	// {
+	// 	std::cout << RED << "Error: could not open file" << RESET << std::endl;
+	// 	return (1);
+	// }
+	// lendo da planilha
+	std::string line;
+	std::string date;
+	std::string exchangeRate;
+	std::ifstream sheet("src/data.csv");
+	if (sheet.fail())
+	{
+		std::cout << "RIP" << std::endl;
+		return (1);
+	}
 
-#define RED	"\033[0;31m"
-#define BYELLOW	"\033[1;33m"
-#define YELLOW	"\033[0;33m"
-#define BBLUE	"\033[1;34m"
-#define BWHITE	"\033[1;37m"
-#define BLACK	"\033[1;30m"
-#define GREEN	"\033[0;32m"
-#define RESET	"\033[0m"
+	std::map<std::string, std::string> infos;
+	// while (sheet >> date >> exchangeRate)
+	// 	infos[date] = exchangeRate;
 
-template <typename T>
-void	easyfind(T& src, int valueToFind);
+	while (getline(sheet, line))
+	{
+		std::stringstream ss(line);
+		ss >> date >> exchangeRate; // delim is ',' to exchangeRate
+		infos[date] = exchangeRate;
+	}
 
-#include "../src/easyfind.tpp"
-
-#endif
+	std::map<std::string, std::string>::iterator it = infos.begin();
+	while (it != infos.end())
+	{
+		std::cout << "Date: " << it->first << ", Value: " << it->second << std::endl;
+		++it; 
+	}
+	return (0);
+}

@@ -17,16 +17,14 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
 
 #include <iostream>
-#include <vector>
-#include <list>
+#include <map>
 #include <algorithm>
-#include <cstdlib>
-#include <ctime>
-#include <limits>
+#include <fstream>
+#include <sstream>
 
 #define RED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
@@ -37,9 +35,7 @@
 #define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
-template <typename T>
-void	easyfind(T& src, int valueToFind);
-
-#include "../src/easyfind.tpp"
+// template <typename T>
+// void	easyfind(T& src, int valueToFind);
 
 #endif

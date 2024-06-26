@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/22/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/22/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,16 +17,15 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef MUTANTSTACK_HPP
+# define MUTANTSTACK_HPP
 
 #include <iostream>
-#include <vector>
+#include <deque>
 #include <list>
+#include <stack>
 #include <algorithm>
-#include <cstdlib>
-#include <ctime>
-#include <limits>
+#include <iterator>
 
 #define RED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
@@ -37,9 +36,29 @@
 #define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
-template <typename T>
-void	easyfind(T& src, int valueToFind);
+template<typename T, class container=std::deque<T> >
+class MutantStack : public std::stack<T>
+{
+	private:
+	
+	public:
+	MutantStack();
+	~MutantStack();
+	MutantStack(const MutantStack& toCopy);
+	MutantStack& operator=(const MutantStack& toCopy);
 
-#include "../src/easyfind.tpp"
+	typedef typename container::iterator iterator;
+	typedef typename container::reverse_iterator reverseIterator;
+	iterator begin();
+	iterator end();
+	reverseIterator rbegin();
+	reverseIterator rend();
+
+	void	swap(MutantStack &toCopy);
+};
+
+void	debugMode(const std::string& msg);
+
+#include "../src/MutantStack.tpp"
 
 #endif

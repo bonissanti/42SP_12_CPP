@@ -17,8 +17,8 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef SPAN_HPP
+# define SPAN_HPP
 
 #include <iostream>
 #include <vector>
@@ -26,7 +26,6 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
-#include <limits>
 
 #define RED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
@@ -37,9 +36,26 @@
 #define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
-template <typename T>
-void	easyfind(T& src, int valueToFind);
+template <class T>
+class Span
+{
+	private:
+	unsigned int capacity;
+	std::vector<int> myVec;
+	
+	public:
+	Span(unsigned int n);
+	~Span();
+	Span(const Span& toCopy);
+	Span& operator=(const Span& toCopy);
 
-#include "../src/easyfind.tpp"
+	void	addNumber(int num);
+	int		shortestSpan(void) const;
+	int		longestSpan(void) const;
+};
+
+void	debugMode(const std::string& msg);
+
+#include "../src/Span.tpp"
 
 #endif
