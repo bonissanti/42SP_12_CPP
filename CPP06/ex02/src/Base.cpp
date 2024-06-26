@@ -99,7 +99,7 @@ void	identity(Base &p)
 		return ;
 	}
 	catch(const std::exception& e){
-		std::cout << RED << "Invalid reference! Bro, stop to try to broken my program :(" << RESET << std::endl;
+		std::cout << RED << "Invalid reference! Bro, stop trying to break my program :(" << RESET << std::endl;
 	}	
 }
 

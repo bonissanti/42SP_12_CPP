@@ -26,12 +26,15 @@
 #include <cctype>
 #include <cfloat>
 #include <cmath>
+#include <unistd.h>
 
-#define BRED	"\033[0;31m"
+#define RED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
+#define YELLOW	"\033[0;33m"
 #define BBLUE	"\033[1;34m"
+#define BWHITE	"\033[1;37m"
 #define BLACK	"\033[1;30m"
-#define BGREEN	"\033[0;32m"
+#define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
 #define DOUBLEL 0
@@ -50,5 +53,7 @@ class	ScalarConverter
 
 	static void converter(std::string toConvert);
 };
+
+void	debugMode(const std::string& msg);
 
 #endif

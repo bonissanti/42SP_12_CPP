@@ -48,9 +48,10 @@ Data*	Serializer::deserialize(uintptr_t raw)
 std::ostream& operator<<(std::ostream& os, const Data& toPrint)
 {
 	os << BYELLOW << toPrint.text << std::endl;
-	os << YELLOW << toPrint.text << " int value: " << RESET << toPrint.number << std::endl;
-	os << YELLOW << toPrint.text << " bool value: " << RESET << toPrint.isOkay << std::endl;
-	os.precision(1);
-	os << YELLOW << toPrint.text << " float value: " << RESET << std::fixed << toPrint.value << std::endl;
+	os << YELLOW << toPrint.text  << GREEN << " int value: " << RESET << toPrint.number << std::endl;
+	os << YELLOW << toPrint.text  << GREEN << " bool value: " << RESET << toPrint.isOkay << std::endl;
+	os << YELLOW << toPrint.text  << GREEN << " text value: " << RESET << toPrint.text << std::endl;
+	os.precision(1); 
+	os << YELLOW << toPrint.text  << GREEN << " float value: " << RESET << std::fixed << toPrint.value << std::endl;
 	return (os);
 }
