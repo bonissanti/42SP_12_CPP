@@ -40,21 +40,11 @@ int main(int argc, char **argv)
 	}
 
 	std::map<std::string, std::string> infos;
-	// while (sheet >> date >> exchangeRate)
-	// 	infos[date] = exchangeRate;
-
 	while (getline(sheet, line))
 	{
-		std::stringstream ss(line);
-		ss >> date >> exchangeRate; // delim is ',' to exchangeRate
-		infos[date] = exchangeRate;
-	}
-
-	std::map<std::string, std::string>::iterator it = infos.begin();
-	while (it != infos.end())
-	{
-		std::cout << "Date: " << it->first << ", Value: " << it->second << std::endl;
-		++it; 
+		std::istringstream	ss(line);
+		if (getline(ss, date, ',') && getline(ss, exchangeRate))
+			infos[date] = exchangeRate;
 	}
 	return (0);
 }

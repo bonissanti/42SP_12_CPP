@@ -70,9 +70,8 @@ void	identity(Base &p)
 {
 	try
 	{
-		A refA = dynamic_cast<A&>(p);
-		std::cout << GREEN << "Base reference to object from Class A" << RESET << std::endl;
-		(void)refA;
+		(void)dynamic_cast<A&>(p);
+			std::cout << GREEN << "Base reference to object from Class A" << RESET << std::endl;
 		return ;	
 	}
 	catch(const std::exception& e){
@@ -81,9 +80,8 @@ void	identity(Base &p)
 
 	try
 	{
-		B refB = dynamic_cast<B&>(p);
+		(void)dynamic_cast<B&>(p);
 		std::cout << GREEN << "Base reference to object from Class B" << RESET << std::endl;
-		(void)refB;
 		return ;
 
 	}
@@ -93,9 +91,8 @@ void	identity(Base &p)
 
 	try
 	{
-		C refC = dynamic_cast<C&>(p);
+		(void)dynamic_cast<C&>(p);
 		std::cout << GREEN << "Base reference to object from Class C" << RESET << std::endl;
-		(void)refC;
 		return ;
 	}
 	catch(const std::exception& e){

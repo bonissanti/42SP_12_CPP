@@ -30,6 +30,7 @@ int	main(void)
 		identity(obj);
 		identity(*obj);
 		std::cout << '\n';
+		delete obj;
 		sleep(1);
 	}
 	std::cout << '\n';
@@ -39,13 +40,16 @@ int	main(void)
 		Base &ref = *obj;
 		identity(obj);
 		identity(ref);
+
+		delete obj;
 	}
 	std::cout << '\n';
 	{
 		std::cout << YELLOW << "Invalid test" << RESET << std::endl;
-		obj = NULL;
+		obj = new Base();
 		identity(obj);
-		identity(*obj);
+		identity(*obj); // pointer NULL to reference
+		delete obj;
 	}
 	return (0);
 }

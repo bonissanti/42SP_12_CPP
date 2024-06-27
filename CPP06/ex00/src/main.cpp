@@ -56,8 +56,8 @@ static	void	myTests(void)
 		ScalarConverter::converter("-42");
 		endl(std::cout);
 
-		std::cout << BWHITE << "Testing: -1.2345675f" << RESET << std::endl;
-		ScalarConverter::converter("-1.23457f");
+		std::cout << BWHITE << "Testing: -1.234567f" << RESET << std::endl;
+		ScalarConverter::converter("-1.234567f");
 		endl(std::cout);
 
 		std::cout << BWHITE << "Testing: -1.2345675" << RESET << std::endl;
