@@ -19,132 +19,60 @@
 
 #include "../include/BitcoinExchange.hpp"
 
-bool	thisIsDigit(std::string &str)
-{
-	for (size_t i = 0; i < str.length(); i++)
-	{
-		if (!isdigit(str[i]) && str[i] != '|' && str[i] != '-' && str[i] != ' ' && str[i] != '.')
-		{
-			std::cout << "The line: " << str << " is not a digit" << std::endl;
-			return (false);
-		}
-	}
-	return (true);
-}
+// int	main(void)
+// {
+// 	std::map<std::string, float> dateMap;
 
-bool	validExchangeRate(float exchangeRate)
-{
-	if (exchangeRate < 0.1 || exchangeRate > 1000)
-		return (false);
-	return (true);
-}
+// 	dateMap["2011-01-01"] = 10.0;
+// 	dateMap["2011-01-12"] = 20.0;
+// 	dateMap["2011-01-23"] = 30.0;
+// 	dateMap["2011-01-24"] = 40.0;
 
-bool	validDate(std::string &str)
-{
-		std::stringstream	ss(str);
-		char delimiter;
-		int	year;
-		int	month;
-		int	day;
-		float exchangeRate;
-		
-		ss >> year >> delimiter >> month >> delimiter >> day >> delimiter >> exchangeRate;
-		if (year < 2009 || year > 2024)
-		{
-			std::cout << "Error: Year is not a valid number" << std::endl;
-			return (false);
-		}
-		else if (month < 1 || month > 12)
-		{
-			std::cout << "Error: Month is not a valid number" << std::endl;
-			return (false);
-		}
-		else if (day < 1 || day > 31)
-		{
-			std::cout << "Error: Day is not a valid number" << std::endl;
-			return (false);
-		}
-		else if (!validExchangeRate(exchangeRate))
-		{
-			std::cout << "Error: ExchangeRate is not a valid number" << std::endl;
-			return (false);
-		}
-		// std::cout << year << std::endl;
-		// std::cout << month << std::endl;
-		// std::cout << day << std::endl;
-		// std::cout << exchangeRate << std::endl;
-		return (true);
-}
+// 	std::string targetDate = "2011-01-03";
+// 	std::map<std::string, float>::iterator it;
+// 	std::map<std::string, float>::iterator prev;
 
+// 	for (it = dateMap.begin(); it != dateMap.end(); ++it)
+// 		if (it->first > targetDate)
+// 			break;
+
+// 	if (it != dateMap.end())
+// 	{
+// 		prev = it;
+// 		--prev;
+// 		std::cout << "Closest date (less than or equal to " << targetDate << ") " << prev->first << std::endl;
+// 		std::cout << "Value associated with this date " << prev->second << std::endl;
+// 	}
+// 	else
+// 	{
+// 		prev = it;
+// 		--prev;
+// 		std::cout << "Closest date (less than or equal to " << targetDate << ") " << prev->first << std::endl;
+// 		std::cout << "Value associated with this date " << prev->second << std::endl;
+// 	}
+// }
 
 int main(int argc, char **argv)
 {
-	(void)argc;
-	// if (argc != 2)
-	// {
-	// 	std::cout << RED << "Error: could not open file" << RESET << std::endl;
-	// 	return (1);
-	// }
-	// lendo da planilha
+	Bitcoin	database;
+	std::string arg;
 
-	// // function of open .csv and storage data
-	// std::string line;
-	// std::string date;
-	// std::string exchangeRate;
-	// std::ifstream sheet("src/data.csv");
-	// if (sheet.fail())
-	// {
-	// 	std::cout << "RIP" << std::endl;
-	// 	return (1);
-	// }
-
-	// std::map<std::string, std::string> infos;
-	// while (getline(sheet, line))
-	// {
-	// 	std::istringstream	ss(line);
-	// 	if (getline(ss, date, ',') && getline(ss, exchangeRate))
-	// 	{
-	// 		std::cout << date << " | " << exchangeRate << std::endl; 
-	// 		infos[date] = exchangeRate;
-	// 	}
-	// }
-
-	// function to open input.txt
-	std::string	line;
-	std::string	value;
-
-	std::ifstream file(argv[1]);
-	if (file.fail())
+	if (argc != 2)
 	{
-		std::cout << "RIP2" << std::endl;
+		std::cout << RED << "Error: could not open file" << RESET << std::endl;
+		std::cout << RED << "Usage: ./btc ./src/input.txt" << RESET << std::endl;
 		return (1);
-	} 
-	// parsing input.txt
-	std::map<std::string, std::string> infos;
-	getline(file, line);
-	while (getline(file, line))
-	{
-		size_t value =	line.find('|');	
-		if (value == std::string::npos)
-		{
-			std::cout << "Error!" << std::endl;
-			return (1);
-		}
-		if (!validDate(line) || !thisIsDigit(line))
-			return (1);
-		std::string date = line.substr(0, value);
-		std::string exchange = line.substr(value + 2, line.length());
-
-		infos[date] = exchange;
-		std::cout << infos[date] << std::endl;
-		// std::cout << exchange << std::endl;
 	}
-
-	std::map<std::string, std::string>::iterator it = infos.begin();
-	while (it != infos.end())
+	arg = argv[1];
+	try
 	{
-		std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
-		++it;
+		database.createDataBase();
+		database.openInputFile(arg);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		return (1);
 	}
 	return (0);
 }

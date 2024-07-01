@@ -25,6 +25,13 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <cmath>
+#include <stdexcept>
+#include <exception>
+#include <set>
+
+#define DATABASE ','
+#define INPUT	'|'
 
 #define RED	"\033[0;31m"
 #define BYELLOW	"\033[1;33m"
@@ -35,13 +42,42 @@
 #define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
+
 class Bitcoin
 {
 	private:
-	std::map<std::string, std::string> infos;
 
 	public:
+	Bitcoin();
+	~Bitcoin();
+	Bitcoin(const Bitcoin& toCopy);
+	Bitcoin& operator=(const Bitcoin& toCopy);
 
+	std::map<std::string, const float> db;
+	void	createDataBase(void);
+	void	openInputFile(std::string &arg);
+	void	multiplyExchange(const std::string date, const float exchange);
+	bool	validDate(char const delim, std::string &str);
+
+	class	BitcoinException : public std::exception
+	{
+		private:
+		std::string message;
+
+		public:
+		explicit BitcoinException(const std::string &msg);
+		virtual ~BitcoinException() throw();
+		virtual const char *what() const throw(){
+			return (this->message.c_str());
+		}
+	};
+	class	DataValidationException : public BitcoinException
+	{
+		public:
+		DataValidationException(const std::string &msg): BitcoinException(msg){};
+	};
 };
+
+void	debugMode(const std::string& msg);
 
 #endif

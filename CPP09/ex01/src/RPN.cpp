@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/10/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/10/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/30/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/30/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,45 +17,108 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef SPAN_HPP
-# define SPAN_HPP
+#include "../include/RPN.hpp"
 
-#include <iostream>
-#include <vector>
-#include <list>
-#include <algorithm>
-#include <cstdlib>
-#include <ctime>
+RPN::RPN(std::string& arg){
+	debugMode("<RPN> Default Constructor called");
 
-#define RED	"\033[0;31m"
-#define BYELLOW	"\033[1;33m"
-#define YELLOW	"\033[0;33m"
-#define BBLUE	"\033[1;34m"
-#define BWHITE	"\033[1;37m"
-#define BLACK	"\033[1;30m"
-#define GREEN	"\033[0;32m"
-#define RESET	"\033[0m"
+	std::string::iterator it;
+	for (it = arg.begin(); it != arg.end(); ++it)
+	{
+		if (validation(*it))
+			throw std::invalid_argument("Error: argument is not a digit and arithmetic operator");
+		//TODO: adicionar se falta numero e/ou operador
+	}
+	this->arg = arg;
+}
 
-template <class T>
-class Span
+RPN::~RPN(){
+	debugMode("<RPN> Destructor called");
+}
+
+RPN::RPN(const RPN& toCopy){
+	debugMode("<RPN> Copy Constructor called");
+		*this = toCopy;
+}
+
+RPN& RPN::operator=(const RPN& toCopy){
+	debugMode("<RPN> Copy Assignment Operator called");
+	if (this != &toCopy)
+		this->stack = toCopy.stack;
+	return (*this);
+}
+
+bool	RPN::validation(char c)
 {
-	private:
-	unsigned int capacity;
-	std::vector<int> myVec;
-	
-	public:
-	Span(unsigned int n);
-	~Span();
-	Span(const Span& toCopy);
-	Span& operator=(const Span& toCopy);
+	return !((c >= '0' && c <= '9') || c == '+' || c == '-' || c == '/' || c == '*' || c == ' ');
+}
 
-	void	addNumber(int num);
-	int		shortestSpan(void) const;
-	int		longestSpan(void) const;
-};
+bool	isOperator(char op)
+{
+	return (op == '+' || op == '-' || op == '/' || op == '*');
+}
 
-void	debugMode(const std::string& msg);
+int	calculateRPN(int a, int b, char op)
+{
+	switch (op)
+	{
+		case '+':
+		return (a + b);
+		break;
 
-#include "../src/Span.tpp"
+		case '-':
+		return (a - b);
+		break;
 
-#endif
+		case '*':
+		return (a * b);
+		break;
+
+		case '/':
+		return (a / b);
+		break;
+
+		default:
+		return (0);
+		break;
+	}
+}
+
+int	RPN::postfixAnalyze(std::string& arg)
+{
+	int a;
+	int b;
+	int	result;
+	std::string::iterator it;
+
+	for (it = arg.begin(); it != arg.end(); ++it)
+	{
+		if (isdigit(*it))
+		{
+			std::cout << "adding values to stack" << std::endl;
+			this->stack.push(*it - '0');
+		}
+
+		if (isOperator(*it))
+		{
+			b = this->stack.top();
+			this->stack.pop();
+			a = this->stack.top();
+			this->stack.pop();
+			result = calculateRPN(a, b, *it);
+			this->stack.push(result);
+		}
+	}
+	return (result);
+}
+
+void	debugMode(const std::string &msg)
+{
+	#ifndef TEST
+	(void)msg;
+	#endif
+
+	#ifdef TEST
+	std::cout << BBLUE << msg << std::endl;
+	#endif
+}
