@@ -36,14 +36,27 @@ int	main(void)
 	std::cout << '\n';
 	{
 		std::cout << BWHITE << "*** STRING TEST ***" << RESET << std::endl;
-		std::string test[] = {"a", "b", "c", "d"};
+		std::string test[] = {"Hello", "World", "bruh", "ramdon"};
 		size_t length = sizeof(test) / sizeof(test[0]);
 
 		::iter(test, length, printing);
-		// std::cout << '\n'; 
-		// ::iter(test, length, increment); not work
+		std::cout << '\n'; 
+		// ::iter(test, length, increment); //not work
 		// std::cout << '\n';
-		// ::iter(test, length, decrement); not work
+		// ::iter(test, length, decrement); //not work
+	}
+
+	std::cout << '\n';
+	{
+		std::cout << BWHITE << "*** CHAR TEST ***" << RESET << std::endl;
+		char test[] = {'a', 'b', 'c', 'd'};
+		size_t length = sizeof(test) / sizeof(test[0]);
+
+		::iter(test, length, printing);
+		std::cout << '\n'; 
+		::iter(test, length, increment);
+		std::cout << '\n';
+		::iter(test, length, decrement);
 	}
 
 	std::cout << '\n';

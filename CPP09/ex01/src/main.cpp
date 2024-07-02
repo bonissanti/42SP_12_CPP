@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		std::cout << "Error: Invalid number of arguments" << std::endl;
+		std::cout << RED << "Error: Invalid number of arguments" << RESET << std::endl;
 		return (1);
 	}
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		arg = argv[1];
 		RPN reversePolish(arg);
 		result = reversePolish.postfixAnalyze(arg);
-		std::cout << result << std::endl;
+		std::cout << GREEN << result << RESET << std::endl;
 	}
 	catch(const std::exception& e)
 	{

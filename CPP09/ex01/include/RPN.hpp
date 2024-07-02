@@ -39,6 +39,8 @@
 class RPN
 {
 	private:
+	bool		hasNum;
+	bool		hasOp;
 	std::string arg;
 	
 	public:

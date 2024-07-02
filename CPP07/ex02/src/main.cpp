@@ -19,24 +19,23 @@
 
 #include "../include/Array.hpp"
 
-int	main(void)
+static	void	constructorTests()
 {
 	{
 		std::cout << BWHITE << "*** DEEP COPY CONSTRUCTOR TEST ***" << RESET << std::endl;
 		Array<int>	value(2);
 
-		value[0] = 20;
+		value[0] = 20; // original values
 		value[1] = 42;
 
 		Array<int>	copy(value);
-		value[0] = 12;
+		value[0] = 12; // changing value
 		try
 		{
 			std::cout << YELLOW << "copy[0]: " << GREEN << copy[0] << RESET << std::endl;
 			std::cout << YELLOW << "copy[1]: " << GREEN << copy[1] << RESET << std::endl;
 			std::cout << YELLOW << "value[0]: " << GREEN << value[0] << RESET << " // new value after deep copy" << std::endl;
 			std::cout << YELLOW << "copy[0]: " << GREEN << copy[0] << RESET " // don't change"<< std::endl;
-
 		}
 		catch(const std::exception& e)
 		{
@@ -49,12 +48,12 @@ int	main(void)
 		std::cout << BWHITE << "*** DEEP COPY ASSIGNMENT OPERATOR TEST ***" << RESET << std::endl;
 		Array<int>	value(2);
 
-		value[0] = 20;
+		value[0] = 20; // original values
 		value[1] = 42;
 
 		Array<int>	copy(2);
 		copy = value;
-		value[0] = 102;
+		value[0] = 102; // changing value
 		try
 		{
 			std::cout << YELLOW << "copy[0]: " << GREEN << copy[0] << RESET << std::endl;
@@ -68,7 +67,17 @@ int	main(void)
 		}
 	}
 
-	std::cout << '\n' << std::endl;
+	std::cout << '\n';
+	{
+		std::cout << BWHITE << "*** EMPTY CONSTRUCTOR TEST ***" << RESET << std::endl;
+		Array<int> empty;
+
+		std::cout << YELLOW "Size of array is: " << GREEN << empty.size() << RESET << std::endl;
+	}
+}
+
+static void	intTests(void)
+{
 	{
 		std::cout << BWHITE << "*** INT TEST #1***" << RESET << std::endl;
 		Array<int>	value(2);
@@ -78,7 +87,7 @@ int	main(void)
 		try
 		{
 			std::cout << YELLOW << "value[1]: " << GREEN << value[1] << RESET << std::endl;
-			std::cout << YELLOW << "value[8]: " << GREEN << value[8] << RESET << std::endl;
+			std::cout << YELLOW << "value[8]: " << GREEN << value[8] << RESET << std::endl; // accessing position invalid
 		}
 		catch(const std::exception& e)
 		{
@@ -105,7 +114,7 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 
-		std::cout << BWHITE << "\n-----> Invalid test <-----" << std::endl;
+		std::cout << YELLOW << "\n-----> Invalid test - accessing invalid position <-----" << std::endl;
 		try
 		{
 			for (int i = 10; i < 20; i++)
@@ -116,20 +125,23 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 	}
-		
+}
+
+static	void	charStringTests(void)
+{
 	std::cout << '\n';
 	{
-		std::cout << BWHITE << "*** CONST CHAR* TEST ***" << RESET << std::endl;
-		Array<const char *>	value(2);
+		std::cout << BWHITE << "*** CHAR TEST ***" << RESET << std::endl;
+		Array<char>	value(2);
 
-		value[0] = "bruh";
-		value[1] = "kachow";
+		value[0] = 'a';
+		value[1] = 'b';
 
 		try
 		{
 			std::cout << YELLOW << "value[0]: " << GREEN << value[0] << RESET << std::endl;
 			std::cout << YELLOW << "value[1]: " << GREEN << value[1] << RESET << std::endl;
-			std::cout << YELLOW << "value[8]: " << GREEN << value[8] << RESET << std::endl;
+			std::cout << YELLOW << "value[8]: " << GREEN << value[8] << RESET << std::endl; // invalid position
 		}
 		catch(const std::exception& e)
 		{
@@ -156,7 +168,10 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 	}
+}
 
+static void floatTest(void)
+{
 	std::cout << '\n';
 	{
 		std::cout << BWHITE << "*** FLOAT TEST #2***" << RESET << std::endl;
@@ -177,7 +192,7 @@ int	main(void)
 			std::cerr << e.what() << '\n';
 		}
 
-		std::cout << BWHITE << "\n-----> Invalid test <-----" << std::endl;
+		std::cout << YELLOW << "\n-----> Invalid test - accessing invalid position <-----" << std::endl;
 		try
 		{
 			for (int i = 10; i < 20; i++)
@@ -187,5 +202,26 @@ int	main(void)
 		{
 			std::cerr << e.what() << '\n';
 		}
-	}return (0);
+	}
+}
+
+static	void	constTypeTest(void)
+{
+	std::cout << BWHITE << "*** CONST INT #2***" << RESET << std::endl;
+	Array<const int> value(10);
+	std::cout << GREEN << value << RESET << std::endl;
+}
+
+int	main(void)
+{
+	constructorTests();
+	std::cout << '\n';
+	intTests();
+	std::cout << '\n';
+	charStringTests();
+	std::cout << '\n';
+	floatTest();
+	std::cout << '\n';
+	constTypeTest();
+	return (0);
 }

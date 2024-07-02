@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/22/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/22/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 07/01/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 07/01/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,48 +17,40 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#ifndef MUTANTSTACK_HPP
-# define MUTANTSTACK_HPP
+#include "../include/PmergeMe.hpp"
 
-#include <iostream>
-#include <deque>
-#include <list>
-#include <stack>
-#include <algorithm>
-#include <iterator>
+PmergeMe::PmergeMe(int argc, char **argv){
+	debugMode("<PmergeMe> Default Constructor called");
+	std::vector<std::string> containerArgs(argv, argv + argc);
 
-#define RED	"\033[0;31m"
-#define BYELLOW	"\033[1;33m"
-#define YELLOW	"\033[0;33m"
-#define BBLUE	"\033[1;34m"
-#define BWHITE	"\033[1;37m"
-#define BLACK	"\033[1;30m"
-#define GREEN	"\033[0;32m"
-#define RESET	"\033[0m"
+	std::vector<std::string>::iterator it;
+	for (it = containerArgs.begin(); it != containerArgs.end(); ++it)
+		std::cout << *it << std::endl;
+}
 
-template<typename T, class container=std::deque<T> >
-class MutantStack : public std::stack<T>
+PmergeMe::~PmergeMe(){
+	debugMode("<PmergeMe> Destructor called");
+}
+
+PmergeMe::PmergeMe(const PmergeMe& toCopy){
+	debugMode("<PmergeMe> Copy Constructor called");
+		*this = toCopy;
+}
+
+PmergeMe& PmergeMe::operator=(const PmergeMe& toCopy){
+	debugMode("<PmergeMe> Copy Assignment Operator called");
+	(void)toCopy;
+	return (*this);
+}
+
+void	debugMode(const std::string& msg)
 {
-	private:
-	
-	public:
-	MutantStack();
-	~MutantStack();
-	MutantStack(const MutantStack& toCopy);
-	MutantStack& operator=(const MutantStack& toCopy);
+	#ifndef TEST
+	(void)msg;
+	#endif
 
-	typedef typename container::iterator iterator;
-	typedef typename container::reverse_iterator reverseIterator;
-	iterator begin();
-	iterator end();
-	reverseIterator rbegin();
-	reverseIterator rend();
+	#ifdef TEST
+	std::cout << BBLUE << msg << RESET << std::endl;
+	#endif
+}
 
-	void	swap(MutantStack &toCopy);
-};
-
-void	debugMode(const std::string& msg);
-
-#include "../src/MutantStack.tpp"
-
-#endif

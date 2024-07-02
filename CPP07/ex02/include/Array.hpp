@@ -50,8 +50,10 @@ class Array
 
 	unsigned int size(void) const ;
 	T&	operator[](unsigned int);
+	const T&	operator[](unsigned int) const;
 };
 
+std::ostream& operator<<(std::ostream &os, const Array<const int>& values);
 void	debugMode(const std::string& msg);
 
 #include "../src/Array.tpp"

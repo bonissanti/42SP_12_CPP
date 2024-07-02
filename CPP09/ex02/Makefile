@@ -12,14 +12,14 @@ RESET   = \033[0m
 
 ################################# Project ###################################
 
-NAME    	= ex02
+NAME    	= PmergeMe
 NAME_TEST	= test-ex02
 HEADER  	= ./include
 
 ################################# Sources ###################################
 
 TEST_DIR	= ./src/tests
-FILES   	= main.cpp
+FILES   	= main.cpp PmergeMe.cpp
 # TEST_SRCS	= $(shell find $(TEST_DIR) -name '*.cpp')
 SRC = $(addprefix ./src/, $(FILES))
 

@@ -3,8 +3,8 @@
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣀⠀⠀⠀⠀⠀⠀⠀⠀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣦          ⠀                                                   */
-/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/19/2024                   */
-/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/19/2024                   */
+/* ⠀⠀⠀⠀⠀⠀⣴⣿⢿⣷⠒⠲⣾⣾⣿⣿⠂         Created by: brunrodr - 06/22/2024                   */
+/* ⠀⠀⠀⠀⣴⣿⠟⠁⠀⢿⣿⠁⣿⣿⣿⠻⣿⣄⠀⠀⠀⠀   Updated by: brunrodr - 06/22/2024                   */
 /* ⠀⠀⣠⡾⠟⠁⠀⠀⠀⢸⣿⣸⣿⣿⣿⣆⠙⢿⣷⡀⠀⠀                                                       */
 /* ⣰⡿⠋⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⠀⠀⠉⠻⣿⡀                                                       */
 /* ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣆ ⠀       Email: brunrodr@student.42sp.org.br                 */
@@ -17,67 +17,40 @@
 /*  ⠀⠠⢾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣷⡤  ╚══════╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝ ╚═════╝  ╚═════╝   */
 /*************************************************************************************/
 
-#include "../include/MutantStack.hpp"
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
 
-template <class T, class container>
-MutantStack<T, container>::MutantStack(){
-	debugMode("<MUTANTSTACK> Default Constructor called");
-}
+#include <iostream>
+#include <deque>
+#include <vector>
+#include <algorithm>
+#include <iterator>
 
-template <class T, class container>
-MutantStack<T, container>::~MutantStack(){
-	debugMode("<MUTANTSTACK> Destructor called");
-}
+#define RED	"\033[0;31m"
+#define BYELLOW	"\033[1;33m"
+#define YELLOW	"\033[0;33m"
+#define BBLUE	"\033[1;34m"
+#define BWHITE	"\033[1;37m"
+#define BLACK	"\033[1;30m"
+#define GREEN	"\033[0;32m"
+#define RESET	"\033[0m"
 
-template <class T, class container>
-MutantStack<T, container>::MutantStack(const MutantStack& toCopy) : std::stack<T, container>(toCopy){
-	debugMode("<MUTANTSTACK> Copy Constructor called");
-}
+// template <typename T>
 
-template <class T, class container>
-MutantStack<T, container>& MutantStack<T, container>::operator=(const MutantStack& toCopy){
-	debugMode("<MUTANTSTACK> Copy Assignment Operator called");
-	this->swap(toCopy);	
-	return (*this);
-}
-
-template <class T, class container>
-void	MutantStack<T, container>::swap(MutantStack& toCopy)
+class PmergeMe
 {
-	std::swap(this->c, toCopy.c);
-}
+	private:
+	int argc;
+	char **argv;
 
-template <class T, class container>
-typename MutantStack<T, container>::iterator MutantStack<T, container>::begin()
-{
-	return (this->c.begin());
-}
+	public:
+	PmergeMe(int argc, char **argv);
+	~PmergeMe();
+	PmergeMe(const PmergeMe& toCopy);
+	PmergeMe& operator=(const PmergeMe& toCopy);
+	std::vector<std::string> pVector;
+};
 
-template <class T, class container>
-typename MutantStack<T, container>::iterator MutantStack<T, container>::end()
-{
-	return (this->c.end());
-}
+void	debugMode(const std::string& msg);
 
-template <class T, class container>
-typename MutantStack<T, container>::reverseIterator MutantStack<T, container>::rbegin()
-{
-	return (this->c.rbegin());
-}
-
-template <class T, class container>
-typename MutantStack<T, container>::reverseIterator MutantStack<T, container>::rend()
-{
-	return (this->c.rend());
-}
-
-void	debugMode(const std::string& msg)
-{
-	#ifndef TEST
-	(void)msg;
-	#endif
-
-	#ifdef TEST
-	std::cout << BBLUE << msg << RESET << std::endl;
-	#endif
-}
+#endif

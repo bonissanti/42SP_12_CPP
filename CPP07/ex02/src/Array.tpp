@@ -23,7 +23,7 @@
 #include "../include/Array.hpp"
 
 template <class T>
-Array<T>::Array()
+Array<T>::Array() : array(NULL)
 {
 	debugMode("<ARRAY> Default Constructor called");
 	this->array = new T[0];
@@ -31,10 +31,10 @@ Array<T>::Array()
 }
 
 template <class T>
-Array<T>::Array(unsigned int n) : n(n)
+Array<T>::Array(unsigned int n) : n(n), array(NULL)
 {
 	debugMode("<ARRAY> Parametrized constructor called");
-	this->array = new T[n];
+	this->array = new T[n]();
 }
 
 template <class T>
@@ -77,9 +77,26 @@ unsigned int	Array<T>::size(void) const
 template <class T>
 T&	Array<T>::operator[](unsigned int index)
 {
+	debugMode("<ARRAY> operator[] - read/write called");
 	if (index > this->size() - 1)
 		throw std::out_of_range(RED "Index out of bounds" RESET);
 	return (this->array[index]);
+}
+
+template <class T>
+const T& Array<T>::operator[](unsigned int index) const
+{
+	debugMode("<ARRAY> operator[] - read called");
+	if (index > this->size() - 1)
+		throw std::out_of_range(RED "Index out of bounds" RESET);
+	return (this->array[index]);
+}
+
+std::ostream& operator<<(std::ostream &os, const Array<const int>& values)
+{
+	for (size_t i = 0; i < values.size(); i++)
+		os << values[i] << " ";
+	return (os);
 }
 
 void	debugMode(const std::string& msg)

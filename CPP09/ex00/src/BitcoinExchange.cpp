@@ -44,7 +44,7 @@ Bitcoin& Bitcoin::operator=(const Bitcoin& toCopy){
 }
 
 // TODO: ajustar isso
-Bitcoin::BitcoinException(const std::string &msg) : message(msg){}
+// Bitcoin::BitcoinException(const std::string &msg) : message(msg){}
 
 Bitcoin::BitcoinException::~BitcoinException() throw(){}
 
@@ -92,6 +92,7 @@ void	Bitcoin::createDataBase(void)
 			continue;
 		}
 	}
+	sheet.close();
 }
 
 void	Bitcoin::openInputFile(std::string &arg)
@@ -128,6 +129,7 @@ void	Bitcoin::openInputFile(std::string &arg)
 			continue ;
 		}
 	}
+	file.close();
 }
 
 //########################## UTILS FUNCTIONS #########################################

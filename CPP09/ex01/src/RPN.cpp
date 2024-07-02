@@ -19,16 +19,17 @@
 
 #include "../include/RPN.hpp"
 
-RPN::RPN(std::string& arg){
+RPN::RPN(std::string& arg) : hasNum(false), hasOp(false){
 	debugMode("<RPN> Default Constructor called");
 
 	std::string::iterator it;
 	for (it = arg.begin(); it != arg.end(); ++it)
 	{
-		if (validation(*it))
-			throw std::invalid_argument("Error: argument is not a digit and arithmetic operator");
-		//TODO: adicionar se falta numero e/ou operador
+		if (!validation(*it))
+			throw std::invalid_argument(RED "Error: argument is not a digit and arithmetic operator" RESET);
 	}
+	if (!hasNum || !hasOp)
+		throw std::invalid_argument(RED "Error: invalid argument, please provide at least two numbers and one arithmetic operator" RESET);
 	this->arg = arg;
 }
 
@@ -44,13 +45,29 @@ RPN::RPN(const RPN& toCopy){
 RPN& RPN::operator=(const RPN& toCopy){
 	debugMode("<RPN> Copy Assignment Operator called");
 	if (this != &toCopy)
+	{
 		this->stack = toCopy.stack;
+		this->hasNum = toCopy.hasNum;
+		this->hasOp = toCopy.hasOp;
+	}
 	return (*this);
 }
 
 bool	RPN::validation(char c)
 {
-	return !((c >= '0' && c <= '9') || c == '+' || c == '-' || c == '/' || c == '*' || c == ' ');
+	if (c >= '0' && c <= '9')
+	{
+		this->hasNum = true;
+		return (true);
+	}
+	else if (c == '+' || c == '-' || c == '/' || c == '*')
+	{
+		this->hasOp = true;
+		return (true);
+	}
+	else if (c == ' ')
+		return (true);
+	return (false);
 }
 
 bool	isOperator(char op)
@@ -94,13 +111,11 @@ int	RPN::postfixAnalyze(std::string& arg)
 	for (it = arg.begin(); it != arg.end(); ++it)
 	{
 		if (isdigit(*it))
-		{
-			std::cout << "adding values to stack" << std::endl;
 			this->stack.push(*it - '0');
-		}
-
-		if (isOperator(*it))
+		else if (isOperator(*it))
 		{
+			if (this->stack.size() < 2)
+				throw std::out_of_range(RED "Error: impossible operation" RESET);
 			b = this->stack.top();
 			this->stack.pop();
 			a = this->stack.top();
