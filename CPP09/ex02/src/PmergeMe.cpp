@@ -21,26 +21,50 @@
 
 PmergeMe::PmergeMe(int argc, char **argv){
 	debugMode("<PmergeMe> Default Constructor called");
-	std::vector<std::string> containerArgs(argv, argv + argc);
-
-	std::vector<std::string>::iterator it;
-	for (it = containerArgs.begin(); it != containerArgs.end(); ++it)
-		std::cout << *it << std::endl;
+	arguments.assign(argv, argv + argc);
 }
 
 PmergeMe::~PmergeMe(){
 	debugMode("<PmergeMe> Destructor called");
 }
 
+//FIXME: ajustar
 PmergeMe::PmergeMe(const PmergeMe& toCopy){
 	debugMode("<PmergeMe> Copy Constructor called");
 		*this = toCopy;
 }
 
+//FIXME: ajustar
 PmergeMe& PmergeMe::operator=(const PmergeMe& toCopy){
 	debugMode("<PmergeMe> Copy Assignment Operator called");
 	(void)toCopy;
 	return (*this);
+}
+
+void	PmergeMe::printContainer(void)
+{
+	std::vector<std::string>::iterator it;
+	for (it = this->arguments.begin(); it != this->arguments.end(); ++it)
+		std::cout << *it << std::endl;
+}
+
+void	PmergeMe::splitContainer(void)
+{	
+	size_t const getSize = this->arguments.size();
+	if (this->arguments.size() % 2 != 0)
+		std::cout << "é impar porque getSize is: " << getSize << std::endl;
+	size_t const halfSize = this->arguments.size() / 2;
+	std::vector<std::string> splitLower(this->arguments.begin(), this->arguments.begin() + halfSize);
+	std::vector<std::string> splitHigher(this->arguments.begin() + halfSize, this->arguments.end());
+
+	std::cout << "SplitLower test" << std::endl;
+	std::vector <std::string>::iterator it;
+	for (it = splitLower.begin(); it != splitLower.end(); ++it)
+		std::cout << *it << std::endl;
+
+	std::cout << "SplitLHigher test" << std::endl;
+	for (it = splitHigher.begin(); it != splitHigher.end(); ++it)
+		std::cout << *it << std::endl;
 }
 
 void	debugMode(const std::string& msg)

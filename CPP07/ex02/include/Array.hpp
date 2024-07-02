@@ -51,6 +51,8 @@ class Array
 	unsigned int size(void) const ;
 	T&	operator[](unsigned int);
 	const T&	operator[](unsigned int) const;
+
+	void	swap(Array& toCopy);
 };
 
 std::ostream& operator<<(std::ostream &os, const Array<const int>& values);

@@ -47,10 +47,7 @@ int main(int argc, char **argv)
 		return (1);
 	}
 
-	//FIXME: colocar num try catch
 	PmergeMe pmergeMe(argc - 1, argv);
-
-
-
+	pmergeMe.splitContainer();
 	return (0);
 }

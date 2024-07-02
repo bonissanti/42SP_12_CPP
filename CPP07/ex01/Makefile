@@ -35,7 +35,7 @@ TEST_OBJS = $(TEST_SRCS:$(TEST_DIR)/%.cpp=$(OBJS_DIR)/tests/%.o)
 ################################# Flags #####################################
 
 CPP = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -I$(HEADER)
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -I$(HEADER)
 
 ################################ Progress ###################################
 

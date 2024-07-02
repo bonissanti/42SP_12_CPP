@@ -40,15 +40,16 @@
 class PmergeMe
 {
 	private:
-	int argc;
-	char **argv;
+	std::vector<std::string> arguments;
 
 	public:
 	PmergeMe(int argc, char **argv);
 	~PmergeMe();
 	PmergeMe(const PmergeMe& toCopy);
 	PmergeMe& operator=(const PmergeMe& toCopy);
-	std::vector<std::string> pVector;
+
+	void	splitContainer(void);
+	void	printContainer(void);
 };
 
 void	debugMode(const std::string& msg);

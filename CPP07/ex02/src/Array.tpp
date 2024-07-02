@@ -47,9 +47,27 @@ template <class T>
 Array<T>::Array(const Array& toCopy)
 {
 	debugMode("<ARRAY> Copy constructor called");
+	this->n = toCopy.n;
 	this->array = new T[toCopy.n];
-	*this = toCopy;
+	std::copy(toCopy.array, toCopy.array + toCopy.n, this->array); //begin, end, begin from other array
 }
+
+// template <class T>
+// Array<T>& Array<T>::operator=(const Array& toCopy)
+// {
+// 	debugMode("<ARRAY> Copy assignment operator called");
+// 	if (this != &toCopy)
+// 	{
+// 		if (this->array)
+// 			delete[] this->array;
+// 		this->n = toCopy.n;
+// 		this->array = new T[this->n];
+
+// 		for (unsigned int i = 0; i < this->n; i++)
+// 			this->array[i] = toCopy.array[i];
+// 	}
+// 	return (*this);
+// }
 
 template <class T>
 Array<T>& Array<T>::operator=(const Array& toCopy)
@@ -57,15 +75,19 @@ Array<T>& Array<T>::operator=(const Array& toCopy)
 	debugMode("<ARRAY> Copy assignment operator called");
 	if (this != &toCopy)
 	{
-		if (this->array)
-			delete[] this->array;
-		this->n = toCopy.n;
-		this->array = new T[this->n];
-
-		for (unsigned int i = 0; i < this->n; i++)
-			this->array[i] = toCopy.array[i];
+		Array temp(toCopy);
+		this->swap(temp);
 	}
 	return (*this);
+}
+
+template <class T>
+void Array<T>::swap(Array& toCopy)
+{
+	using std::swap;
+
+	swap(this->n, toCopy.n);
+	swap(this->array, toCopy.array);
 }
 
 template <class T>
