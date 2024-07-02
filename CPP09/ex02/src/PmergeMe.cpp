@@ -50,9 +50,14 @@ void	PmergeMe::printContainer(void)
 
 void	PmergeMe::splitContainer(void)
 {	
-	size_t const getSize = this->arguments.size();
-	if (this->arguments.size() % 2 != 0)
-		std::cout << "é impar porque getSize is: " << getSize << std::endl;
+	std::string lastElem;
+
+	if (this->arguments.size() % 2 == 0)
+	{
+		lastElem = this->arguments.back();
+		this->arguments.pop_back();
+	}
+
 	size_t const halfSize = this->arguments.size() / 2;
 	std::vector<std::string> splitLower(this->arguments.begin(), this->arguments.begin() + halfSize);
 	std::vector<std::string> splitHigher(this->arguments.begin() + halfSize, this->arguments.end());
@@ -62,6 +67,9 @@ void	PmergeMe::splitContainer(void)
 	for (it = splitLower.begin(); it != splitLower.end(); ++it)
 		std::cout << *it << std::endl;
 
+	std::cout << "last element: " << lastElem << std::endl;
+
+	std::cout << std::endl;
 	std::cout << "SplitLHigher test" << std::endl;
 	for (it = splitHigher.begin(); it != splitHigher.end(); ++it)
 		std::cout << *it << std::endl;
