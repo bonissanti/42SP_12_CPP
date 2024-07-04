@@ -21,9 +21,11 @@
 # define PMERGEME_HPP
 
 #include <iostream>
-#include <deque>
 #include <vector>
 #include <algorithm>
+#include <iterator>
+#include <utility>
+#include <sstream>
 #include <iterator>
 
 #define RED	"\033[0;31m"
@@ -35,12 +37,10 @@
 #define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
-// template <typename T>
-
 class PmergeMe
 {
 	private:
-	std::vector<std::string> arguments;
+	std::vector<int> vec;
 
 	public:
 	PmergeMe(int argc, char **argv);
@@ -48,10 +48,20 @@ class PmergeMe
 	PmergeMe(const PmergeMe& toCopy);
 	PmergeMe& operator=(const PmergeMe& toCopy);
 
-	void	splitContainer(void);
+	void	makePair(void);
 	void	printContainer(void);
+
+	std::vector<int> convertVector(int argc, char **argv);
+	// convertList
+
+	template <typename T>
+	T mergeSort(T& container);
+
+	template <typename T>
+	T merge(T& leftContainer, T& rightContainer);
 };
 
+bool	validDigits(int argc, char **argv);
 void	debugMode(const std::string& msg);
 
 #endif

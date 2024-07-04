@@ -36,12 +36,12 @@
 #define GREEN	"\033[0;32m"
 #define RESET	"\033[0m"
 
-template <class T>
 class Span
 {
 	private:
 	unsigned int capacity;
 	std::vector<int> myVec;
+	Span(void);
 	
 	public:
 	Span(unsigned int n);
@@ -49,7 +49,11 @@ class Span
 	Span(const Span& toCopy);
 	Span& operator=(const Span& toCopy);
 
+	unsigned int	getCapacity(void);
 	void	addNumber(int num);
+
+	template <class Iterator>
+	void	addRange(Iterator begin, Iterator end);
 	int		shortestSpan(void) const;
 	int		longestSpan(void) const;
 };

@@ -23,9 +23,10 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <deque>
 #include <algorithm>
 #include <cstdlib>
-#include <ctime>
+#include <unistd.h>
 #include <limits>
 
 #define RED	"\033[0;31m"

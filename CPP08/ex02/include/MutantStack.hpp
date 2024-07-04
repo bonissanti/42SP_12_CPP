@@ -37,7 +37,7 @@
 #define RESET	"\033[0m"
 
 template<typename T, class container=std::deque<T> >
-class MutantStack : public std::stack<T>
+class MutantStack : public std::stack<T, container>
 {
 	private:
 	
@@ -48,11 +48,17 @@ class MutantStack : public std::stack<T>
 	MutantStack& operator=(const MutantStack& toCopy);
 
 	typedef typename container::iterator iterator;
+	typedef typename container::const_iterator const_iterator;
 	typedef typename container::reverse_iterator reverseIterator;
+	typedef typename container::const_reverse_iterator const_reverseIterator;
 	iterator begin();
 	iterator end();
+	const_iterator begin() const;
+	const_iterator end() const;
 	reverseIterator rbegin();
 	reverseIterator rend();
+	const_reverseIterator rbegin() const;
+	const_reverseIterator rend() const;
 
 	void	swap(MutantStack &toCopy);
 };

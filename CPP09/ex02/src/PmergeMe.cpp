@@ -21,7 +21,9 @@
 
 PmergeMe::PmergeMe(int argc, char **argv){
 	debugMode("<PmergeMe> Default Constructor called");
-	arguments.assign(argv, argv + argc);
+	if (!validDigits(argc, argv))
+		throw std::invalid_argument(RED "Error: arguments are not digits" RESET);
+	this->vec = convertVector(argc, argv);
 }
 
 PmergeMe::~PmergeMe(){
@@ -41,39 +43,100 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& toCopy){
 	return (*this);
 }
 
+std::vector<int> PmergeMe::convertVector(int argc, char **argv)
+{
+	unsigned int value;
+	std::vector<int> vector;
+
+	for (int i = 0; i < argc; i++)
+	{
+		std::stringstream	ss(argv[i]);
+		ss >> value;	
+
+	if (ss.fail())
+		std::cout << RED << "Error at converting " << argv[i] << " to int" << RESET << std::endl;
+	else
+		vector.push_back(value);
+	}
+	return (vector);
+}
+
 void	PmergeMe::printContainer(void)
 {
-	std::vector<std::string>::iterator it;
-	for (it = this->arguments.begin(); it != this->arguments.end(); ++it)
+	std::vector<int>::iterator it;
+	for (it = this->vec.begin(); it != this->vec.end(); ++it)
 		std::cout << *it << std::endl;
 }
 
-void	PmergeMe::splitContainer(void)
+void	PmergeMe::makePair(void)
 {	
 	std::string lastElem;
 
-	if (this->arguments.size() % 2 == 0)
+	if (this->vec.size() % 2 != 0)
 	{
-		lastElem = this->arguments.back();
-		this->arguments.pop_back();
+		lastElem = this->vec.back();
+		this->vec.pop_back();
 	}
 
-	size_t const halfSize = this->arguments.size() / 2;
-	std::vector<std::string> splitLower(this->arguments.begin(), this->arguments.begin() + halfSize);
-	std::vector<std::string> splitHigher(this->arguments.begin() + halfSize, this->arguments.end());
-
-	std::cout << "SplitLower test" << std::endl;
-	std::vector <std::string>::iterator it;
-	for (it = splitLower.begin(); it != splitLower.end(); ++it)
-		std::cout << *it << std::endl;
-
-	std::cout << "last element: " << lastElem << std::endl;
-
-	std::cout << std::endl;
-	std::cout << "SplitLHigher test" << std::endl;
-	for (it = splitHigher.begin(); it != splitHigher.end(); ++it)
-		std::cout << *it << std::endl;
+	std::vector<std::pair<int, int> > toSort;
+	for (size_t i = 0; i < this->vec.size(); i += 2)
+	{
+		if (this->vec[i] > this->vec[i + 1])
+			toSort.push_back(std::make_pair(this->vec[i], this->vec[i + 1]));
+		else
+			toSort.push_back(std::make_pair(this->vec[i + 1], this->vec[i]));
+	}
+	toSort = mergeSort(toSort);
 }
+
+template <typename T>
+T PmergeMe::mergeSort(T& container)
+{
+	if (container.size() <= 1)
+		return (container);
+
+	typename T::iterator middle = container.begin() + (std::distance(container.begin(), container.end())) / 2; 
+	T	left(container.begin(), middle);
+	T	right(middle, container.end());
+
+	left = mergeSort(left);
+	right = mergeSort(right);
+	return (merge(left, right));
+}
+
+template <typename T>
+T PmergeMe::merge(T& leftContainer, T& rightContainer)
+{
+	T result;
+	typename T::iterator left = leftContainer.begin();
+	typename T::iterator right = rightContainer.begin();
+
+	while (left != leftContainer.end() && right != rightContainer.end())
+	{
+		if (*left <= *right)
+		{
+			result.push_back(*left);
+			++left;
+		}
+		else
+		{
+			result.push_back(*right);
+			++right;
+		}
+	}
+	while (left != leftContainer.end())
+	{
+		result.push_back(*left);
+		++left;
+	}
+	while (right != rightContainer.end())
+	{
+		result.push_back(*right);
+		++right;
+	}
+	return (result);
+}
+
 
 void	debugMode(const std::string& msg)
 {

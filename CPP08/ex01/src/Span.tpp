@@ -19,24 +19,22 @@
 
 #include "../include/Span.hpp"
 
-template <class T>
-Span<T>::Span(unsigned int n) : capacity(n){
+Span::Span(){}
+
+Span::Span(unsigned int n) : capacity(n){
 	debugMode("<SPAN> Default Constructor called");
 }
 
-template <class T>
-Span<T>::~Span(){
+Span::~Span(){
 	debugMode("<SPAN> Destructor called");
 }
 
-template <class T>
-Span<T>::Span(const Span& toCopy){
+Span::Span(const Span& toCopy){
 	debugMode("<SPAN> Copy Constructor called");
-		*this = toCopy;
+	*this = toCopy;
 }
 
-template <class T>
-Span<T>& Span<T>::operator=(const Span& toCopy){
+Span& Span::operator=(const Span& toCopy){
 	debugMode("<SPAN> Copy Assignment Operator called");
 	if (this != &toCopy)
 	{
@@ -46,8 +44,12 @@ Span<T>& Span<T>::operator=(const Span& toCopy){
 	return (*this);
 }
 
-template <class T>
-int Span<T>::shortestSpan(void) const
+unsigned int	Span::getCapacity(void)
+{
+	return (this->capacity);
+}
+
+int Span::shortestSpan(void) const
 {
 	int	min;
 	int	tempDiff;
@@ -70,8 +72,7 @@ int Span<T>::shortestSpan(void) const
 	return (min);
 }
 
-template <class T>
-int	Span<T>::longestSpan(void) const
+int	Span::longestSpan(void) const
 {
 	if (this->myVec.size() < 2)
 		throw std::out_of_range(RED "<LongestSpan> don't have at least 2 elements" RESET);
@@ -83,8 +84,7 @@ int	Span<T>::longestSpan(void) const
 	return (*max - *min);
 }
 
-template <class T>
-void	Span<T>::addNumber(int num)
+void	Span::addNumber(int num)
 {
 	if (num < -2147483647-1 || num > 2147483647)
 		throw std::out_of_range(RED "Invalid value" RESET);
@@ -92,6 +92,13 @@ void	Span<T>::addNumber(int num)
 		throw std::out_of_range(RED "Error: Number not added because 'capacity' is full" RESET);
 	this->myVec.push_back(num);
 	std::cout << YELLOW << "Num " << GREEN << num << YELLOW << " added sucessfully" << RESET << std::endl;
+}
+
+template <class Iterator>
+void	Span::addRange(Iterator begin, Iterator end)
+{
+	for(Iterator it = begin; it != end; ++it)
+		this->addNumber(*it);
 }
 
 void	debugMode(const std::string& msg)

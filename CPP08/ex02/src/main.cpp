@@ -118,7 +118,7 @@ static	void	pushPopSizeTest(void)
 		mstack.push(2);
 		mstack.push(-21);
 		mstack.push(0);
-		mstack.pop(); // deleting the newest element at stack - 0
+		mstack.pop(); // deleting the newest element at stack #0
 
 		MutantStack<int>::iterator it = mstack.begin();
 		MutantStack<int>::iterator ite = mstack.end();
@@ -130,7 +130,8 @@ static	void	pushPopSizeTest(void)
 			std::cout << YELLOW << "value of MutantStack: " << GREEN << *it << RESET << std::endl;
 			++it;
 		}
-		std::stack<int> s(mstack);
+		std::cout << '\n';
+		std::cout << YELLOW << "Size of mstack is: " << GREEN << mstack.size() << RESET << std::endl;
 	}
 }
 
@@ -157,30 +158,62 @@ static	void	reverseIteratorTest(void)
 	}
 }
 
+static void		constIteratorsTest(void)
+{
+	MutantStack<std::string> mstack;
+
+	mstack.push("bruh");
+	mstack.push("random");
+	mstack.push("hello");
+
+	MutantStack<std::string>::const_iterator it = mstack.begin();
+	MutantStack<std::string>::const_iterator ite = mstack.end();
+	MutantStack<std::string>::const_reverseIterator rit = mstack.rbegin();
+	MutantStack<std::string>::const_reverseIterator rite = mstack.rend();
+
+	std::cout << BWHITE << "Comparation between const_iterator vs const_reverseIterator" << RESET << std::endl;
+	while (it != ite && rit != rite)
+	{
+		std::cout << YELLOW << "Value of iterator: " << GREEN << *it << YELLOW << " | " 
+			<< YELLOW << "Value of reverseIterator: " << GREEN << *rit << RESET << std::endl;
+		++it;
+		++rit;
+	}
+}
+
 static	void	deepCopyTest(void)
 {
-	MutantStack<int> a;
+	MutantStack<float> a;
 
-	MutantStack<int> b(a);
-	MutantStack<int> c = b;
+	MutantStack<float> b(a);
+	MutantStack<float> c = b;
 
 	std::cout << BWHITE << "-----> adding elements on MutantStack 'a' <-----" << RESET << std::endl;
-	a.push(0);
-	a.push(1);
+	a.push(0.0f);
+	a.push(1.0f);
 	std::cout << BWHITE << "-----> verifying size of MutantStacks, 'b' and 'c' must be 0 <-----" << RESET << std::endl;
 	std::cout << YELLOW << "MutantStack 'a' size is: " << GREEN << a.size() << std::endl;
 	std::cout << YELLOW << "MutantStack 'b' size is: " << GREEN << b.size() << std::endl;
 	std::cout << YELLOW << "MutantStack 'c' size is: " << GREEN << c.size() << std::endl;
+
+	MutantStack<float> e = a;
+	std::cout << YELLOW << "MutantStack 'e' size is: " << GREEN << e.size() << std::endl;
 }
 
 int main(void)
 {
 	iteratorTest();
 	std::cout << '\n';
+
 	pushPopSizeTest();
 	std::cout << '\n';
+
 	reverseIteratorTest();
 	std::cout << '\n';
+
+	constIteratorsTest();
+	std::cout << '\n';
+
 	deepCopyTest();
 	return (0);
 }
