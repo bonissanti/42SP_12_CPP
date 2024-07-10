@@ -19,38 +19,12 @@
 
 #include "../include/BitcoinExchange.hpp"
 
-// int	main(void)
-// {
-// 	std::map<std::string, float> dateMap;
-
-// 	dateMap["2011-01-01"] = 10.0;
-// 	dateMap["2011-01-12"] = 20.0;
-// 	dateMap["2011-01-23"] = 30.0;
-// 	dateMap["2011-01-24"] = 40.0;
-
-// 	std::string targetDate = "2011-01-03";
-// 	std::map<std::string, float>::iterator it;
-// 	std::map<std::string, float>::iterator prev;
-
-// 	for (it = dateMap.begin(); it != dateMap.end(); ++it)
-// 		if (it->first > targetDate)
-// 			break;
-
-// 	if (it != dateMap.end())
-// 	{
-// 		prev = it;
-// 		--prev;
-// 		std::cout << "Closest date (less than or equal to " << targetDate << ") " << prev->first << std::endl;
-// 		std::cout << "Value associated with this date " << prev->second << std::endl;
-// 	}
-// 	else
-// 	{
-// 		prev = it;
-// 		--prev;
-// 		std::cout << "Closest date (less than or equal to " << targetDate << ") " << prev->first << std::endl;
-// 		std::cout << "Value associated with this date " << prev->second << std::endl;
-// 	}
-// }
+static	bool validFile(const std::string& arg)
+{
+	if (arg.substr(arg.find_last_of(".") + 1) == ".txt" || arg.substr(arg.find_last_of(".") + 1) == ".csv")
+		return (true);
+	return (false);
+}
 
 int main(int argc, char **argv)
 {
@@ -59,13 +33,15 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		std::cout << RED << "Error: could not open file" << RESET << std::endl;
-		std::cout << RED << "Usage: ./btc ./src/input.txt" << RESET << std::endl;
+		std::cout << RED << "Error: input file was not passed" << RESET << std::endl;
+		std::cout << RED << "Usage: ./btc input.txt" << RESET << std::endl;
 		return (1);
 	}
 	arg = argv[1];
 	try
 	{
+		if (validFile(arg))
+			throw Bitcoin::exception(RED "Error: extension of the file is incorrect" RESET);
 		database.createDataBase();
 		database.openInputFile(arg);
 	}

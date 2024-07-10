@@ -19,26 +19,30 @@
 
 #include "../include/PmergeMe.hpp"
 
-static int	jacobsthal(int n);
 template <typename T>
 static int binarySearch(T& container, int low, int high, int target);
+
 template <typename T>
 static bool isSorted(T& container);
+
+template <typename T>
+static bool isDuplicate(T& container);
 
 PmergeMe::PmergeMe(int argc, char **argv)
 {
 	debugMode("<PmergeMe> Default Constructor called");
 	if (!validDigits(argc, argv))
-		throw PmergeMe::invalidDigitsException(RED "Error: arguments are not digits" RESET);
+		throw PmergeMe::exception(RED "Error: arguments are not digits" RESET);
 
 	this->vec = convertVector(argc, argv);
 	this->dqe = convertDeque(argc, argv); 
 
 	if (isSorted(this->vec))
-		throw PmergeMe::isSortedException(RED "Error: arguments are sorted already" RESET);
+		throw PmergeMe::exception(RED "Error: arguments are sorted already" RESET);
 
+	if (isDuplicate(this->vec))
+		throw PmergeMe::exception(RED "Error: arguments has duplicate numbers" RESET);
 	printContainer(this->vec, "Before: ", BBLUE);
-	this->start = clock();
 }
 
 PmergeMe::~PmergeMe(){
@@ -59,22 +63,27 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& toCopy){
 
 // ############## EXCEPTIONS ################
 
-PmergeMe::isSortedException::isSortedException(const std::string& msg) : msg(msg){}
-PmergeMe::isSortedException::~isSortedException() throw(){}
-PmergeMe::invalidDigitsException::invalidDigitsException(const std::string& msg) : msg(msg){}
-PmergeMe::invalidDigitsException::~invalidDigitsException() throw(){}
+PmergeMe::exception::exception(const std::string& msg) : msg(msg){}
+PmergeMe::exception::~exception() throw(){}
 
-const char* PmergeMe::isSortedException::what() const throw()
-{
-	return (msg.c_str());
-}
-
-const char* PmergeMe::invalidDigitsException::what() const throw()
+const char* PmergeMe::exception::what() const throw()
 {
 	return (msg.c_str());
 }
 
 // ############## UTILS ####################
+
+template <typename T>
+static bool isDuplicate(T& container)
+{
+	T sorted = container;
+
+	std::sort(sorted.begin(), sorted.end());
+	for (size_t i = 0; i < sorted.size() - 1; i++)
+		if (sorted[i] == sorted[i + 1])
+			return (true);
+	return (false);
+}
 
 template <typename T>
 static bool isSorted(T& container)
@@ -140,10 +149,8 @@ void	PmergeMe::printContainer(T& container, const std::string& msg, const std::s
 template <typename T>
 void	PmergeMe::printTime(T&container, const std::string& msg)
 {
-	this->end = clock();
-
 	std::cout << YELLOW << "Time to process a range of " << container.size() << " elements with " << msg << " : " 
-		<< BBLUE << double(this->end - this->start)/CLOCKS_PER_SEC * 1000 << " microseconds"<< std::endl; 
+		<< BBLUE << double(this->end - this->start)/CLOCKS_PER_SEC * 1000 << " milliseconds"<< std::endl; 
 }
 
 // ################## SORT ########################
@@ -151,6 +158,7 @@ void	PmergeMe::printTime(T&container, const std::string& msg)
 void	PmergeMe::runDeque(void)
 {
 	int lastElem = -1;
+	this->start = clock();
 
 	// save lastElem
 	if (this->dqe.size() % 2 != 0)
@@ -180,9 +188,6 @@ void	PmergeMe::runDeque(void)
 		pend.push_back(toSort[i].second);
 
 	mainChain.insert(mainChain.begin(), pend[0]);
-
-	// generating jacobsthal + insertion
-	generateinsertOrder(pend);
 	insertionSort(mainChain, pend);
 
 	if (lastElem != -1)
@@ -190,12 +195,14 @@ void	PmergeMe::runDeque(void)
 		int pos = binarySearch(mainChain, 0, mainChain.size(), lastElem);
 		mainChain.insert(mainChain.begin() + pos, lastElem);
 	}
+	this->end = clock();
 	printTime(mainChain, "std::deque");
 }
 
 void	PmergeMe::runVector(void)
 {	
 	int lastElem = -1;
+	this->start = clock();
 
 	// save lastElem
 	if (this->vec.size() % 2 != 0)
@@ -226,9 +233,6 @@ void	PmergeMe::runVector(void)
 		pend.push_back(toSort[i].second);
 
 	mainChain.insert(mainChain.begin(), pend[0]);
-
-	// generating jacobsthal + insertion
-	generateinsertOrder(pend);
 	insertionSort(mainChain, pend);
 
 	// add lastElem
@@ -237,6 +241,7 @@ void	PmergeMe::runVector(void)
 		int pos = binarySearch(mainChain, 0, mainChain.size(), lastElem);
 		mainChain.insert(mainChain.begin() + pos, lastElem);
 	}
+	this->end = clock();
 	printContainer(mainChain, "After: ", GREEN);
 	printTime(mainChain, "std::vector");
 }
@@ -318,43 +323,6 @@ void PmergeMe::insertionSort(T& mainChain, T& pend)
 		pos = binarySearch(mainChain, 0, mainChain.size() - 1, pend[i + 1]);
 		mainChain.insert(mainChain.begin() + pos, pend[i + 1]);
 	}
-}
-
-//################ SORT UTILS ################
-
-template <typename T>
-void	PmergeMe::generateinsertOrder(T& pend)
-{
-	int	jacobIndex = 2;
-	size_t size = pend.size();
-
-	this->insertOrder.push_back(jacobsthal(jacobIndex));
-
-	while (this->insertOrder.size() < size)
-	{
-		int value = jacobsthal(jacobIndex++);
-		if (value >= static_cast<int>(size))
-			value = size;
-		while (this->insertOrder.size() < size && value > 0)
-		{
-			this->insertOrder.push_back(value);
-			if (std::find(this->insertOrder.begin(), this->insertOrder.end(), value - 1) != this->insertOrder.end())
-				break ;
-			value--;
-		}
-	}
-}
-
-static int	jacobsthal(int n)
-{
-	int dp[n + 1];
-
-	dp[0] = 0;
-	dp[1] = 1;
-
-	for (int i = 2; i <= n; i++)
-		dp[i] = dp[i - 1] + 2 * dp[i - 2];
-	return (dp[n]);
 }
 
 void	debugMode(const std::string& msg)

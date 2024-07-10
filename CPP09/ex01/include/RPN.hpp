@@ -42,6 +42,7 @@ class RPN
 	bool		hasNum;
 	bool		hasOp;
 	std::string arg;
+	std::stack<int> stack;
 	
 	public:
 	RPN(std::string& arg);
@@ -49,7 +50,6 @@ class RPN
 	RPN(const RPN& toCopy);
 	RPN& operator=(const RPN& toCopy);
 
-	std::stack<int> stack;
 	int	postfixAnalyze(std::string& arg);
 	bool	validation(char c);
 

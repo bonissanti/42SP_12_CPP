@@ -46,6 +46,7 @@
 class Bitcoin
 {
 	private:
+	std::map<std::string, const float> db;
 
 	public:
 	Bitcoin();
@@ -53,28 +54,22 @@ class Bitcoin
 	Bitcoin(const Bitcoin& toCopy);
 	Bitcoin& operator=(const Bitcoin& toCopy);
 
-	std::map<std::string, const float> db;
 	void	createDataBase(void);
 	void	openInputFile(std::string &arg);
 	void	multiplyExchange(const std::string date, const float exchange);
 	bool	validDate(char const delim, std::string &str);
 
-	class	BitcoinException : public std::exception
+	class	exception : public std::exception
 	{
 		private:
 		std::string message;
 
 		public:
-		explicit BitcoinException(const std::string &msg);
-		virtual ~BitcoinException() throw();
+		exception(const std::string &msg);
+		virtual ~exception() throw();
 		virtual const char *what() const throw(){
 			return (this->message.c_str());
 		}
-	};
-	class	DataValidationException : public BitcoinException
-	{
-		public:
-		DataValidationException(const std::string &msg): BitcoinException(msg){};
 	};
 };
 

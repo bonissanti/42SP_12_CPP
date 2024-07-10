@@ -48,6 +48,7 @@ int main(int argc, char **argv)
 		std::cout << RED << "Error: usage ./PmergeMe <values>" << RESET << std::endl;
 		return (1);
 	}
+
 	try
 	{
 		PmergeMe pmergeMe(argc - 1, argv);

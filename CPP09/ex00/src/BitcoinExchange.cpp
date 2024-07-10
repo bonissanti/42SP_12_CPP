@@ -21,6 +21,7 @@
 
 bool	thisIsDigit(char const delim, std::string &str);
 bool	validDate(char const delim, std::string &str);
+static bool	emptyFile(std::ifstream& file);
 static std::string	removeSpace(std::string str);
 
 Bitcoin::Bitcoin(){
@@ -43,10 +44,8 @@ Bitcoin& Bitcoin::operator=(const Bitcoin& toCopy){
 	return (*this);
 }
 
-// TODO: ajustar isso
-// Bitcoin::BitcoinException(const std::string &msg) : message(msg){}
-
-Bitcoin::BitcoinException::~BitcoinException() throw(){}
+Bitcoin::exception::exception(const std::string& msg) : message(msg) {}
+Bitcoin::exception::~exception() throw(){}
 
 void	Bitcoin::multiplyExchange(const std::string date, const float exchange)
 {
@@ -57,8 +56,6 @@ void	Bitcoin::multiplyExchange(const std::string date, const float exchange)
 	{
 		if (it != db.begin())
 			--it;
-		else
-			std::cout << RED << "Error: Value not found " << RESET << std::endl;
 	}
 	std::cout << YELLOW << date << " => " << exchange << " = " << GREEN << it->second * exchange << RESET << std::endl;
 }
@@ -103,7 +100,7 @@ void	Bitcoin::openInputFile(std::string &arg)
 	std::string	value;
 
 	std::ifstream file(arg.c_str());
-	if (file.fail())
+	if (file.fail() || emptyFile(file))
 		throw std::invalid_argument(RED "Failed to open the input file" RESET);
 
 	getline(file, line);
@@ -163,11 +160,18 @@ bool	thisIsDigit(char const delim, std::string &str)
 	{
 		if (!isdigit(*it) && validChars.find(*it) == validChars.end())
 		{
-			throw Bitcoin::DataValidationException(RED "Error: this is not a digit" RESET);
+			throw Bitcoin::exception(RED "Error: this is not a digit" RESET);
 			return (false);
 		}
 	}
 	return (true);
+}
+
+static bool	emptyFile(std::ifstream& file)
+{
+	if (file.peek() == std::ifstream::traits_type::eof())
+		return (true);
+	return (false);
 }
 
 bool	Bitcoin::validDate(char const delim, std::string &str)
@@ -185,25 +189,25 @@ bool	Bitcoin::validDate(char const delim, std::string &str)
 	try
 	{
 		if (year < 2009 || year > 2022)
-			throw Bitcoin::DataValidationException(RED "Error: invalid year. The year accept by database is: min = 2009 and max = 2022" RESET);
+			throw Bitcoin::exception(RED "Error: invalid year. The year accept by database is: min = 2009 and max = 2022" RESET);
 		else if (month < 1 || month > 12)
-			throw Bitcoin::DataValidationException(RED "Error: invalid month" RESET);
+			throw Bitcoin::exception(RED "Error: invalid month" RESET);
 		else if (day < 1 || day > 31)
-			throw Bitcoin::DataValidationException(RED "Error: invalid day" RESET);
+			throw Bitcoin::exception(RED "Error: invalid day" RESET);
 		else if (month == 2 && day > 29)
-			throw Bitcoin::DataValidationException(RED "Error: february with 30 or more days doesn't exist" RESET);
+			throw Bitcoin::exception(RED "Error: february with 30 or more days doesn't exist" RESET);
 
 		else if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
-			throw Bitcoin::DataValidationException(RED "Error: month with extra days" RESET);
+			throw Bitcoin::exception(RED "Error: month with extra days" RESET);
 		else if (delim == INPUT && exchangeRate < 0)
-			throw Bitcoin::DataValidationException(RED "Error: not a positive number" RESET);
+			throw Bitcoin::exception(RED "Error: not a positive number" RESET);
 		else if (delim == INPUT && exchangeRate > 1000 && exchangeRate != MAXFLOAT)
-			throw Bitcoin::DataValidationException(RED "Error: too large a number" RESET);
+			throw Bitcoin::exception(RED "Error: too large a number" RESET);
 
 		else if (exchangeRate == MAXFLOAT)
-			throw Bitcoin::DataValidationException(RED "Error: exchange value not informed" RESET);
+			throw Bitcoin::exception(RED "Error: exchange value not informed" RESET);
 	}
-	catch(const Bitcoin::DataValidationException& e)
+	catch(const Bitcoin::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 		return (false);

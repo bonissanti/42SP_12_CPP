@@ -75,28 +75,14 @@ class PmergeMe
 	template <typename T>
 	void insertionSort(T& mainChain, T& pend);
 
-	template <typename T>
-	void	generateinsertOrder(T& pend);
-
-	class isSortedException : public std::exception
+	class exception : public std::exception
 	{
 		private:
 		std::string msg;
 		
 		public:
-		isSortedException(const std::string& msg);
-		virtual ~isSortedException() throw();
-		virtual const char* what() const throw();
-	};
-
-	class invalidDigitsException : public std::exception
-	{
-		private:
-		std::string msg;
-
-		public:
-		invalidDigitsException(const std::string& msg);
-		virtual ~invalidDigitsException() throw();
+		exception(const std::string& msg);
+		virtual ~exception() throw();
 		virtual const char* what() const throw();
 	};
 };
