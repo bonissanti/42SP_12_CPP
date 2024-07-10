@@ -38,11 +38,11 @@ class WrongAnimal
 	public:
 	WrongAnimal();
 	WrongAnimal(const std::string& type);
-	virtual ~WrongAnimal();
+	~WrongAnimal();
 	WrongAnimal(const WrongAnimal& toCopy);
 	WrongAnimal& operator=(const WrongAnimal& toCopy);
 
-	virtual	void	makeSound(void);
+	void	makeSound(void);
 	std::string		getType(void) const;
 	void			setType(const std::string& newType);
 };

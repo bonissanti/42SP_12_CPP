@@ -19,7 +19,7 @@
 		"cwchar": "cpp",
 		"cwctype": "cpp",
 		"deque": "cpp",
-		"unordered_map": "cpp",
+		"uninsertOrdered_map": "cpp",
 		"vector": "cpp",
 		"exception": "cpp",
 		"algorithm": "cpp",

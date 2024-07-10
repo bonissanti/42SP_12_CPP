@@ -45,12 +45,12 @@ static void	testPresidential()
 		try
 		{
 			std::cout << YELLOW << "**** VALID TESTS ****" << RESET << std::endl;
-			Presidential 	order("Amnesty Order");
+			Presidential 	insertOrder("Amnesty insertOrder");
 			Bureaucrat	bob("Bob", 24); // need at least 25 to sign
-			bob.signForm(order);
+			bob.signForm(insertOrder);
 
 			Bureaucrat	tim("Tim", 3); // needs at least 5 to execute
-			tim.executeForm(order);
+			tim.executeForm(insertOrder);
 		}
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';
@@ -62,12 +62,12 @@ static void	testPresidential()
 		try
 		{
 			std::cout << YELLOW << "**** INVALID SIGN/EXECUTE ****" << RESET << std::endl;
-			Presidential 	order("Amnesty Order");
+			Presidential 	insertOrder("Amnesty insertOrder");
 			Bureaucrat	bob("Bob", 50);  // need at least 25 to sign
-			bob.signForm(order);
+			bob.signForm(insertOrder);
 
 			Bureaucrat	tim("Tim", 20); // needs at least 5 to execute
-			tim.executeForm(order);
+			tim.executeForm(insertOrder);
 		}
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';
@@ -95,12 +95,12 @@ static void	testPresidential()
 		try
 		{
 			std::cout << YELLOW << "**** INVALID EXECUTE ONLY ****" << RESET << std::endl;
-			Presidential 	order("Order");
+			Presidential 	insertOrder("insertOrder");
 			Bureaucrat	random("Random", 20);  // need at least 25 to sign
-			random.signForm(order);
+			random.signForm(insertOrder);
 
 			Bureaucrat	senate("senate", 50); // needs at least 5 to execute
-			senate.executeForm(order);
+			senate.executeForm(insertOrder);
 		}
 		catch(const std::exception& e){
 			std::cerr << e.what() << '\n';

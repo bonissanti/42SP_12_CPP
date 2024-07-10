@@ -43,8 +43,21 @@ int main(int argc, char **argv)
 		std::cout << RED << "Error: invalid number of arguments" << RESET << std::endl;
 		return (1);
 	}
-
-	PmergeMe pmergeMe(argc - 1, argv);
-	pmergeMe.makePair();
+	else if (argc == 2)
+	{
+		std::cout << RED << "Error: usage ./PmergeMe <values>" << RESET << std::endl;
+		return (1);
+	}
+	try
+	{
+		PmergeMe pmergeMe(argc - 1, argv);
+		pmergeMe.runVector();
+		pmergeMe.runDeque();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		return (1);
+	}
 	return (0);
 }
