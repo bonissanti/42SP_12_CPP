@@ -21,7 +21,7 @@
 #include "../include/ScavTrap.hpp"
 
 ScavTrap::ScavTrap(){
-	std::cout << "<ScavTrap> "<< "default constructor called" << std::endl;
+	std::cout << BBLUE << "<ScavTrap> "<< "default constructor called" << RESET << std::endl;
 	setType("<ScavTrap>");
 	this->hitPoints = 100;
 	this->energyPoints = 50;
@@ -30,7 +30,7 @@ ScavTrap::ScavTrap(){
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 {
-	std::cout << "<ScavTrap> parameterized constructor called" << std::endl;
+	std::cout << BBLUE << "<ScavTrap> parameterized constructor called" << RESET << std::endl;
 	setType("<ScavTrap>");
 	this->hitPoints = 100;
 	this->energyPoints = 50;
@@ -38,16 +38,16 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 }
 
 ScavTrap::~ScavTrap(){
-	std::cout << "<ScavTrap> " << this->name << " destructor called" << std::endl;
+	std::cout << BBLUE << "<ScavTrap> " << this->name << " destructor called" << RESET << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& toCopy) : ClapTrap(toCopy){
-	std::cout << "<ScavTrap> copy constructor called" << std::endl;
+	std::cout << BBLUE << "<ScavTrap> copy constructor called" << RESET << std::endl;
 		*this = toCopy;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& toCopy){
-	std::cout << "<ScavTrap> copy assignment operator called" << std::endl;
+	std::cout << BBLUE << "<ScavTrap> copy assignment operator called" << RESET << std::endl;
 	if (this != &toCopy)
 		ClapTrap::operator=(toCopy);
 	return (*this);
@@ -56,11 +56,11 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& toCopy){
 void	ScavTrap::guardGate(void)
 {
 	if (this->energyPoints == 0)
-		std::cout << "<ScavTrap> " << this->name << " have insufficient energy points " << std::endl;
+		std::cout << RED << "<ScavTrap> " << WHITE << this->name << RED << " have insufficient energy points " << RESET << std::endl;
 	else
 	{
 		this->energyPoints--;
-		std::cout << "<ScavTrap> " << this->name << " now is in Gate keeper mode" << std::endl;
+		std::cout << RED << "<ScavTrap> " << WHITE << this->name << RED << " now is in Gate keeper mode" << RESET << std::endl;
 	}
 }
 

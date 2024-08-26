@@ -22,7 +22,7 @@
 
 
 DiamondTrap::DiamondTrap() : FragTrap(), ScavTrap(){
-	std::cout << "<DiamondTrap> default constructor called" << std::endl;
+	std::cout << BBLUE << "<DiamondTrap> default constructor called" << RESET << std::endl;
 	ClapTrap::name = name + suffix;
 	ScavTrap::type = "<DiamondType>";
 	FragTrap::hitPoints = 100;
@@ -31,8 +31,8 @@ DiamondTrap::DiamondTrap() : FragTrap(), ScavTrap(){
 }
 
 DiamondTrap::DiamondTrap(const std::string& name) : ClapTrap(name + suffix), FragTrap(), ScavTrap(), 
-	_name(name + suffix){
-	std::cout << "<DiamondTrap> default constructor called" << std::endl;
+	_name(name){
+	std::cout << BBLUE << "<DiamondTrap> default constructor called" << RESET << std::endl;
 	ClapTrap::name = name + suffix;
 	ScavTrap::type = "<DiamondType>";
 	FragTrap::hitPoints = 100;
@@ -41,16 +41,16 @@ DiamondTrap::DiamondTrap(const std::string& name) : ClapTrap(name + suffix), Fra
 }
 
 DiamondTrap::~DiamondTrap(){
-	std::cout << "<DiamondTrap> " << this->name << " destructor called" << std::endl;
+	std::cout << BBLUE << "<DiamondTrap> " << this->name << BBLUE << " destructor called" << RESET<< std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& toCopy) :ClapTrap(toCopy), FragTrap(toCopy), ScavTrap(toCopy){
-	std::cout << "<DiamondTrap> copy constructor called" << std::endl;
+	std::cout << BBLUE << "<DiamondTrap> copy constructor called" << RESET << std::endl;
 	*this = toCopy;
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& toCopy){
-	std::cout << "<DiamondTrap> copy assignment operator called" << std::endl;
+	std::cout << BBLUE << "<DiamondTrap> copy assignment operator called" << RESET << std::endl;
 	if (this != &toCopy)
 	{
 		this->_name = toCopy._name;
@@ -66,5 +66,5 @@ void	DiamondTrap::attack(const std::string& target)
 
 void	DiamondTrap::whoAmI(void)
 {
-	std::cout << "I am " << this->_name << " and my ClapTrap name is " << ClapTrap::name << std::endl; 
+	std::cout << YELLOW << "<DiamondTrap> I am " << this->_name << " and my ClapTrap name is " << GREEN << ClapTrap::name << RESET << std::endl; 
 }
